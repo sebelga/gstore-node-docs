@@ -2,6 +2,6 @@
 
 * [Getting Started](README.md)
    * [About](getting-startes/about.md)
-   * Installation
+   * [Installation](getting-started/installation.md)
 * [Defining Methods](methods.md)
 
