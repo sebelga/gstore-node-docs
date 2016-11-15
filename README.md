@@ -4,14 +4,13 @@ gstore-node is a Google Datastore entities modeling library for Node.js inspired
 
 Its main features are:
 
-* explicit Schema declaration for entities
-* properties type validation
-* properties value validation
-* shortcuts queries
-* pre & post middleware (hooks)
-* custom methods on entity instances
+* explicit **Schema declaration** for entities
+* properties **type validation**
+* properties **value validation**
+* **shortcuts** queries
+* pre & post **middleware** (hooks)
+* **custom methods** on entity instances
 
-This library is in active development, please report any issue you might find.
 
 ## Motivation
 
