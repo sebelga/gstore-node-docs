@@ -32,3 +32,5 @@ const userSchema = new Schema({
     modifiedOn: { type: 'datetime' }
 });
 ```
+
+Note: you are not forced to set a type, if you don't define one, then any type is valid.
