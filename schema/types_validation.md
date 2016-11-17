@@ -20,4 +20,15 @@ Valid types are
 
 So back to our previous example of a User Model, we would probably have something like this.
 
-
+```js
+const userSchema = new Schema({
+    name: { type: 'string' },
+    lastname: { type: 'string' },
+    password: { type: 'string' },
+    email: { type: 'string' },
+    votes: { type: 'int' },
+    dateOfBirth: { type: 'datetime' },
+    createdOn: { type: 'datetime' },
+    modifiedOn: { type: 'datetime' }
+});
+```
