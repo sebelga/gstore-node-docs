@@ -1,30 +1,27 @@
-# Defining Methods
+# Schema
 
-Methods allow you to smoothly display code examples in different languages.
+You define your Datastore entities models with **Schemas**. This is where you set the allowed properties for an entity, their types, default values, read/write...
 
-{% method %}
-## My first method
+It is also on the schemas that you can add **pre** and **post** middelware for different operations on your entities. For example before saving, or after deleting and entity. 
 
-My first method exposes how to print a message in JavaScript and Go.
+## Define a Model Schema
 
-{% sample lang="js" %}
-Here is how to print a message to `stdout` using JavaScript.
+Let's define a simple "User" Model schema.
 
 ```js
-console.log('My first method');
+const gstore = require('gstore-node');
+const Schema = gstore.Schema;
+
+const userSchema = new Schema({
+    name: {},
+    lastname: {},
+    password: {},
+    email: {},
+    dateOfBirth: {}
+});
 ```
 
-{% sample lang="go" %}
-Here is how to print a message to `stdout` using Go.
+With this simple schema, if you try to save an entity another property than "name", "lastname" or "email", it won't validate and won't be saved in the Datastore.
+Guaranteed! :)
 
-```go
-fmt.Println("My first method")
-```
-
-{% common %}
-Whatever language you are using, the result will be the same.
-
-```bash
-$ My first method
-```
-{% endmethod %}
+Let's add some 
