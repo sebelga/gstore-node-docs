@@ -24,7 +24,7 @@ const userSchema = new Schema({
 });
 ```
 
-With this simple schema, if you try to save an entity another property than "name", "lastname" or "email", it won't validate and won't be saved in the Datastore.
+With this simple schema, if you try to save an entity with any other property than the ones defined here, it won't validate and won't be saved in the Datastore.
 Guaranteed! :)
 
 Let's add some type to those properties.
