@@ -4,6 +4,6 @@
    * [Motivation](getting-started/motivation.md)
    * [Installation](getting-started/installation.md)
 * [Schema](methods.md)
-   * Types validation
+   * [Types validation](schema/types_validation.md)
 * [ref](ref.md)
 
