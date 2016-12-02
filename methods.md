@@ -1,8 +1,8 @@
 # Schema
 
-You define your Datastore entities models with **Schemas**. This is where you set the allowed properties for an entity, their types, default values, read/write...
+You define your Datastore entities models with **Schemas**. This is where you set the properties of an entity, its types, default values, read/write value...
 
-It is also on the schemas that you can add **pre** and **post** middelware for different operations on your entities. For example before saving, or after deleting and entity. 
+It is also on schemas that you can add **pre** and **post** middlewares for different operations on your entities. For example before saving, or after deleting and entity. 
 
 ## Define a Model Schema
 
@@ -27,4 +27,4 @@ const userSchema = new Schema({
 With this simple schema, if you try to save an entity with any other property than the ones defined here, it won't validate and won't be saved in the Datastore.
 Guaranteed! :)
 
-Let's add some type to those properties.
+Let's [add now some type](../<schema>/<types_validation>.md) to those properties.
