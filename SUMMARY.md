@@ -5,6 +5,6 @@
    * [Installation](getting-started/installation.md)
 * [Schema](methods.md)
    * [Types validation](schema/types_validation.md)
-   * Value validation
+   * [Value validation](value_validation.md)
 * [ref](ref.md)
 
