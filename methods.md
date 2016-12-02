@@ -27,4 +27,4 @@ const userSchema = new Schema({
 With this simple schema, if you try to save an entity with any other property than the ones defined here, it won't validate and won't be saved in the Datastore.
 Guaranteed! :)
 
-Let's [add now some type](../<schema>/<types_validation>.md) to those properties.
+Let's [add now some type](../schema/types_validation.md) to those properties.
