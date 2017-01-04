@@ -53,3 +53,22 @@ This parameter can be overridden on a query basis by passing a *readAll* option 
 If you want to protect certain properties to be written by a untrusted source, you can set their *write* parameter to **false**. You can then call **sanitize()** (see Model section) on a Model passing the user data and those properties will be removed from the data to be saved in the Datastore.
 
 
+```js
+
+// Schema:
+var blogPostSchema = new Schema({
+    ...
+    protectedProp: { write: false }
+});
+	
+// In a Controller request:
+const BlogPostModel = require('../models/blogpost.model');
+let data = req.body; // {name: 'John', lastname: 'Snow', protectedProp: 1234};
+	
+// Sanitize incoming user data
+data = BlogPostModel.sanitize(data);
+console.log(data); // {name: 'John', lastname: 'Snow'};
+
+```
+
+
