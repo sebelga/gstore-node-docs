@@ -1,6 +1,6 @@
 # Value validation
 
-gstore uses the great validator library (https://github.com/chriso/validator.js) to validate input values so you can use any of the validations from that library.
+gstore uses the great validator library \([https://github.com/chriso/validator.js](https://github.com/chriso/validator.js)\) to validate input values so you can use any of the validations from that library.
 
 ```js
 const entitySchema = new Schema({
@@ -20,9 +20,12 @@ const productSchema = new Schema({
     ...
 });
 
-const productData = { color: '#cccccc' };
-const product = new Product(productData);
+const data = { color: '#cccccc' };
+const product = new Product(data);
 product.save().catch((err) => {
   // Validation Error
 })
 ```
+
+
+
