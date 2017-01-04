@@ -61,13 +61,19 @@ var blogPostSchema = new Schema({
     protectedProp: { write: false }
 });
 	
-// In a Controller request:
+// In a Controller:
 const BlogPostModel = require('../models/blogpost.model');
-let data = req.body; // {name: 'John', lastname: 'Snow', protectedProp: 1234};
+
+function createBlogPost(req, res) {
+    let data = req.body; // {title: 'Title of the post', protectedProp: 1234};
 	
-// Sanitize incoming user data
-data = BlogPostModel.sanitize(data);
-console.log(data); // {name: 'John', lastname: 'Snow'};
+    // Sanitize incoming user data
+    data = BlogPostModel.sanitize(data);
+    console.log(data); // {name: 'John', lastname: 'Snow'};
+
+    ...
+}
+
 
 ```
 
