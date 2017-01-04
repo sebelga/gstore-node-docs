@@ -1,6 +1,0 @@
-# Other parameters
-
-
-
-
-

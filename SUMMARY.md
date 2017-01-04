@@ -6,6 +6,6 @@
 * [Schema](schema/index.md)
     * [Type validation](schema/type_validation.md)
     * [Value validation](schema/value_validation.md)
-    * [Other parameters](schema/other-options.md)
+    * [Other parameters](schema/other-paremeters.md)
 * [ref](ref.md)
 
