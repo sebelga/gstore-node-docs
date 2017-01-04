@@ -26,3 +26,30 @@ const userSchema = new Schema({
 });
 
 ```
+
+## excludeFromIndexes
+
+By default all properties are **included** in the Datastore indexes. If you don't want some properties to be indexed set their 'excludeFromIndexes' parameter
+to **true**.
+
+```js
+const articleSchema = new Schema({
+    author: { type: 'string' },
+    text: { type: 'string', excludeFromIndexes: true } // indexes size is limited, so very long text can't be indexed
+});
+```
+
+## read
+If you don't want certain properties to show up in the response data of queries or when calling entity.plain() (see Entity section), set this parameter to **false**. This is useful when you have entity properties only useful to your business logic and that you don't want to exposed publicly.
+
+This parameter can be overridden on a query basis by passing a *readAll* option set to **true** in:
+
+- `entity.plain({ readAll:true });` (see Entity section)
+- **globally** in list() and a Schema *queries* settings
+- **inline** option of list(), query() and findAround() queries
+
+
+## write
+If you want to protect certain properties to be written by a untrusted source, you can set their *write* parameter to **false**. You can then call **sanitize()** (see Model section) on a Model passing the user data and those properties will be removed from the data to be saved in the Datastore.
+
+
