@@ -77,4 +77,38 @@ function createBlogPost(req, res) {
 
 ```
 
+## required
+If you want to define a mandatory property, set its **required** parameter to true. If the value passed for property is **undefined**, **null** or an **empty string** it will not validate and will not be saved in the Datastore.
 
+
+```js
+// Schema:
+const userSchema = new Schema({
+    name: { type: 'string' }
+    email: { type: 'string',  validate: 'isEmail', required: true }
+});
+	
+// In a Controller request:
+var data = req.body; // {name: 'John'}; // ---> email is missing
+	
+var user = new User(data);
+user.save()
+    .catch((err) => {
+        // --> ValidatorError
+    });
+
+```
+
+# Complete parameters example:
+
+```js
+var entitySchema = new Schema({
+    name:  {type: 'string'},
+    lastname:  {excludeFromIndexes: true},
+    email: {validate: 'isEmail', required: true},
+    website :  {validate: 'isURL', optional: true},
+    modified:  {type: 'boolean', default: false, read:false}, // won't show up in queries
+    createdOn: {type:'datetime', default: gstore.defaultValues.NOW, write:false} // will be removed from data on sanitize()
+    ...
+});
+```
