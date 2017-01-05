@@ -38,7 +38,7 @@ Valid values are:
 
 ```js
 
-const mySchema = new Schema({
+const userSchema = new Schema({
     username : { type: 'string' },
     email: { type: 'string', validate: 'isEMAIL' }
 }, {
