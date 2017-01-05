@@ -1,6 +1,6 @@
 # Schema Options
 
-When creating a Schema you can pass a second object with a set of options. This object is **optional** you only need to pass it to override the default values.
+When creating a Schema you can pass a second object with a set of options. This object is **optional** you only need to pass it if you need to override the default values.
 
 ```js
 const mySchema = new Schema({...properties}, {... options});
@@ -37,10 +37,9 @@ Valid values are:
 # Example
 
 ```js
-
 const userSchema = new Schema({
     username : { type: 'string' },
-    email: { type: 'string', validate: 'isEMAIL' }
+    email: { type: 'string', validate: 'isEmail' }
 }, {
     validateBeforeSave: false,
     explicitOnly: false,
