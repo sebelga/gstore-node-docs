@@ -8,6 +8,6 @@
     * [Value validation](schema/value_validation.md)
     * [Other parameters](schema/other-paremeters.md)
     * [Schema options](schema/schema-options.md)
-    * Schema methods
+    * [Schema methods](schema/schema-methods.md)
 * [ref](ref.md)
 
