@@ -7,7 +7,7 @@ Getter / Setter for schemas paths.
 const mySchema = new Schema({ username: {type:'string' });
 
 // Getter
-mySchema.path('name'); // returns {type:'string'}
+mySchema.path('name'); // returns { type:'string' }
 
 // Setter
 mySchema.path('email', { type: 'string', validate: 'isEmail' });
