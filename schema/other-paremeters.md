@@ -39,6 +39,7 @@ const articleSchema = new Schema({
 });
 ```
 
+<a name="read"></a>
 ## read
 If you don't want certain properties to show up in the response data of queries or when calling entity.plain() (see Entity section), set this parameter to **false**. This is useful when you have entity properties only useful to your business logic and that you don't want to exposed publicly.
 
