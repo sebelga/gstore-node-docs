@@ -19,7 +19,6 @@ blogPostSchema.methods.texts = function() {
     return query.run();
 };
 
-...
 // In your Controller
 // You can then call it on an entity instance of BlogPost
 const BlogPost = require('../models/blogpost.model');
@@ -40,8 +39,6 @@ Note how entities instances can access other models through `entity.model('Other
 userSchema.methods.profilePict = function() {
     return this.model('Image').get(this.imageIdx);
 };
-
-...
 
 // In your controller
 const User = require('../models/user.model');
