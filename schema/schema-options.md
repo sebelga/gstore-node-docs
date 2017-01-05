@@ -24,6 +24,7 @@ An object to set global settings for your queries. These settings can be overrid
 Override the Schema property parameter **read** \([here](../schema/other-paremeters.md#read)\) to return all the properties of the entities.
 
 #### format (default: gstore.Queries.formats.JSON)  
+
 By default queries will return plain JSON objects with the entity **data** + the "**id**" of the entity added automatically.  
 If you prefer, you can also have entities gstore **instances** returned (with all the extra methods like "save(), model()", ...).  
 The response format can be set here globally but this setting can be overriden on any query (see below).  
