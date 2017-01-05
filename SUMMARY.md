@@ -9,5 +9,6 @@
     * [Other parameters](schema/other-paremeters.md)
     * [Schema options](schema/schema-options.md)
     * [Schema methods](schema/schema-methods.md)
+    * [Custom methods](schema/custom-methods.md)
 * [ref](ref.md)
 
