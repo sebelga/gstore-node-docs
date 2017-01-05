@@ -19,5 +19,5 @@ The properties explicitly declared will still be validated.
 Here you can set global behaviour for queries. These settings can be overridden on each query.
 
 #### readAll (default false)
-Override the Schema property parameter **read** to return all the properties of the entities.
+Override the Schema property parameter **read** ([here](../schema/other-parameters.md) ) to return all the properties of the entities.
 
