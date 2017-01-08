@@ -23,13 +23,14 @@ blogPostSchema.methods.texts = function() {
 // You can then call it on an entity instance of BlogPost
 const BlogPost = require('../models/blogpost.model');
 
-BlogPost.get(123).then((data) => {
-    const blogEntity = data[0];
-    blogEntity.texts()
-                .then((response) => {
-                    const texts = response[0].entities;
-                });
-});
+BlogPost.get(123)
+        .then((data) => {
+            const blogEntity = data[0];
+            blogEntity.texts()
+                        .then((response) => {
+                            const texts = response[0].entities;
+                        });
+        });
 ```
 
 Note how entities instances can access other models through `entity.model('OtherModel')`. *Denormalization* can then easily be done with a custom method:
@@ -37,6 +38,7 @@ Note how entities instances can access other models through `entity.model('Other
 ```js
 // Add custom "profilePict()" method on the User Schema
 userSchema.methods.profilePict = function() {
+    // Any type of query can be done here
     return this.model('Image').get(this.imageIdx);
 };
 
@@ -44,15 +46,16 @@ userSchema.methods.profilePict = function() {
 const User = require('../models/user.model');
 
 const user = new User({ name: 'John', imageIdx: 1234 });
-user.profilePict().then((data) => {
-    const imageEntity = data[0];
-    user.profilePict = imageEntity.url;
-    user.save().then(() { ... });
-});
+user.profilePict()
+    .then((data) => {
+        const imageEntity = data[0];
+        user.profilePict = imageEntity.url;
+        user.save()
+            .then(() { ... });
+    });
 
 // Or with a callback
 userSchema.methods.profilePict = function(cb) {
-    // Any type of query can be done here
     return this.model('Image').get(this.imageIdx, cb);
 };
 ...
