@@ -11,4 +11,5 @@
     * [Schema methods](schema/schema-methods.md)
     * [Custom methods](schema/custom-methods.md)
 * [ref](ref.md)
+* Model
 
