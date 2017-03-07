@@ -1,6 +1,6 @@
 # Types validation
 
-You can set a type for a Schema passing a "type" parameter to it.
+You can set a _type _for a schema property adding a "type" parameter to it.
 
 `new Schema({ name: { type: 'string' }})`
 
@@ -33,11 +33,11 @@ const userSchema = new Schema({
 });
 ```
 
-Note: you are not forced to set a type, if you don't define one, then any type is valid.
+Note: you are not forced to set a type, if you don't define one, then **any **type is valid.
 
 ```js
 const userSchema = new Schema({
-    name: {}, // any type can be passed
+    name: {}, // any type
     email: { type: 'string' }
 });
 ```
