@@ -7,22 +7,22 @@ This method accepts the following arguments:
 
 ```js
 MyModel.get(
-    /* {int|string}. Can also be an Array of ids to retrieve */
+    /* {int|string}. -- Can also be an Array of ids to retrieve */
     <id>,
-    /* {Array} optional. ex: ['ParentEntity', 1234 ] */
+    /* {Array} -- optional. ex: ['ParentEntity', 1234 ] */
     <ancestors>,
-    /* {string} optional. A specific namespace */
+    /* {string} -- optional. A specific namespace */
     <namespace>,
-    /* {Transaction} optional. The transaction currently in progress */
+    /* {Transaction} -- optional. The transaction currently in progress */
     <transaction>,
-    /* {object} optional. Additional config settings */
+    /* {object} -- optional. Additional config */
     <options>,
-    /* {function} optional. The callback, if not passed a Promise is returned */
+    /* {function} -- optional. The callback, if not passed a Promise is returned */
     <callback>
 )
 ```
 
-**@Returns **---&gt; a gstore entity **instance**.
+**@Returns** ---> a gstore entity **instance**.
 
 ---
 
