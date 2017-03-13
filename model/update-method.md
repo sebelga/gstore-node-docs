@@ -73,21 +73,22 @@ transaction.run().then(() =>
 });
 ```
 
-**replace** property \(options\)  
-The options parameter has a **replace** property \(default to false\) that you can set to true if you want to replace all the entity data. By default, Model.update\(\) does 2 operations inside a **Transaction**:
 
-* first a get\(\) + merges the new data passed in the entity fetched
-* then a save\(\)
+### Options
 
-If just want to override the entity data without doing any merge with the data stored the Datastore, pass replace:true in the options parameter.
+**replace** (default: false)
+The options argument has a *replace* property that you can set to true if you want to replace all the entity data without merging with the data in the Datastore. By default, `MyModel.update(...)` does 2 operations inside one transaction:
+
+* get() the entity + merges its data with the ones passed
+* save()
+
+If you just want to override the entity data without doing any merge set *replace* to **true** in the options parameter.
 
 ```js
-BlogPost.update(123, data, null, null, null, {replace:true}, function(err, entity) {
-    ...
-});
+BlogPost.update(123, data, null, null, null, { replace:true }).then( ... );
 ```
 
-If no callback is passed, it will return a Promise
+If no callback is passed, it will return a **Promise**
 
 ```js
 BlogPost.update(123, data).then((data) => {
