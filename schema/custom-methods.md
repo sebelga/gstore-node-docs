@@ -1,16 +1,16 @@
 # Custom Methods
 
-Custom methods can be added to entities instances through their Schemas.  
+Custom methods can be added to entities instances through their Schemas.
 
 `schema.methods.<methodName> = function(){ ... }`
 
-Make sure to **not** use arrow function as you would lose the scope set to the entity instance.
+Make sure **not to** use arrow function as you would lose the scope of the entity instance.
 
 ```js
 const blogPostSchema = new Schema({ title: {} });
 
 // Custom method to retrieve all children Text entities
-blogPostSchema.methods.texts = function() {
+blogPostSchema.methods.texts = function getTexts() {
     // the scope (this) is the entity instance
     const query = this.model('Text')
                         .query()
@@ -21,8 +21,8 @@ blogPostSchema.methods.texts = function() {
 
 // In your Controller
 // You can then call it on an entity instance of BlogPost
-const BlogPost = require('../models/blogpost.model');
 
+const BlogPost = require('../models/blogpost.model');
 BlogPost.get(123)
         .then((data) => {
             const blogEntity = data[0];
@@ -33,11 +33,11 @@ BlogPost.get(123)
         });
 ```
 
-Note how entities instances can access other models through `entity.model('OtherModel')`. *Denormalization* can then easily be done with a custom method:
+Note how entities instances can access other models through `entity.model('MyModel')`. _Denormalization_ can then easily be done with a custom method:
 
 ```js
 // Add custom "profilePict()" method on the User Schema
-userSchema.methods.profilePict = function() {
+userSchema.methods.profilePicture = function profilePicture() {
     // Any type of query can be done here
     return this.model('Image').get(this.imageIdx);
 };
@@ -46,10 +46,10 @@ userSchema.methods.profilePict = function() {
 const User = require('../models/user.model');
 
 const user = new User({ name: 'John', imageIdx: 1234 });
-user.profilePict()
+user.profilePicture()
     .then((data) => {
         const imageEntity = data[0];
-        user.profilePict = imageEntity.url;
+        user.profilePicture = imageEntity.url;
         user.save()
             .then(() { ... });
     });
@@ -63,10 +63,11 @@ userSchema.methods.profilePict = function(cb) {
 const user = new User({ name:'John', imageIdx:1234 });
 
 // Call custom Method 'getImage'
-user.profilePict(function(err, imageEntity) {
+user.profilePict(function onProfilePict(err, imageEntity) {
     user.profilePict = imageEntity.url;
     user.save().then(() { ... });
 });
 ```
+
 
 

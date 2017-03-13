@@ -1,6 +1,7 @@
 # Schema methods
 
-## path()
+## path\(\)
+
 Getter / Setter for schemas paths.
 
 ```js
@@ -17,10 +18,9 @@ const User = gstore.model('User');
 
 // add new path to the User Schema
 User.schema.path('age', { type:'number' });
-
 ```
 
-## virtual()
+## virtual\(\)
 
 Virtuals are properties that are added to the entities at runtime that are not persisted in the Datastore. You can both define a **getter** and a **setter**.
 
@@ -32,8 +32,9 @@ const userSchema = new Schema({
     lastname : {}
 });
 
-userSchema.virtual('fullname').get(function() {
+userSchema.virtual('fullname').get(function fullName() {
     // the scope (this) is the entityData of the entity instance
+    // for this reason don't use arrow functions here
     return `${this.firstname} ${this.lastname}`;
 });
 
@@ -48,7 +49,6 @@ console.log(user.fullname); // 'John Snow';
  */
 const response = user.plain({ virtuals: true });
 console.log(response.fullname); // 'John Snow';
-
 ```
 
 **setter**
@@ -75,6 +75,4 @@ console.log(user.lastname); // 'Snow';
 ```
 
 **Note:** You can save entities without worrying about the virtuals as they are **removed** from the entity data automatically.
-
-
 
