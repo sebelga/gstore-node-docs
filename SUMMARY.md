@@ -14,4 +14,5 @@
 * [Model](model.md)
   * [Creation](model/creation.md)
   * [GET](model/methods.md)
+  * [UPDATE](model/update-method.md)
 
