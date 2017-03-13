@@ -12,4 +12,6 @@
   * [Custom methods](schema/custom-methods.md)
 * [ref](ref.md)
 * [Model](model.md)
+  * [Creation](model/creation.md)
+  * [GET](model/methods.md)
 
