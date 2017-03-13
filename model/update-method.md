@@ -39,8 +39,8 @@ const blogPostData = {
     title : 'New title'
 };
 
-// Basic
-// -----
+// Basic example
+// --------------
 BlogPost.update(123, blogPostData, function onBlogPostUpdate(err, entity) {
     if (err) {
         // deal with err
@@ -57,15 +57,12 @@ BlogPost.update(123, data, ['Grandpa', 123, 'Dad', 123], 'dev.namespace.com', fu
     console.log(entity);
 });
 
-// The same method can be executed from inside a transaction
-var transaction = gstore.transaction();
+// Example from inside a Transaction
+// ---------------------------------
 
-transaction.run(function(err) {
-    if (err) {
-        // handle error
-        return;
-    }
+const transaction = gstore.transaction();
 
+transaction.run().then(() => 
     BlogPost.update(123, data, null, null, transaction);
 
     transaction.commit(function(err) {
