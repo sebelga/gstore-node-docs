@@ -2,7 +2,7 @@
 
 ## UPDATE
 
-This method allows you to update an entity in the Datastore.
+This method allows you to update an entity in the Datastore.  
 It will first fetch the entity, then update its data with the new ones and finally save the data back to the Datastore
 
 This method accepts the following arguments:
@@ -26,28 +26,30 @@ MyModel.update(
 )
 ```
 
-**@Returns** ---> an entity **instance**.
+**@Returns** ---&gt; an entity **instance**.
 
 ---
 
 Example
+
 ```js
-// ...
+const BlogPost = require('./blog-post.model');
 
-var BlogPost = gstore.model('BlogPost');
-
-var data = {
+const blogPostData = {
     title : 'New title'
 };
 
-BlogPost.update(123, data, function(err, entity) {
+// Basic
+// -----
+BlogPost.update(123, blogPostData, function onBlogPostUpdate(err, entity) {
     if (err) {
         // deal with err
     }
     console.log(entity.plain());
 });
 
-// You can also pass an optional ancestors path and a namespace
+// Example with *ancestors* and a *namespace*
+// ------------------------------------------
 BlogPost.update(123, data, ['Grandpa', 123, 'Dad', 123], 'dev.namespace.com', function(err, entity) {
     if (err) {
         // deal with err
@@ -72,20 +74,19 @@ transaction.run(function(err) {
         }
     });
 });
-
 ```
 
-**replace** property (options)
-The options parameter has a **replace** property (default to false) that you can set to true if you want to replace all the entity data. By default, Model.update() does 2 operations inside a **Transaction**:
+**replace** property \(options\)  
+The options parameter has a **replace** property \(default to false\) that you can set to true if you want to replace all the entity data. By default, Model.update\(\) does 2 operations inside a **Transaction**:
 
-- first a get() + merges the new data passed in the entity fetched
-- then a save()
+* first a get\(\) + merges the new data passed in the entity fetched
+* then a save\(\)
 
 If just want to override the entity data without doing any merge with the data stored the Datastore, pass replace:true in the options parameter.
 
 ```js
 BlogPost.update(123, data, null, null, null, {replace:true}, function(err, entity) {
-	...
+    ...
 });
 ```
 
@@ -97,3 +98,6 @@ BlogPost.update(123, data).then((data) => {
     console.log(entity.plain());
 });
 ```
+
+
+
