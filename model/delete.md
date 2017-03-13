@@ -26,8 +26,13 @@ MyModel.delete(
 )
 ```
 
-**@returns** a boolean set to true if an entity has been deleted or false if not.
+**@returns**
+    - success: a boolean set to true if an entity has been deleted or false if not.
+    - apiResponse: the api response
 
+---
+
+Example:
 ```js
 var BlogPost = gstore.model('BlogPost');
 
