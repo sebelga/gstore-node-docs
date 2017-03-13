@@ -6,11 +6,13 @@ When creating a Schema you can pass a second object with a set of options. This 
 const mySchema = new Schema({...properties}, {... options});
 ```
 
-## validateBeforeSave \(default: true\)
+## validateBeforeSave
+**default: true**
 
 By default each time an entity is saved it is validated. You can disable this behaviour by setting **validateBeforeSave** to false.
 
-## explicitOnly \(default: true\)
+## explicitOnly
+**default: true**
 
 To allow undeclared properties on a Schema set **explicitOnly** to false. This will bring back the magic of _Schemaless_ datastores.  
 The properties explicitly declared will still be validated.
@@ -19,20 +21,22 @@ The properties explicitly declared will still be validated.
 
 An object to set global settings for your queries. These settings can be overridden on each query:
 
-#### readAll (default: false\)
+#### readAll
+**default: false**
 
 Override the Schema property parameter **read** \([here](../schema/other-paremeters.md#read)\) to return all the properties of the entities.
 
-#### format (default: "JSON")  
+#### format
+**default: "JSON"**
 
 By default queries will return plain JSON objects with the entity **data** + the "**id**" of the entity added automatically.  
-If you prefer, you can also have entities gstore **instances** returned (with all the extra methods like "save(), model()", ...).  
+If you prefer, you can have **gstore instances** of the entities returned \(with all the extra methods like "save\(\), model\(\)", ...\).
 
-The response format can be set here globally but this setting can be overriden later in each query.
-Valid values are: 
--  "JSON" (default)
--  "ENTITY"
+The response format can be set here globally but it can be overriden later in each query.  
+Valid values are:
 
+* "JSON"
+* "ENTITY"
 
 # Example
 
@@ -49,3 +53,6 @@ const userSchema = new Schema({
     }
 });
 ```
+
+
+
