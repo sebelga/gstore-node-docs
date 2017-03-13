@@ -6,15 +6,27 @@ You can delete an entity by calling `Model.delete(...args)`.
 
 This method accepts the following arguments:
 
-- id : the id to delete. Can also be an **array** of ids
-- ancestors (optional)
-- namespace (optional)
-- transaction (optional)
-- key (optional) Can also be an **array** of keys
-- callback (optional, if not passed a **Promise** is returned)
+```js
+MyModel.delete(
+    /* {int|string}. -- Can also be an Array of ids to delete */
+    <id>,
+    /* {Array} -- optional. ex: ['ParentEntity', 1234 ] */
+    <ancestors>,
+    /* {string} -- optional. A specific namespace */
+    <namespace>,
+    /* {Transaction} -- optional. The transaction currently in progress */
+    <transaction>,
+    /*
+        {object|Array} -- optional. An entityKey. Can also be an *Array* of keys.
+        If you already know the key (after a get() for ex.) you can pass it here.
+    */
+    <key>,
+    /* {function} -- optional. The callback, if not passed a Promise is returned */
+    <callback>
+)
+```
 
-
-The response of the callback has a "success" properties that is set to true if an entity has been deleted or false if not.
+**@returns** a boolean set to true if an entity has been deleted or false if not.
 
 ```js
 var BlogPost = gstore.model('BlogPost');
