@@ -1,6 +1,6 @@
 # Model Methods
 
-## UPDATE
+## update()
 
 This method allows you to update an entity in the Datastore.  
 It will first fetch the entity, then update its data with the new ones and finally save the data back to the Datastore
