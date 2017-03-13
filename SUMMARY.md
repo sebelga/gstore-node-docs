@@ -1,15 +1,15 @@
 # Summary
 
 * [Getting Started](README.md)
-    * [Motivation](getting-started/motivation.md)
-    * [Installation](getting-started/installation.md)
+  * [Motivation](getting-started/motivation.md)
+  * [Installation](getting-started/installation.md)
 * [Schema](schema/index.md)
-    * [Type validation](schema/type_validation.md)
-    * [Value validation](schema/value_validation.md)
-    * [Other parameters](schema/other-paremeters.md)
-    * [Schema options](schema/schema-options.md)
-    * [Schema methods](schema/schema-methods.md)
-    * [Custom methods](schema/custom-methods.md)
+  * [Type validation](schema/type_validation.md)
+  * [Value validation](schema/value_validation.md)
+  * [Other parameters](schema/other-paremeters.md)
+  * [Schema options](schema/schema-options.md)
+  * [Schema methods](schema/schema-methods.md)
+  * [Custom methods](schema/custom-methods.md)
 * [ref](ref.md)
-* Model
+* [Model](model.md)
 
