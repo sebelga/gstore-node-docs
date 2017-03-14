@@ -2,9 +2,7 @@
 
 ## delete()
 
-You can delete an entity by calling `Model.delete(...args)`.  
-
-This method accepts the following arguments:
+This method allows you to delete an entity in the Datastore. It accepts the following arguments:
 
 ```js
 MyModel.delete(
@@ -26,70 +24,66 @@ MyModel.delete(
 )
 ```
 
-**@returns**
-    - success: a boolean set to true if an entity has been deleted or false if not.
-    - apiResponse: the api response from google-cloud-node
+**@returns** an object with the following properties
+    - success -- a boolean set to true if an entity has been deleted or false if not.
+    - apiResponse -- the api response from google-cloud-node
+    - key -- the entityKey thas has been deleted
 
 ---
 
 Example:
-```js
-var BlogPost = gstore.model('BlogPost');
 
-BlogPost.delete(123, function(err, response) {
+```js
+const BlogPost = require('./blog-post.model');
+
+BlogPost.delete(123, function onBlogPostDelete(err, response) {
     if (err) {
         // deal with err
     }
+
     if (!response.success) {
-        console.log('No entity deleted. The id provided didn\'t return any entity');
+        console.log('No entity deleted. There is not BlogPost Entity with the id provided');
     }
-    
-    // The response has a *key* property with the entity keys that have been deleted (single or Array)
 });
 
-// With an array of ids
-BlogPost.delete([123, 456, 789], function(err, success, apiResponse) {...}
+// Array of ids
+BlogPost.delete([123, 456, 789], function onBlogPostDelete(err, response) {...}
 
-// With ancestors and a namespace
-BlogPost.delete(123, ['Parent', 123], 'dev.namespace.com', function(err, success, apiResponse) {...}
+// Ancestors and a namespace
+BlogPost.delete(123, ['Parent', 123], 'dev.namespace.com', function onBlogPostDelete(err, response) {...}
 
-// With a key (can also be an <Array> of keys)
-BlogPost.delete(null, null, null, null, key, function(err, success, apiResponse) {...}
-
+// Passing a key (can also be an <Array> of keys)
+BlogPost.delete(null, null, null, null, key, function onBlogPostDelete(err, response) {...}
 
 // Transaction
 // -----------
 /* The same method can be executed inside a transaction
- * Important!: if you have "pre" middelware set fot delete, then you must *resolve*
- * the Promise before commiting the transaction
+ * Important: if you have "pre" middelware defined on "delete" in your schema,
+ * then you must first *resolve* the Promise before commiting the transaction
 */
 
-var transaction = gstore.transaction();
+const transaction = gstore.transaction();
 
-transaction.run(function(err) {
-    if (err) {
-        // handle error
-        return;
-    }
-		
-	// example 1 (in sync when there are no "pre" middleware)
-	BlogPost.delete(123, null, null, transaction); 
-	
-	transaction.commit(function(err) {
-        if (err) {
-            // handle error
-        }
-	});
-	
-   // example 2 (with "pre" middleware to execute first) 
-   BlogPost.delete(123, null, null, transaction)
-   				.then(() => {
-    				 transaction.commit(function(err) {
-				        if (err) {
-				            // handle error
-				        }
-				    });
-    			});
+// example 1 -- with no "pre" delete middleware
+transaction.run().then(() => {
+    BlogPost.delete(123, null, null, transaction); 
+    return transaction.commit().then(() { ... })
+}).catch((err) => {
+    // handle errors 
 });
+
+// example 2 (with "pre" middleware to execute first)
+transaction.run().then(() => { 
+   return BlogPost.delete(123, null, null, transaction)
+   	    .then(() => {
+                return transaction.commit().then(() { ... });
+    	    });
+}).catch((err) => {
+    // handle errors 
+});
+
+
+
+
 
 ```
