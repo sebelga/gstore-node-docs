@@ -9,7 +9,8 @@ If you don't want this behaviour you can call `Model.excludeFromIndexes(property
 Example:
 
 ```js
-// Your model declarartion
+// Your model declaration
+
 const options = { explicitOnly: false };
 const blogPostSchema = new Schema({
     title: { type: 'string' }
@@ -19,7 +20,7 @@ BlogPost = gstore.model('BlogPost', blogPostSchema);
 
 ...
 
-// In some controller
+// Yout controller
 
 const blogPost = new BlogPost({
     title:'my-title',
@@ -47,26 +48,30 @@ blogPost.save().then(() => { ... });
 
 ## sanitize()
 
-This methods will clean and do basic formatting of an entity data. It is a good practice to call it on data coming from an untrusted source.
-Executing it will:
+This methods will clean and do basic formatting of an entity data. It is a good practice to call it on data coming from an untrusted source.  Sanitize() will:
 
-- remove properties that are marked as not *writable* in schemas
-- convert 'null' (string) values to null
+- **remove properties** that are marked as not *writable* in schemas
+- convert 'null' (string) values to **null**
 
 ```js
-var userSchema = new Schema({
-    name : {type:'string'},
-    createdOn : {type:'datetime', write:false}
+// user.model.js
+
+const userSchema = new Schema({
+    name : { type: 'string' },
+    createdOn : { type: 'datetime', write:false } // write not allowed
 });
 
-...
-// in your Controller
+module.exports = gstore.model('User', userSchema);
 
-var data = req.body; // body request
+...
+// In your controller
+const User = require('./user.model');
+
+const data = req.body; // body of the Request
 console.log(data.createdOn); // '2016-03-01T21:30:00';
 console.log(data.lastname); // "null";
 
-data = UserModel.sanitize(data);
+data = User.sanitize(data);
 console.log(data.createdOn); // undefined
 console.log(data.lastname); // null
 
