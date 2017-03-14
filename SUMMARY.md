@@ -16,4 +16,5 @@
   * [GET](model/methods.md)
   * [UPDATE](model/update-method.md)
   * [DELETE](model/delete.md)
+  * [Other methods](model/other-methods.md)
 
