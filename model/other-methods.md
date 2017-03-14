@@ -50,7 +50,7 @@ blogPost.save().then(() => { ... });
 
 This methods will clean and do basic formatting of an entity data. It is a good practice to call it on data coming from an untrusted source.  Sanitize() will:
 
-- **remove properties** that are marked as not *writable* in schemas
+- **remove properties** that are marked as **not writable** in schemas
 - convert 'null' (string) values to **null**
 
 ```js
@@ -74,12 +74,10 @@ console.log(data.lastname); // "null";
 data = User.sanitize(data);
 console.log(data.createdOn); // undefined
 console.log(data.lastname); // null
-
-
 ```
 
 ## key()
-Create entity Key(s). This method accepts the following arguments:
+Creates and entity key(s) for the Model. This method accepts the following arguments:
 
 - id (one or several in an Array)
 - ancestors (optional)
