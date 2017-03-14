@@ -28,7 +28,7 @@ MyModel.delete(
 
 **@returns**
     - success: a boolean set to true if an entity has been deleted or false if not.
-    - apiResponse: the api response
+    - apiResponse: the api response from google-cloud-node
 
 ---
 
