@@ -31,7 +31,7 @@ MyModel.delete(
 
 ---
 
-Example:
+Examples:
 
 ```js
 const BlogPost = require('./blog-post.model');
@@ -44,6 +44,15 @@ BlogPost.delete(123, function onBlogPostDelete(err, response) {
     if (!response.success) {
         console.log('No entity deleted. There is not BlogPost Entity with the id provided');
     }
+});
+
+// With Promise
+BlogPost.delete(123).then((response) => {
+    if (!response[0].success) {
+        ...
+    }
+}).catch((err) => {
+    // deal with err
 });
 
 // Array of ids
