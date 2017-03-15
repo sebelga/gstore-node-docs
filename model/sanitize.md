@@ -33,7 +33,7 @@ console.log(data);
 }
 */
 
-// Sanitize body request
+// Now sanitize the body request
 data = User.sanitize(req.body);
 console.log(data);
 
