@@ -2,7 +2,7 @@
 
 ## sanitize()
 
-This methods will clean and do basic formatting of an entity data. It is a good practice to call it on data coming from an untrusted source.  Sanitize() will:
+This methods will clean and do basic formatting of an entity data. You should always execute it on data coming from an untrusted source.  MyModel.sanitize() will:
 
 - **remove properties** that are marked as **not writable** in schemas
 - convert 'null' (string) values to **null**
