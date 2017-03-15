@@ -1,10 +1,10 @@
 # Entity
 
-Each entity is an instance of its Model that has a Datastore Key and data.
+Each entity is an instance of a Model and represents an entity stored in the Datastore of a certain "Entity Kind".
 
-## Instantiate
+## Creation
 
-To create instances of a model use
+To create an instance of a model use
 
 `new Model(data, id /*optional*/, ancestors /*optional*/, namespace /*optional*/)`
 
