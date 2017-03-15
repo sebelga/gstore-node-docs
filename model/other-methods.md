@@ -46,36 +46,6 @@ blogPost.save().then(() => { ... });
 
 ```
 
-## sanitize()
-
-This methods will clean and do basic formatting of an entity data. It is a good practice to call it on data coming from an untrusted source.  Sanitize() will:
-
-- **remove properties** that are marked as **not writable** in schemas
-- convert 'null' (string) values to **null**
-
-```js
-// user.model.js
-
-const userSchema = new Schema({
-    name : { type: 'string' },
-    createdOn : { type: 'datetime', write:false } // write not allowed
-});
-
-module.exports = gstore.model('User', userSchema);
-
-...
-// In your controller
-const User = require('./user.model');
-
-const data = req.body; // body of the Request
-console.log(data.createdOn); // '2016-03-01T21:30:00';
-console.log(data.lastname); // "null";
-
-data = User.sanitize(data);
-console.log(data.createdOn); // undefined
-console.log(data.lastname); // null
-```
-
 ## key()
 Creates and entity key(s) for the Model. This method accepts the following arguments:
 

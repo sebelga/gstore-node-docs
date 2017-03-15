@@ -17,4 +17,5 @@
   * [DELETE](model/delete.md)
   * [excludeFromIndexes\(\)](model/other-methods.md)
   * [sanitize\(\)](model/sanitize.md)
+  * [key\(\)](model/key.md)
 
