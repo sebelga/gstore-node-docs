@@ -20,4 +20,5 @@
   * [key\(\)](model/key.md)
 * [Entity](entity.md)
   * [Properties](entity/properties.md)
+  * Methods
 
