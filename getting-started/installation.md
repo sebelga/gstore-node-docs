@@ -15,12 +15,12 @@ const gstore = require('gstore-node');
 gstore.connect(datastore);
 ```
 
-### Aliases
+## Aliases
 
 After a successful connection, gstore has **2 aliases** set up
 
-* `gstore.ds` The gcloud datastore instance
-* `gstore.transaction`. Alias of the same gcloud method
+* `gstore.ds` The @google/datastore instance
+* `gstore.transaction`. Alias of the same google-cloud method
 
 
 
