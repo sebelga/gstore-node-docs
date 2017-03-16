@@ -28,9 +28,15 @@ const blogPost = new BlogPost({title: 'title of the post', author: 'John Snow' }
 #### id
 **(optional)**
 
-By default, if you don't pass an id when you create an instance, the entity id will be auto-generated. If you want to manually give the entity an id, pass it as a second parameter during the instantiation.
+By default, if you don't pass an id when you create an instance, the entity id will be auto-generated. If you want to manually give the entity an id, pass it as a second parameter during the instantiation. 
 
-```js
+
+
+
+
+
+
+`js
 ...
 // String id
 const blogPost = new BlogPost(data, 'stringId');
@@ -38,6 +44,8 @@ const blogPost = new BlogPost(data, 'stringId');
 // Integer ir
 const blogPost = new BlogPost(data, 1234);
 ```
+
+
 
 #### ancestors
 **(optional)**
