@@ -6,7 +6,7 @@
 
 ## Connect to the Google Cloud Node library
 
-For info on how to configure the gcloud datastore [read the docs here](https://googlecloudplatform.github.io/google-cloud-node/#/docs/datastore/0.5.0/datastore).
+For info on how to configure the gcloud datastore [read the docs here](https://googlecloudplatform.github.io/google-cloud-node/#/docs/datastore/master/datastore).
 
 ```js
 const datastore = require('@google-cloud/datastore')();
