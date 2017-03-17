@@ -1,4 +1,4 @@
-# Model Methods
+# Entity Methods
 
 ## plain()
 
