@@ -20,7 +20,7 @@
     * [excludeFromIndexes\(\)](model/other-methods.md)
     * [sanitize\(\)](model/sanitize.md)
     * [key\(\)](model/key.md)
-* [Entity](entity.md)
+* [Entity](entity/creation.md)
   * [Creation](entity/creation.md)
   * [Properties](entity/properties.md)
   * [Methods](entity/methods.md)
