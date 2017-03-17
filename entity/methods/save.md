@@ -5,55 +5,76 @@
 After you create an entity you can persist its data to the Datastore with `entity.save()`  
 This method accepts the following arguments
 
-- transaction (optional). Will execute the save operation inside this transaction
-- options { method: 'upsert | insert | update' }  (optional). Default to { method: 'upsert' }
-- callback (optional, if not passed a **Promise** is returned)
+```js
+entity.save(
+    /* {Transaction} -- optional. Will execute the save operation inside this transaction */
+    <transaction>,
+    /* {object} -- optional. Additional config */
+    <options>,
+    /* {function} -- optional. The callback, if not passed a Promise is returned */
+    <callback>
+)
+```
 
+#### options
+
+The options argument has a **method** property where you can set the saving method.
+It default to 'upsert'.
 
 ```js
-var gstore = require('gstore-node');
+{
+  method: 'upsert|insert|update', // default: 'upsert'
+}
+```
 
-var blogPostSchema = new gstore.Schema({
-    title :     {type:'string'},
-    createdOn : {type:'datetime', default:new Date()}
+Example:
+```js
+// blog-post.model.js
+const gstore = require('gstore-node');
+
+const blogPostSchema = new gstore.Schema({
+  title: { type:'string' },
+  createdOn: { type:'datetime', default: gstore.defaultValues.NOW }
 });
 
-var BlogPost = gstore.model('BlogPost', blogPostSchema);
+module.exports = gstore.model('BlogPost', blogPostSchema);
+```
 
-var data = {
-    title : 'My first blog post'
-};
-var blogPostEntity = new BlogPost(data);
+```js
+// blog-post.controller.js
+const BlogPost = require('./blog-post.model');
 
-blogPostEntity.save(function(err) {
-    if (err) {// deal with err}
+const data = { title: 'My first blog post' };
+const blogPostEntity = new BlogPost(data);
 
-    // the function scope (this) is the entity instance.
-    console.log(this.plain());
-    console.log(this.get('title')); // 'My first blog post'
-    console.log(this.entityKey.id); // to get the auto generated id
+// Example 1: Promise
+blogPostEntity.save().then((response) => {
+  const entity = response[0];
+  console.log(entity.entityKey.id); // auto-generated id
+}).catch(err => { ... });
+
+// Example 2: callback
+blogPostEntity.save(function onBlogPostSave(err, entity) {
+    if (err) { // deal with err }
+
+    console.log(entity.entityKey.id); // auto-generated id
 });
 
 /*
  * From inside a transaction
  */
-var user = new User({name:'john'});
-var transaction = gstore.transaction();
+const blogPost = new BlogPost({ title: 'My new blog post' });
+const transaction = gstore.transaction();
 
-transaction.run().then(() => {
-	
-	// See note below to avoid nesting Promises
-   return user.save(transaction).then(() => {
-    	return transaction.commit().then((data) => {
-    		const apiResponse = data[0];
-    		...
-    	});
-    });
-}).catch((err) => {
-	// handle error
-   ...
- });
-
+transaction.run()
+           .then(() => { return user.save(transaction) })
+           .then(transaction.commit)
+           .then((response) => {
+              const apiResponse = data[0];
+              // ... transaction finished
+            }).catch((err) => {
+              // handle error
+            });
 
 /*
  * Changing the method to save
@@ -61,7 +82,6 @@ transaction.run().then(() => {
 
 var blogPostEntity = new BlogPost(data);
 blogPostEntity.save(null, { method: 'insert' }).then( ... );
-
 
 ```
 
@@ -71,13 +91,13 @@ A solution to avoid this is to **manually validate** before saving and then desa
 **Important**: This solution will bypass any other middleware that you might have defined on "save" in your Schema.
 
 ```js
-var user = new User({name:'john'});
-var transaction = gstore.transaction();
+const user = new User({ name: 'john' });
+const transaction = gstore.transaction();
 
 transaction.run().then() => {
-	User.get(123, null, null, transaction).then((data) => {
-		const user = data[0];
-		user.email = 'abc@def.com';
+	User.get(123, null, null, transaction).then((response) => {
+		const user = response[0];
+		user.email = 'john@domain.com';
 		const valid = user.validate();
 		
 		if (!valid) {
@@ -87,10 +107,10 @@ transaction.run().then() => {
 		// disable pre middleware(s)
 		user.preHooksEnabled = false;
 		
-		// save inside transaction
+		// save inside transaction in sync
 		user.save(transaction);
 
-		// ... more transaction operations
+		// ... any other transaction operations
 		
 		transaction.commit().then(() => {
 		    ...
