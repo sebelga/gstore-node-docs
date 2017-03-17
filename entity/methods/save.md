@@ -2,7 +2,7 @@
 
 ## save()
 
-After the instantiation of a Model, you can persist its data to the Datastore with `entity.save(...args)`  
+After you create an entity you can persist its data to the Datastore with `entity.save()`  
 This method accepts the following arguments
 
 - transaction (optional). Will execute the save operation inside this transaction
