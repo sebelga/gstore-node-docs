@@ -18,4 +18,4 @@ Outputs **all** the data properties, regardless of the schema "read" parameter.
 
 - virtuals (default: false)  
 
-Adds virtuals properties to the output object
+Adds your Schema "virtuals" to the output. ()
