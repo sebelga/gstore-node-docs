@@ -8,7 +8,7 @@
   * [Value validation](schema/value_validation.md)
   * [Properties parameters](schema/other-paremeters.md)
   * [Options](schema/schema-options.md)
-  * [Methods](schema/schema-methods.md)
+  * [Methods](schema/schema-methods/path.md)
     * [path\(\)](schema/schema-methods/path.md)
     * [virtual\(\)](schema/schema-methods/virtual.md)
   * [Custom methods](schema/custom-methods.md)
