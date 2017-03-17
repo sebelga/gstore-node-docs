@@ -18,4 +18,4 @@ Outputs **all** the data properties, regardless of the schema "read" parameter.
 
 - virtuals (default: false)  
 
-Adds your Schema "virtuals" to the output. (see: [schema virtuals](../schema/schema-methods/virtual.md))
+Adds the schema "virtuals" to the output. (see: [schema virtuals](../../schema/schema-methods/virtual.md))
