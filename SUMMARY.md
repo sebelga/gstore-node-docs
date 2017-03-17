@@ -24,4 +24,5 @@
   * [Creation](entity/creation.md)
   * [Properties](entity/properties.md)
   * [Methods](entity/methods.md)
+    * [SAVE](entity/methods/save.md)
 
