@@ -40,14 +40,13 @@ const blogPost = new BlogPost(data, 1234);
 ```
 
 
-If the ID integer is **outside the bounds of a JavaScript Number object**, you have to create an **Int** from @google-cloud/datastore
+If the ID integer is **outside the bounds of a JavaScript Number object**, you have to create an **Int** calling the int() method from @google-cloud/datastore
 
-Reminder: _gstore.ds_ is an alias to the google-cloud **datastore **instance
+Reminder: _gstore.ds_ is an alias to the google-cloud **datastore **instance.
 
 ```js
 
-// long Key ID
-// 
+// long Key ID 
 const blogPost = new BlogPost(data, gstore.ds.int('100000000000001234'));
 ```
 
