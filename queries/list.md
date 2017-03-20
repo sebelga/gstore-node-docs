@@ -22,19 +22,18 @@ Example
 
 ```js
 // Create Schema
-var blogPostSchema = new gstore.Schema({
-    title : {type:'string'},
-    isDraft: {type: 'boolean'}
+const blogPostSchema = new gstore.Schema({
+    title : { type: 'string' },
+    isDraft: { type: 'boolean' }
 });
 
 // List settings
-var querySettings = {
-    limit    : 10,
-    order    : {property: 'title', descending:true}, // descending defaults to false and is optional
-    select   : 'title',
-    ancestors: ['Parent', 123],  // will add an "hasAncestor" filter
-    filters  : ['isDraft', false] // operator defaults to "=",
-    start    : 'nextPageCursorFromPreviousQuery' // from a previous query
+const listQueryOptions = {
+    limit : 10,
+    order : { property: 'title', descending: true }, // descending defaults to false and is optional
+    select : 'title',
+    ancestors : ['Parent', 123],  // will add an "hasAncestor" filter
+    filters : ['isDraft', false] // operator defaults to "=",
 };
 
 // Add to schema
