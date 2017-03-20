@@ -4,10 +4,25 @@
 
 gstore is built **on top of @google-cloud/datastore** so you can execute [any query from the Google library](https://googlecloudplatform.github.io/google-cloud-node/#/docs/datastore/master/datastore/query).  
 
-1. First you create a query object with:  
-`const query = MyModel.query(namespace /*optional*/, transaction /*optional*/)`  
-then chain all the operators.  
-2. Then you call query.run() to execute the query.  
+1. Create a query object `const query = MyModel.query(namespace /*optional*/, transaction /*optional*/)`
+`
+2. and chain the operators to build the query. `query.filter(...).order(...).start(...)`
+3. call query.run() to execute the query. `query.run([options]).then( ... )`
+
+
+
+
+```js
+const query = MyModel.query(namespace /*optional*/, transaction /*optional*/)`  
+```
+
+2. then chain all the operators for the Query
+
+```js
+query.filter(...).order(...).start(...);
+```  
+
+3. Then you call query.run() to execute the query.  
 Query.run() has an **optional** parameters to pass 2 settings: "readAll" and "format".
 
 ```
