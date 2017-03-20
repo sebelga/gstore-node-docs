@@ -30,4 +30,5 @@
     * [plain\(\)](entity/methods/plain.md)
     * [model\(\)](entity/methods/model.md)
     * [datastoreEntity\(\)](entity/methods/datastoreentity.md)
+    * [validate\(\)](entity/methods/validate.md)
 
