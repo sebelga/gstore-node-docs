@@ -80,62 +80,28 @@ const query = User.query()
                   .filter('age', '>=', 4)
                   .order('lastname', { descending: true })
                   .start(nextPageCursor);
-
-// Example with an options parameter
-query.run({ readAll:true, format: gstore.Queries.formats.ENTITY })
-	 .then( ... );
-
-```
-
-**namespace**  
-Model.query() takes an optional "namespace" parameter if needed.
-
-```js
-var query = User.query('com.domain-dev')
+                  
+// Query on namespace
+const namespace = 'com.dev.server';
+const query = User.query(namespace)
                 .filter('name', '=', 'John');
-...
-```
 
-**transaction**  
-Model.query() takes an optional "transaction" parameter if needed.
-
-```js
-
-var transaction = gstore.transaction();
+// Query in a transaction
+const transaction = gstore.transaction();
 transaction.run().then(() => {
-
-	// Create the query inside the transaction
-	var query = User.query(null, transaction)
-                .filter('name', '=', 'John');
+    // Create the query inside the transaction
+    const query = User.query(null, transaction)
+                      .filter('name', '=', 'John');
    
-   	query.run().then(() => {
-  		...
+    query.run().then(() => {
+        // other operations inside the transaction
+        ...
   		
-  		// transaction.commit()...
-   	});	
+        transaction.commit().then( ... )
+    });	
 });
 
-
-
-**run with options**```
-
-
-**run() options**
-
-
-
-
-If no callback is passed, a **Promise** is returned
-
-```js
-var query = User.query()
-            .filter('name', '=', 'John');
-
-query.run().then((result) => {
-    const response = result[0];
-
-    // response contains both the entities and a nextPageCursor for pagination
-    var entities       = response.entities;
-    var nextPageCursor = response.nextPageCursor; // not present if no more results
-});
+// run options
+query.run({ readAll: true, format: 'ENTITY' })
+     .then( ... )
 ```
