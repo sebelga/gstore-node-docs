@@ -31,4 +31,5 @@
     * [model\(\)](entity/methods/model.md)
     * [datastoreEntity\(\)](entity/methods/datastoreentity.md)
     * [validate\(\)](entity/methods/validate.md)
+* Queries
 
