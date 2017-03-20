@@ -10,20 +10,18 @@ gstore is built **on top of @google-cloud/datastore** so you can execute [any qu
 3. call query.run() to execute the query. `query.run([options]).then( ... )`
 
 
-### Create query object
+### Create the query
 
 ```js
 MyModel.query(
-    /**/
+    /* {string}. -- optional. A namespace to execute the query */
+    <namespace>,
+    /* {object} -- optional. A transaction to execute the query from */
+    <transaction>
 );
 ```
 
-
-```js
-const query = MyModel.query(namespace /*optional*/, transaction /*optional*/)`  
-```
-
-2. then chain all the operators for the Query
+### Chain query operators
 
 ```js
 query.filter(...).order(...).start(...);
