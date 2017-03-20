@@ -29,4 +29,5 @@
     * [SAVE](entity/methods/save.md)
     * [plain\(\)](entity/methods/plain.md)
     * [model\(\)](entity/methods/model.md)
+    * [datastoreEntity\(\)](entity/methods/datastoreentity.md)
 
