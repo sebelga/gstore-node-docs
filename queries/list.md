@@ -49,22 +49,31 @@ const BlogPost = gstore.model('BlogPost', blogPostSchema);
 
 **@Returns** object with both the **entities** and a **nextPageCursor** for pagination (that can be used in a future call to `MyModel.list({ start: pageCursor }, function(){ ... }`)
 
+Example:
 ```js
-// In your Controllers
+BlogPost.list((response) => {
+    console.log(response[0].entities);
+    console.log(response[0].nextPageCursor); // only present if more results
+});
+
+// with a callback
 BlogPost.list(function(err, response) {
     if (err) {
         // deal with err
     }
     console.log(response.entities);
-    console.log(response.nextPageCursor); // only present if more results
+    console.log(response.nextPageCursor);
 });
 ```
 
 Order, Select & filters can also be **arrays** of settings
 
 ```js
-var querySettings = {
-    orders  : [{property: 'title'}, {property:'createdOn', descending:true}]
+const querySettings = {
+    orders  : [
+        { property: 'title' },
+        { property: 'createdOn', descending: true }
+    ],
     select  : ['title', 'createdOn'],
     filters : [['title', 'My first post'], ['createdOn', '<',  new Date()]]
 };
