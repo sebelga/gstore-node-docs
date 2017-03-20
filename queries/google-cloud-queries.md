@@ -13,7 +13,7 @@ gstore is built **on top of @google-cloud/datastore** so you can execute [any qu
 ### Create the query
 
 ```js
-MyModel.query(
+const query = MyModel.query(
     /* {string}. -- optional. A namespace to execute the query */
     <namespace>,
     /* {object} -- optional. A transaction to execute the query from */
@@ -23,31 +23,29 @@ MyModel.query(
 
 ### Chain query operators
 
+Refer to [@google-cloud/datastore](https://googlecloudplatform.github.io/google-cloud-node/#/docs/datastore/master/datastore/query) for list of operators
+
 ```js
-query.filter(...).order(...).start(...);
+query.filter(...).order(...).groupBy(...).start(...);
 ```  
 
-3. Then you call query.run() to execute the query.  
-Query.run() has an **optional** parameters to pass 2 settings: "readAll" and "format".
-
-```
-/**
- * readAll:
- * If you set it to true, all the properties will be returned regardless of the "read"
- * setting defined on the Schema
- *
- * format: 
- * Response format, either plain object (default) or entity instances
-*/
-
-{
-    readAll: true | false
-    format : gstore.Queries.formats.JSON | gstore.Queries.formats.ENTITY
-}
-```
+### Run the query
+To execute the query call
 
 ```js
-var User = gstore.model('User'); // with User schema previously defined
+query.run(
+    /* {boolean}. -- optional. Default: false
+       If set to true will return all the properties of the entity, regardless of the *read* parameter defined in the Schema */
+    <readAll>,
+    /* {string} -- optional. "JSON"|"ENTITY". Default: "JSON"
+       Format of the response, either plain object or entity instances  */
+    <format>
+);
+```
+
+Example:
+```js
+constUser = gstore.model('User'/ with User schema previously defin
 
 // 1. Initialize query
 var query = User.query()
