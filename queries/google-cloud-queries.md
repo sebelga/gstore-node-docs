@@ -45,18 +45,23 @@ query.run(
 
 Example:
 ```js
-constUser = gstore.model('User'/ with User schema previously defin
+const User = require('./user.model');
 
-// 1. Initialize query
-var query = User.query()
-            .filter('name', '=', 'John')
+// 1. Build the query
+const query = User.query()
+            .filter('firstname', '=', 'John')
             .filter('age', '>=', 4)
-            .order('lastname', {
-                descending: true
-            });
+            .order('lastname', { descending: true })
+            .limit(10);
 
-// 2. Execute query.
-// The callback response contains both the entities and the cursor if there are more results
+// 2. Execute the query.
+// The response contains both the entities and the cursor if there are more results
+
+// with Promise
+query.run().then((response) => {
+    var entities = response[0].entities;
+    var nextPageCursor = response[0].nextPageCursor; // not present if no more results
+});
 
 query.run(function(err, response) {
     if (err) {
