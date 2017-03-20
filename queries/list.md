@@ -14,7 +14,7 @@ It supports the following queries parameters
 - start
 
 
-**1. Define on Schema**
+**1. Define on your Model Schema**
 
 `entitySchema.queries('list', { ...settings });`
 
@@ -27,8 +27,8 @@ const blogPostSchema = new gstore.Schema({
     isDraft: { type: 'boolean' }
 });
 
-// List settings
-const listQueryOptions = {
+// list config
+const queryListConfig = {
     limit : 10,
     order : { property: 'title', descending: true }, // descending defaults to false and is optional
     select : 'title',
@@ -36,17 +36,18 @@ const listQueryOptions = {
     filters : ['isDraft', false] // operator defaults to "=",
 };
 
-// Add to schema
-blogPostSchema.queries('list', querySettings);
+// Add list query config to schema
+blogPostSchema.queries('list', queryListConfig);
 
 // Create Model
-var BlogPost = gstore.model('BlogPost', blogPostSchema);
+const BlogPost = gstore.model('BlogPost', blogPostSchema);
 ```
 
 **2. Use anywhere**
 
-`Model.list(callback)`
-The **response** object in the callback contains both the **entities** and a **nextPageCursor** for pagination (to be used in a next `Model.list({start:pageCursor}, function(){...}` call)
+`MyModel.list(options /*optional*/, callback /*optional*/)`
+
+**@Returns** object with both the **entities** and a **nextPageCursor** for pagination (that can be used in a future call to `MyModel.list({ start: pageCursor }, function(){ ... }`)
 
 ```js
 // In your Controllers
