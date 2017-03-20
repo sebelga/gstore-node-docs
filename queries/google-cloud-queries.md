@@ -30,7 +30,9 @@ query.filter(...).order(...).groupBy(...).start(...);
 ```  
 
 ### Run the query
-To execute the query call
+To execute the query call `query.run(options)`
+
+**@Returns** -- the response contains both the entities and the cursor if there are more results
 
 ```js
 query.run(
@@ -55,32 +57,29 @@ const query = User.query()
             .limit(10);
 
 // 2. Execute the query.
-// The response contains both the entities and the cursor if there are more results
 
 // with Promise
 query.run().then((response) => {
-    var entities = response[0].entities;
-    var nextPageCursor = response[0].nextPageCursor; // not present if no more results
+    const entities = response[0].entities;
+    const nextPageCursor = response[0].nextPageCursor; // not present if no more results
 });
 
+// or with a callback
 query.run(function(err, response) {
     if (err) {
         // deal with err
     }
 
-    // response contains both the entities and a nextPageCursor for pagination
-    var entities       = response.entities;
-    var nextPageCursor = response.nextPageCursor; // not present if no more results
+    const entities = response.entities;
+    const nextPageCursor = response.nextPageCursor;
 });
 
-// You can then use the nextPageCursor when calling the same query and set it as a start value
-var query = User.query()
-            .filter('name', '=', 'John')
-            .filter('age', '>=', 4)
-            .order('lastname', {
-                descending: true
-            })
-            .start(nextPageCursor);
+// You can then use the "nextPageCursor" when calling the same query and pass it as start value
+const query = User.query()
+                  .filter('name', '=', 'John')
+                  .filter('age', '>=', 4)
+                  .order('lastname', { descending: true })
+                  .start(nextPageCursor);
 
 // Example with an options parameter
 query.run({ readAll:true, format: gstore.Queries.formats.ENTITY })
@@ -116,9 +115,9 @@ transaction.run().then(() => {
    	});	
 });
 
-...
 
-```
+
+**run with options**```
 
 If no callback is passed, a **Promise** is returned
 
