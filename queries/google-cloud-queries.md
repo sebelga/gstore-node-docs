@@ -119,6 +119,12 @@ transaction.run().then(() => {
 
 **run with options**```
 
+
+**run() options**
+
+
+
+
 If no callback is passed, a **Promise** is returned
 
 ```js
