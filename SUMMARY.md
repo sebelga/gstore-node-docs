@@ -31,5 +31,6 @@
     * [model\(\)](entity/methods/model.md)
     * [datastoreEntity\(\)](entity/methods/datastoreentity.md)
     * [validate\(\)](entity/methods/validate.md)
-* Queries
+* [Queries](queries.md)
+  * [@google-cloud Query](queries/google-cloud-queries.md)
 
