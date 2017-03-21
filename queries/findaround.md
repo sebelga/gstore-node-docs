@@ -30,15 +30,15 @@ BlogPost.findAround('publishedOn', '2016-03-01', { after: 20 }).then((response) 
 User.findAround('lastname', 'Jagger', { before: 10 }).then( ... );
 
 // with a callback
-BlogPost.findAround('publishedOn', '2016-03-01', {after:20}, function(err, entities){
+BlogPost.findAround('publishedOn', '2016-03-01', {after:20}, function onEntities(err, entities){
    ...
 });
 ```
 
 **Additional options**
 
-- readAll {boolean} true | false
-- format {string} "JSON" (default) | "ENTITY"
+- **readAll** {boolean} true | false
+- **format** {string} "JSON" (default) | "ENTITY"
 
 ```js
 const options = { after: 20, readAll: true, format: "ENTITY" };
