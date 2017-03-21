@@ -34,4 +34,5 @@
 * [Queries](queries/google-cloud-queries.md)
   * [@google-cloud Query](queries/google-cloud-queries.md)
   * [list](queries/list.md)
+  * [findOne](queries/findone.md)
 
