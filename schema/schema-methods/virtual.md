@@ -56,3 +56,5 @@ console.log(user.lastname); // 'Snow';
 
 **Note:** You can save entities without worrying about the virtuals as they are **removed** from the entity data automatically.
 
+
+
