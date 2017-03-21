@@ -1,4 +1,6 @@
-# Custom Methods
+# Schema
+
+## Custom Methods
 
 Custom methods can be added to entities instances through their Schemas.
 
