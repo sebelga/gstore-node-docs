@@ -22,22 +22,15 @@ The **options** argument is an object with *either* a "before" or an "after" key
 Example:
 ```js
 // Find the next 20 post after march 1st
-BlogPost.findAround('publishedOn', '2016-03-01', { after: 20 }, function(err, entities){
-   ...
+BlogPost.findAround('publishedOn', '2016-03-01', { after: 20 }).then((response) => {
+    const entities = response[0];
 });
 
-// Find 10 users before Mick Jagger
-User.findAround('lastname', 'Jagger', {before:10}, function(err, entities){
-   ...
-});
+// Find 10 users with the lastname 
+User.findAround('lastname', 'Jagger', { before: 10 }).then( ... );
 
-```
-
-Example with a callback is passed, a **Promise** is returned
-
-```js
-BlogPost.findAround('publishedOn', '2016-03-01', {after:20}).then((data) => {
-	const entities = data[0];
+// with a callback
+BlogPost.findAround('publishedOn', '2016-03-01', {after:20}, function(err, entities){
    ...
 });
 ```
