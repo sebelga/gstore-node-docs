@@ -3,7 +3,7 @@
 ## deleteAll
 
 If you need to delete all the entities of a Model, this shortcut query will do just that.
-It queries your entity Kind by batches of 500 (maximum set by the Datastore) and delete them.
+It queries the entitites by batches of 500 (maximum set by the Datastore) and delete them then repeat the query.
 
 Disclaimer: this shortcut query hasn't been tested on a very large set of entities so please report any issue you might find.
 
