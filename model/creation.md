@@ -1,4 +1,6 @@
-# Creation
+# Model
+
+## Creation
 
 Once you have defined your schema, you can create a model calling
 `gstore.model(<EntityKind>, <schema>)`
