@@ -86,7 +86,7 @@ const querySettings = {
 ```
 
 ####Filters
-The **value** of a filter can also be a function that **returns** a value. This function will be executed on each request. Usefull for dynamic value for example when retrieving the current date.
+The **value** of a filter can also be a **function that returns a value**. This function will be executed on each request. Usefull for dynamic value for example when retrieving the current date.
 
 Example
 ```js
