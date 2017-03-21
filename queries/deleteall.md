@@ -20,7 +20,7 @@ MyModel.deleteAll(
 )
 ```
 
-Example
+Example:
 ```js
 BlogPost.deleteAll().then((response) => {
     console.log(response[0].message);
