@@ -20,6 +20,7 @@ MyModel.findOne(
     <callback>
 )
 ```
+
 Example:
 ```js
 const User = require('./user.model');
