@@ -37,4 +37,6 @@
   * [findOne](queries/findone.md)
   * [findAround](queries/findaround.md)
   * [deleteAll](queries/deleteall.md)
+* [Middleware \(hooks\)](middleware-hooks.md)
+  * Pre hooks
 
