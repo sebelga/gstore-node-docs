@@ -4,17 +4,25 @@
 
 Find entities before or after an entity based on a property and a value.
 
+```js
+MyModel.findAround(
+    /* {string}. -- The property to look around */
+    <property>,
+    /* {string} -- The property value */
+    <value>,
+    /* {object} -- { before|after: limit } */
+    <options>,
+    /* {function} -- optional. The callback, if not passed a Promise is returned */
+    <callback>
+)
+```
 
-**options** is an object that contains *either* a "before" or an "after" key with the corresponding limit of entities to retrieve.
+The **options** argument is an object with *either* a "before" or an "after" key with the corresponding limit of entities to retrieve.
 
-
-`Model.findAround(property, value, settings, callback)`
-
-
-
+Example:
 ```js
 // Find the next 20 post after march 1st
-BlogPost.findAround('publishedOn', '2016-03-01', {after:20}, function(err, entities){
+BlogPost.findAround('publishedOn', '2016-03-01', { after: 20 }, function(err, entities){
    ...
 });
 
@@ -25,7 +33,7 @@ User.findAround('lastname', 'Jagger', {before:10}, function(err, entities){
 
 ```
 
-If no callback is passed, a **Promise** is returned
+Example with a callback is passed, a **Promise** is returned
 
 ```js
 BlogPost.findAround('publishedOn', '2016-03-01', {after:20}).then((data) => {
