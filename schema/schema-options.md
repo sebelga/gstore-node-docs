@@ -5,7 +5,7 @@
 When creating a Schema you can pass a second object with a set of options. This object is **optional** you only need to pass it if you need to override the default values.
 
 ```js
-const mySchema = new Schema({...properties}, {... schema_options});
+const mySchema = new Schema({...properties}, {... options});
 ```
 
 #### validateBeforeSave
