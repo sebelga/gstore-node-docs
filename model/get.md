@@ -2,32 +2,6 @@
 
 ## get()
 
-{% method %}
-## My first method
-
-Retrieving an entity **by key** is the fastest way to read from the Datastore.  
-This method accepts the following arguments:
-
-{% sample lang="js" %}
-
-```js
-MyModel.get(
-    /* {int|string}. -- Can also be an Array of ids to retrieve */
-    <id>,
-    /* {Array} -- optional. ex: ['ParentEntity', 1234 ] */
-    <ancestors>,
-    /* {string} -- optional. A specific namespace */
-    <namespace>,
-    /* {Transaction} -- optional. The transaction currently in progress */
-    <transaction>,
-    /* {object} -- optional. Additional config */
-    <options>,
-    /* {function} -- optional. The callback, if not passed a Promise is returned */
-    <callback>
-)
-```
-{% endmethod %}
-
 Retrieving an entity **by key** is the fastest way to read from the Datastore.  
 This method accepts the following arguments:
 
