@@ -10,7 +10,7 @@ MyModel.findAround(
     <property>,
     /* {string} -- The property value */
     <value>,
-    /* {object} -- { before|after: limit } */
+    /* {object} -- { before|after: limit, readAll: boolean, format: string } */
     <options>,
     /* {function} -- optional. The callback, if not passed a Promise is returned */
     <callback>
@@ -19,14 +19,14 @@ MyModel.findAround(
 
 The **options** argument is an object with *either* a "before" or an "after" key with the corresponding limit of entities to retrieve.
 
-Example:
+Examples:
 ```js
 // Find the next 20 post after march 1st
 BlogPost.findAround('publishedOn', '2016-03-01', { after: 20 }).then((response) => {
     const entities = response[0];
 });
 
-// Find 10 users with the lastname 
+// Find 10 users with the lastname coming before 'Jagger'
 User.findAround('lastname', 'Jagger', { before: 10 }).then( ... );
 
 // with a callback
@@ -35,17 +35,15 @@ BlogPost.findAround('publishedOn', '2016-03-01', {after:20}, function(err, entit
 });
 ```
 
-**Additional settings**
+**Additional options**
 
 - readAll {boolean} true | false
-- format {string} gstore.Queries.formats.JSON (default) | gstore.Queries.formats.ENTITY
+- format {string} "JSON" (default) | "ENTITY"
 
 ```js
-BlogPost.findAround('publishedOn',
-						'2016-03-01',
-						{after:20, readAll: true, format: gstore.Queries.formats.ENTITY})
-		.then((data) => {
-			const entities = data[0];
-		   ...
-		});
+const options = { after: 20, readAll: true, format: "ENTITY" };
+BlogPost.findAround('publishedOn', '2016-03-01', options)
+        .then((response) => {
+            const entities = response[0];
+        });
 ```
