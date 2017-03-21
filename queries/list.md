@@ -13,7 +13,7 @@ It supports the following queries parameters
 - filters (default operator is "=" and does not need to be passed)
 - start
 
-Info: "order", "select" & "filters" can also be **Arrays** of settings
+**INFO**: "order", "select" & "filters" can also be **Arrays** of settings
 
 **1. Configure List query settings on your Model Schema**
 
