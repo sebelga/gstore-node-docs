@@ -6,30 +6,40 @@ Quickly find an entity by passing key/value pairs. You can optionally pass an an
 
 **@Returns** an gstore entity **instance** of the Model.
 
+This method accepts the following arguments:
+
 ```js
-User.findOne({prop1:value, prop2:value2}, ancestors /*optional*/, namespace /*optional*/, callback);
+MyModel.findOne(
+    /* {object}. -- Key/Value pairs to look for */
+    <propsValues>,
+    /* {Array} -- optional. ex: ['ParentEntity', 1234 ] */
+    <ancestors>,
+    /* {string} -- optional. A specific namespace */
+    <namespace>,
+    /* {function} -- optional. The callback, if not passed a Promise is returned */
+    <callback>
+)
 ```
-
-
+Example:
 ```js
-var User = gstore.model('User');
+const User = require('./user.model');
 
-User.findOne({email:'john@snow.com'}, function(err, entity) {
-    if (err) {... deal with error}
+User.findOne({ email: 'john@snow.com' })
+    .then((response) => {
+        const entity = response[0];
+        console.log(entity.plain()); // entityData + id
+        console.log(entity.firstname)); // 'John'
+});
+
+
+// with a callback
+User.findOne({ email: 'john@snow.com' }, function onEntity(err, entity) {
+    if (err) {
+        ... // deal with error
+    }
 
     console.log(entity.plain());
     console.log(entity.get('name'));
 });
 
-```
-
-If no callback is passed, a **Promise** is returned
-
-```js
-User.findOne({email:'john@snow.com'}).then((data) => {
-	const entity = data[0];
-
-    console.log(entity.plain());
-    console.log(entity.get('name')); // or directly entity.name;
-});
 ```
