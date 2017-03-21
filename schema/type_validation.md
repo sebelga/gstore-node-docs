@@ -1,4 +1,6 @@
-# Types validation
+# Schema
+
+## Types validation
 
 You can set a _type _for a schema property adding a "type" parameter to it.
 
