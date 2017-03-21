@@ -36,4 +36,5 @@
   * [list](queries/list.md)
   * [findOne](queries/findone.md)
   * [findAround](queries/findaround.md)
+  * [deleteAll](queries/deleteall.md)
 
