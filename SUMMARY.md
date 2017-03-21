@@ -41,4 +41,5 @@
   * [Post hooks](middleware-hooks/post-hooks.md)
 * [gstore Methods](save.md)
   * [save\(\)](save.md)
+* [Credits](credits.md)
 
