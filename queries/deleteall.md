@@ -7,26 +7,37 @@ It queries your entity Kind by batches of 500 (maximum set by the Datastore) and
 
 Disclaimer: this shortcut query hasn't been tested on a very large set of entities so please report any issue you might find.
 
+This method accepts the following arguments:
+
 ```js
-BlogPost.deleteAll(ancestors /*optional*/, namespace /*optional*/, callback)
+MyModel.deleteAll(
+    /* {Array} -- optional. ex: ['ParentEntity', 1234 ] */
+    <ancestors>,
+    /* {string} -- optional. A specific namespace */
+    <namespace>,
+    /* {function} -- optional. The callback, if not passed a Promise is returned */
+    <callback>
+)
 ```
 
-
+Example
 ```js
+BlogPost.deleteAll().then((response) => {
+    console.log(response[0].message);
+});
+
+
+// With ancestors path and namespace
+BlogPost.deleteAll(['Grandpa', 1234, 'Dad', 'keyname'], 'com.dev.new-domain')
+        .then((response) => {
+            ...
+        });
+
+// with a callback
 BlogPost.deleteAll(function(err, result){
     if (err) {// deal with err}
 
     console.log(result.message);
 });
-
-// With ancestors path and namespace
-BlogPost.deleteAll(['Grandpa', 1234, 'Dad', 'keyname'], 'com.new-domain.dev', function(err) {...});
 ```
 
-If no callback is passed, a **Promise** is returned
-
-```js
-BlogPost.deleteAll(['Grandpa', 1234, 'Dad', 'keyname'], 'com.new-domain.dev').then(() => {
-	...
-});
-```
