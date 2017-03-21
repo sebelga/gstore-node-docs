@@ -2,7 +2,7 @@
 
 ## list
 
-Shortcut for listing the entities. For complete control (pagination, start, end...) use the [@google-cloud queries](./google-cloud-queries.md). List queries are meant to quickly list entities with predefined settings.
+Shortcut for listing entities from a Model. For complete control (pagination, start, end...) use the [@google-cloud queries](./google-cloud-queries.md). **List queries** are meant to quickly list entities with predefined settings (that can be overridden on a query).
 
 It supports the following queries parameters
 
@@ -13,22 +13,25 @@ It supports the following queries parameters
 - filters (default operator is "=" and does not need to be passed)
 - start
 
+Info: "order", "select" & "filters" can also be **Arrays** of settings
 
-**1. Define on your Model Schema**
+**1. Configure List query settings on your Model Schema**
 
 `entitySchema.queries('list', { ...settings });`
 
 Example
 
 ```js
+// blog-post.model.js
+
 // Create Schema
 const blogPostSchema = new gstore.Schema({
     title : { type: 'string' },
     isDraft: { type: 'boolean' }
 });
 
-// list config
-const queryListConfig = {
+// List query settings
+const listQuerySettings = {
     limit : 10,
     order : { property: 'title', descending: true }, // descending defaults to false and is optional
     select : 'title',
@@ -36,8 +39,8 @@ const queryListConfig = {
     filters : ['isDraft', false] // operator defaults to "=",
 };
 
-// Add list query config to schema
-blogPostSchema.queries('list', queryListConfig);
+// Add settings to schema
+blogPostSchema.queries('list', listQuerySettings);
 
 // Create Model
 const BlogPost = gstore.model('BlogPost', blogPostSchema);
@@ -51,10 +54,13 @@ const BlogPost = gstore.model('BlogPost', blogPostSchema);
 
 Example:
 ```js
-BlogPost.list((response) => {
-    console.log(response[0].entities);
-    console.log(response[0].nextPageCursor); // only present if more results
-});
+const BlogPost = require('./blog-post.model');
+
+BlogPost.list()
+        .then((response) => {
+            console.log(response[0].entities);
+            console.log(response[0].nextPageCursor); // only present if more results
+        });
 
 // with a callback
 BlogPost.list(function(err, response) {
@@ -66,74 +72,66 @@ BlogPost.list(function(err, response) {
 });
 ```
 
-Order, Select & filters can also be **arrays** of settings
+Example with Array of settings (order, select, filters)
 
 ```js
 const querySettings = {
-    orders  : [
+    order  : [
         { property: 'title' },
         { property: 'createdOn', descending: true }
     ],
     select  : ['title', 'createdOn'],
-    filters : [['title', 'My first post'], ['createdOn', '<',  new Date()]]
+    filters : [['author', 'John Snow'], ['rating', '>',  4]]
 };
 ```
 
-The **value** of a filter can also be a function that **returns** a value. This function will be executed on on each request. Usefull for dynamic value like retrieving the current date.
+####Filters
+The **value** of a filter can also be a function that **returns** a value. This function will be executed on each request. Usefull for dynamic value for example when retrieving the current date.
 
+Example
 ```js
-var querySettings = {
-	filters : ['publishOn', '<', () => new Date()],
-	...
+const querySettings = {
+    filters : ['publishedOn', '<', () => new Date()],
 }
 
-// In a Controller request
-BlogPost.list(function(err, response) {
-	// --> will return all BlogPost with a publishOn property date previous of today's date.
+...
+
+BlogPost.list().then((response) => {
+    // --> will return all BlogPost with a publishedOn date previous from current date.
 });
 ```
 
-**Override settings**  
-These global settings defined on the schema can be overridden anytime by passing new settings as first parameter. `Model.list(settings, cb)`
+####Override settings
+The global configuration defined on the Schema can be overridden anytime by passing new settings as first argument. `Model.list(newSettings)`
 
 ```js
-var newSettings = {
-    limit : 20,
-    start : 'pageCursor'
+const newSettings = {
+    limit: 20,
+    start: 'somPageCursorFromPreviousQuery'
 };
 
-BlogPost.list(newSettings, function(err, entities) {
-    if (err) {
-        // deal with err
-    }
-    console.log(entities);
-});
+BlogPost.list(newSettings)
+        .then(function(response) {
+            ...
+        });
 ```
 
-**Additional settings** in override
+**Additional settings** available in override
 
 - namespace {string}
 - readAll {boolean} true | false
-- format {string} gstore.Queries.formats.JSON (default) | gstore.Queries.formats.ENTITY
+- format {string} "JSON" (default) | "ENTITY"
 
 Use the **namespace** setting to override the default namespace.
 
 ```js
-var newSettings = {
+const newSettings = {
     ...
-    namespace:'com.domain-dev',
+    namespace:'com.prod.myproject',
     readAll: true,
-    format: gstore.Queries.formats.ENTITY
+    format: "ENTITY"
 };
 
-BlogPost.list(newSettings, ...);
-```
+BlogPost.list(newSettings).then( ... );
 
-If no callback is passed, a **Promise** is returned
-
-```js
-BlogPost.list(/*settings*/).then((data) => {
-	const entities = data[0];
-    console.log(entities);
-});
 ```
