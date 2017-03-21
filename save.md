@@ -2,11 +2,16 @@
 
 ## save()
 
-`gstore.save(entity | entity[], transaction /*optional*/)`
-
 gstore has a global method "save" that is an alias of the original Datastore save() method, with the exception that you can pass it an Entity **instance** or an **\<Array\>** of entities instances and it will first convert them to the correct Datastore format before saving.  
 
+
+`gstore.save(entity | entity[], transaction /*optional*/)`
+
+
+
 **Note**: The entities can be of **any** kind. You can concat several arrays of queries from different Models and then save them all at once with this method.
+
+Example:
 
 ```js
 const query = BlogModel.query().limit(20);
