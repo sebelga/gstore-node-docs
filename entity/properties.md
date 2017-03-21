@@ -1,4 +1,4 @@
-# Model
+# Entity
 
 ## Properties
 
