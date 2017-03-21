@@ -40,6 +40,6 @@
 * [Middleware \(hooks\)](middleware-hooks.md)
   * [Pre hooks](middleware-hooks/pre-hooks.md)
   * [Post hooks](middleware-hooks/post-hooks.md)
-* gstore Methods
+* [gstore Methods](save.md)
   * [save\(\)](save.md)
 
