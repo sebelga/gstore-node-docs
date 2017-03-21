@@ -1,6 +1,6 @@
 # gstore-node
 
-gstore-node is a Google Datastore **entities modeling library** for Node.js inspired by Mongoose and built on top of the google-cloud-node library.
+gstore-node is a Google Datastore **entities modeling library** for Node.js inspired by Mongoose and built on top of the [@google-cloud-node](https://github.com/GoogleCloudPlatform/google-cloud-node) library.
 
 Its main features are:
 
