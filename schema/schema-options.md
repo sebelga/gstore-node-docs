@@ -1,4 +1,6 @@
-# Schema Options
+# Schema
+
+## Options
 
 When creating a Schema you can pass a second object with a set of options. This object is **optional** you only need to pass it if you need to override the default values.
 
@@ -6,30 +8,30 @@ When creating a Schema you can pass a second object with a set of options. This 
 const mySchema = new Schema({...properties}, {... schema_options});
 ```
 
-## validateBeforeSave
+#### validateBeforeSave
 
 **default: true**
 
 By default each time an entity is saved it is validated. You can disable this behaviour by setting **validateBeforeSave** to false.
 
-## explicitOnly
+#### explicitOnly
 
 **default: true**
 
 To allow undeclared properties on a Schema set **explicitOnly** to false. This will bring back the magic of _Schemaless_ datastores.  
 The properties explicitly declared will still be validated.
 
-## queries
+#### queries
 
 An object to set global settings for your queries. These settings can be overridden on each query:
 
-#### readAll
+##### readAll
 
 **default: false**
 
 Override the Schema property parameter **read** \([here](../schema/other-paremeters.md#read)\) to return all the properties of the entities.
 
-#### format
+##### format
 
 **default: "JSON"**
 
@@ -42,7 +44,9 @@ Valid values are:
 * "JSON"
 * "ENTITY"
 
-# Example
+----
+
+Example:
 
 ```js
 const userSchema = new Schema({
