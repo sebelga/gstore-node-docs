@@ -12,7 +12,6 @@
     * [path\(\)](schema/schema-methods/path.md)
     * [virtual\(\)](schema/schema-methods/virtual.md)
   * [Custom methods](schema/custom-methods.md)
-* [ref](ref.md)
 * [Model](model/creation.md)
   * [Creation](model/creation.md)
   * [Methods](model/get.md)
