@@ -65,7 +65,7 @@ function middleware2() {
 userSchema.post('save', [middleware1, middleware2]);
 ```
 
-### Transactions and Hooks
+#### Transactions and Post Hooks
 
 When you save or delete an entity from inside a transaction, gstore adds an **execPostHooks()** method to the transaction instance.  
 If the transaction succeeds and you have any post('save') or post('delete') hooks on any of the entities modified during the transaction you need to call this method to execute them.
