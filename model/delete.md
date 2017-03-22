@@ -24,11 +24,9 @@ MyModel.delete(
 )
 ```
 
-**@returns** an object with the following properties
+**@returns** an object with the following properties (TODO!)
     - success -- a boolean set to true if an entity has been deleted or false if not.
     - apiResponse -- the api response from google-cloud-node
-    - key -- the entityKey thas has been deleted
-
 ---
 
 Examples:
