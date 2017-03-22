@@ -45,25 +45,3 @@ BlogPost.excludeFromIndexes('text');
 blogPost.save().then(() => { ... });
 
 ```
-
-## key()
-Creates and entity key(s) for the Model. This method accepts the following arguments:
-
-- id (one or several in an Array)
-- ancestors (optional)
-- namespace (optional)
-
-```js
-var User = gstore.model('User');
-
-var entityKey = User.key(123);
-
-// with ancestors and namespace
-var entityKey = User.key(123, ['Parent', 'keyname'], 'dev.domain.com');
-
-// passing array of ids
-
-var entityKeys = User.key([123, 456]);
-console.log(entityKeys.length); // 2
-
-```
