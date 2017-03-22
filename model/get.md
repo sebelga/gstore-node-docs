@@ -32,16 +32,18 @@ Example:
 const BlogPost = require('./blog-post.model');
 
 // id can be integer or string
+BlogPost.get(123).then((entity) => {
+    console.log(entity.plain());
+});
+
+// Passing an ancestor path with a string id
+const ancestors = ['Parent', 'parentName'];
+BlogPost.get('stringId', ancestors).then((entity) => { ... });
+
+// ... with a callback
 BlogPost.get(1234, function onEntity(err, entity) {
     if (err) { // deal with err }
     console.log('Blogpost title:', entity.title);
-});
-
-// Passing an ancestor path with a stringId
-const ancestors = ['Parent', 'parentName'];
-BlogPost.get('stringId', ancestors, function onEntity(err, entity) {
-    if (err) { // deal with err }
-    ...
 });
 ```
 
