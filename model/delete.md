@@ -35,17 +35,6 @@ Examples:
 ```js
 const BlogPost = require('./blog-post.model');
 
-BlogPost.delete(123, function onBlogPostDelete(err, response) {
-    if (err) {
-        // deal with err
-    }
-
-    if (!response.success) {
-        console.log('No entity deleted. There is not BlogPost Entity with the id provided');
-    }
-});
-
-// With Promise
 BlogPost.delete(123).then((response) => {
     if (!response[0].success) {
         ...
@@ -57,11 +46,23 @@ BlogPost.delete(123).then((response) => {
 // Array of ids
 BlogPost.delete([123, 456, 789], function onBlogPostDelete(err, response) {...}
 
-// Ancestors and a namespace
+// ancestors and a namespace
 BlogPost.delete(123, ['Parent', 123], 'dev.namespace.com', function onBlogPostDelete(err, response) {...}
 
-// Passing a key (can also be an <Array> of keys)
+// passing a key (can also be an <Array> of keys)
 BlogPost.delete(null, null, null, null, key, function onBlogPostDelete(err, response) {...}
+
+// with a callback
+BlogPost.delete(123, function onBlogPostDelete(err, response) {
+    if (err) {
+        // deal with err
+    }
+
+    if (!response.success) {
+        console.log('No entity deleted. There is not BlogPost Entity with the id provided');
+    }
+});
+
 
 // Transaction
 // -----------
@@ -89,9 +90,5 @@ transaction.run().then(() => {
 }).catch((err) => {
     // handle errors 
 });
-
-
-
-
 
 ```
