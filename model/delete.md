@@ -37,7 +37,7 @@ const BlogPost = require('./blog-post.model');
 
 BlogPost.delete(123).then((response) => {
     if (!response.success) {
-        console.log('No entity has been deleted');
+        console.log('No entity deleted. There is not BlogPost Entity with the id provided');
     }
 }).catch((err) => {
     // deal with err
@@ -57,10 +57,8 @@ BlogPost.delete(123, function onBlogPostDelete(err, response) {
     if (err) {
         // deal with err
     }
-
-    if (!response.success) {
-        console.log('No entity deleted. There is not BlogPost Entity with the id provided');
-    }
+    
+    ...
 });
 
 
