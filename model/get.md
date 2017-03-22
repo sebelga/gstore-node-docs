@@ -31,7 +31,7 @@ Example:
 ```js
 const BlogPost = require('./blog-post.model');
 
-// id can be integer or string
+// id can be an integer or a string
 BlogPost.get(123).then((entity) => {
     console.log(entity.plain());
 });
@@ -79,14 +79,14 @@ The **preserveOrder** option property is useful when you pass an array of IDs to
 **Note**: setting this property to true does add some processing, especially for large sets. Only use it if you absolutely need to maintain the original order passed.
 
 ```js
-BlogPost.get([1,2,3], null, null, null, {preserveOrder:true}, function(err, entities) {
-    if (err) { // deal with err }
+BlogPost.get([1,2,3], null, null, null, { preserveOrder: true })
+        .then(function(entities) {
 
-    // Order is preserved
-    console.log(entities[0].entityKey.id); // 1
-    console.log(entities[1].entityKey.id); // 2
-    console.log(entities[2].entityKey.id); // 3
-});
+            // Order is preserved
+            console.log(entities[0].entityKey.id); // 1
+            console.log(entities[1].entityKey.id); // 2
+            console.log(entities[2].entityKey.id); // 3
+        });
 ```
 
 
