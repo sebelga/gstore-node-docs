@@ -2,7 +2,7 @@
 
 ### Post hooks
 
-"Post" middelwares are defined the same way as "pre" middlewares. The main difference is that if you reject the Promise of your middleware because of an error, the original method still resolves but its response is now an object with 2 properties. The **result** and **errorsPostHook** containing possible post hooks error(s).
+"Post" middelwares are defined the same way as "pre" middlewares. The main difference is that if you reject the Promise of your middleware because of an error, the original method still resolves but its response has an **errorsPostHook** property added, an **Array** with the post hooks error(s).
 
 ```js
 // user.model.js
@@ -17,7 +17,7 @@ schema.post('save', function postSave(){
         // ... do anything needed, maybe send an email?
         
         if (someError) {
-            // If there is any error you'd reject your middleware
+            // If there is any error reject the Promise
             return reject({ code: 500, message: 'Houston something went wrong.' });
         }
     });
@@ -29,13 +29,12 @@ schema.post('save', function postSave(){
 const User = require('./user.model');
 const user = new User({ name: 'John', email: 'john@snow.com' });
 
-user.save().then((response) => {
+user.save().then((entity) => {
 	// You should do this check if you have post hooks that could fail
-	if (response[0].errorsPostHook) {
-	    console.log(response[0].errorsPostHook.message); // 'Houston something went wrong.'
-	}
-
-	const entity = response[0].errorsPostHook ? response[0].result : response[0];	
+    if (entity.errorsPostHook) {
+        console.log(entity.errorsPostHook[0].message); // 'Houston something went wrong.'
+    }
+    ...	
 });
 
 ```
