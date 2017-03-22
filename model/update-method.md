@@ -26,7 +26,7 @@ MyModel.update(
 )
 ```
 
-**@Returns** ---&gt; an entity **instance**.
+**@Returns** -- an entity **instance**.
 
 ---
 
@@ -39,37 +39,30 @@ const blogPostData = {
     title : 'New title'
 };
 
-// Basic example
-// --------------
+BlogPost.update(123, blogPostData).then((entity) => {
+    console.log(entity.plain());
+});
+
+// with *ancestors* and a *namespace*
+BlogPost.update(123, data, ['Grandpa', 123, 'Dad', 123], 'dev.namespace.com')
+        .then((entity) => {
+            console.log(entity);
+        });
+
+// from inside a Transaction
+const transaction = gstore.transaction();
+transaction.run().then(() => 
+    BlogPost.update(123, data, null, null, transaction);
+
+    transaction.commit().then(() => { ... });
+});
+
+// with a callback
 BlogPost.update(123, blogPostData, function onBlogPostUpdate(err, entity) {
     if (err) {
         // deal with err
     }
     console.log(entity.plain());
-});
-
-// Example with *ancestors* and a *namespace*
-// ------------------------------------------
-BlogPost.update(123, data, ['Grandpa', 123, 'Dad', 123], 'dev.namespace.com', function(err, entity) {
-    if (err) {
-        // deal with err
-    }
-    console.log(entity);
-});
-
-// Example from inside a Transaction
-// ---------------------------------
-
-const transaction = gstore.transaction();
-
-transaction.run().then(() => 
-    BlogPost.update(123, data, null, null, transaction);
-
-    transaction.commit(function(err) {
-        if (err) {
-            // handle error
-        }
-    });
 });
 ```
 
@@ -96,10 +89,7 @@ blogPost.save().then( ... );
 If no callback is passed, it will return a **Promise**
 
 ```js
-BlogPost.update(123, data).then((data) => {
-    const entity = data[0];
-    console.log(entity.plain());
-});
+
 ```
 
 
