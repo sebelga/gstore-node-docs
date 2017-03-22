@@ -22,7 +22,7 @@ MyModel.get(
 )
 ```
 
-**@Returns** ---> a gstore entity **instance**.
+**@Returns** -- a gstore entity **instance**.
 
 ---
 
@@ -60,36 +60,19 @@ If you need to retrieve an entity **from inside a transaction**, you can pass th
 ```js
 const transaction = gstore.transaction();
 
-transaction.run(function onTransaction(err) {
-    if (err) {
-        // handle error
-        return;
-    }
+transaction.run().then(() => {
+    BlogPost.get(123, null, null, transaction)
+            .then((entity) => {
+                // Reminder: entity is an instance of the BlogPost model with all its properties & methods
 
-    BlogPost.get(123, null, null, transaction, function onEntity(err, entity) {
-        if (err) {... deal with error }
-
-        // Info: entity is an instance of the BlogPost model with all its properties & methods
-
-        transaction.commit(function transactionCommited(err) {
-            if (err) {
-                // transaction will be automatically rolled back on failure
-                // handle error
-            }
-            ...
-        });
-    });
+                transaction.commit().then(() => { ... });
+            });
 });
 ```
 
 If no callback is passed, the get\(\) method will return a **Promise**
 
-```js
-BlogPost.get(123).then((data) => {
-    const entity = data[0];
-    console.log(entity.plain());
-});
-```
+
 
 **options** argument
 
