@@ -10,7 +10,7 @@ const user = new User({ name:'John' });
 
 // with a Promise...
 User.update(123, { email: 'john@snow.com' })
-    .then((reponse) => {
+    .then((response) => {
         const entity = response[0];
         entity.datastoreEntity().then((response) => {
             const datastoreEntity = response[0];
