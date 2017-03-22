@@ -82,12 +82,13 @@ transaction.run().then(() => {
 });
 
 // example 2 (with "pre" middleware to execute first)
-transaction.run().then(() => { 
-   return BlogPost.delete(123, null, null, transaction)
+transaction.run().then(() => ( 
+   BlogPost.delete(123, null, null, transaction)
+           .then(transaction.commit)
    	    .then(() => {
-                return transaction.commit().then(() { ... });
+                ...
     	    });
-}).catch((err) => {
+)).catch((err) => {
     // handle errors 
 });
 
