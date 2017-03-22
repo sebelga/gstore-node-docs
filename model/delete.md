@@ -36,21 +36,21 @@ Examples:
 const BlogPost = require('./blog-post.model');
 
 BlogPost.delete(123).then((response) => {
-    if (!response[0].success) {
-        ...
+    if (!response.success) {
+        console.log('No entity has been deleted');
     }
 }).catch((err) => {
     // deal with err
 });
 
-// Array of ids
-BlogPost.delete([123, 456, 789], function onBlogPostDelete(err, response) {...}
+// array of ids
+BlogPost.delete([123, 456, 789]).then((response) => { ... });
 
 // ancestors and a namespace
-BlogPost.delete(123, ['Parent', 123], 'dev.namespace.com', function onBlogPostDelete(err, response) {...}
+BlogPost.delete(123, ['Parent', 123], 'dev.namespace.com').then((response) => { ... });
 
-// passing a key (can also be an <Array> of keys)
-BlogPost.delete(null, null, null, null, key, function onBlogPostDelete(err, response) {...}
+// passing an entity Key (can also be an *Array* of keys)
+BlogPost.delete(null, null, null, null, key).then((response) => { ... });
 
 // with a callback
 BlogPost.delete(123, function onBlogPostDelete(err, response) {
