@@ -70,10 +70,6 @@ transaction.run().then(() => {
 });
 ```
 
-If no callback is passed, the get\(\) method will return a **Promise**
-
-
-
 **options** argument
 
   - preserveOrder (default: false)
