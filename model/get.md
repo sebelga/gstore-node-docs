@@ -81,7 +81,6 @@ The **preserveOrder** option property is useful when you pass an array of IDs to
 ```js
 BlogPost.get([1,2,3], null, null, null, { preserveOrder: true })
         .then(function(entities) {
-
             // Order is preserved
             console.log(entities[0].entityKey.id); // 1
             console.log(entities[1].entityKey.id); // 2
