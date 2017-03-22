@@ -76,7 +76,7 @@ const transaction = gstore.transaction();
 // example 1 -- with no "pre" delete middleware
 transaction.run().then(() => {
     BlogPost.delete(123, null, null, transaction); 
-    return transaction.commit().then(() { ... })
+    transaction.commit().then(() { ... })
 }).catch((err) => {
     // handle errors 
 });
