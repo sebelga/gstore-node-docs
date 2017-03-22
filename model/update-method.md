@@ -66,7 +66,6 @@ BlogPost.update(123, blogPostData, function onBlogPostUpdate(err, entity) {
 });
 ```
 
-
 ### Options
 
 **replace** (default: false)
