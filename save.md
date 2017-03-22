@@ -33,6 +33,14 @@ query.run({ format: "ENTITY" })
          gstore.save(entities).then(() => {
              ...
          });
+         
+         // ... or with a callback
+         gstore.save(entities, (err) => {
+             if (err) { ... // deal with err) }
+             
+             ...
+         });
+
     });
 
 /*
