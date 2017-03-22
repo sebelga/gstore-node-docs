@@ -16,6 +16,8 @@ entity.save(
 )
 ```
 
+**@Returns** -- the entity saved
+
 #### options
 
 The options argument has a **method** property where you can set the saving method.
@@ -47,13 +49,12 @@ const BlogPost = require('./blog-post.model');
 const data = { title: 'My first blog post' };
 const blogPostEntity = new BlogPost(data);
 
-// Example 1: Promise
-blogPostEntity.save().then((response) => {
-  const entity = response[0];
-  console.log(entity.entityKey.id); // auto-generated id
+
+blogPostEntity.save().then((entity) => {
+    console.log(entity.entityKey.id); // auto-generated id
 }).catch(err => { ... });
 
-// Example 2: callback
+// with a callback
 blogPostEntity.save(function onBlogPostSave(err, entity) {
     if (err) { // deal with err }
 
@@ -77,7 +78,7 @@ transaction.run()
             });
 
 /*
- * Changing the method to save
+ * Changing the save method
  */
 
 var blogPostEntity = new BlogPost(data);
@@ -85,7 +86,7 @@ blogPostEntity.save(null, { method: 'insert' }).then( ... );
 
 ```
 
-Note on **saving inside a Transaction**  
+#### Saving inside a Transaction with middleware
 By default, the entity data is validated before being saved in the Datastore (you can desactivate this behavious by setting [validateBeforeSave](#validateBeforeSave) to false in the Schema definition). The validation middleware is async, which means that to be able to save inside a transaction and at the same time validate before, you need to resolve the *save* method before being able to commit the transaction.  
 A solution to avoid this is to **manually validate** before saving and then desactivate the "pre" middelwares by setting **preHooksEnabled** to false on the entity.  
 **Important**: This solution will bypass any other middleware that you might have defined on "save" in your Schema.
