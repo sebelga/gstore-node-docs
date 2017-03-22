@@ -45,7 +45,7 @@ The "post" middleware for **delete()** does _not_ have its scope mapped to the e
 
 ```js
 userSchema.post('delete', function postDelete(response){
-    const keys = response[1]; // can be one Key or an Array of entity Keys that have been deleted.
+    const keyDeleted = response.key; // can be one Key or an Array of entity Keys that have been deleted.
     ...
     return Promise.resolve();
 });
