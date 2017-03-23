@@ -86,7 +86,9 @@ blogPostEntity.save(null, { method: 'insert' }).then( ... );
 
 ```
 
-#### Saving inside a Transaction with middleware
+#### Saving inside a Transaction with middleware on Model
+
+If you have "pre" middlewares on the save method of your Model (
 By default, the entity data is validated before being saved in the Datastore (you can desactivate this behavious by setting [validateBeforeSave](#validateBeforeSave) to false in the Schema definition). The validation middleware is async, which means that to be able to save inside a transaction and at the same time validate before, you need to resolve the *save* method before being able to commit the transaction.  
 A solution to avoid this is to **manually validate** before saving and then desactivate the "pre" middelwares by setting **preHooksEnabled** to false on the entity.  
 **Important**: This solution will bypass any other middleware that you might have defined on "save" in your Schema.
