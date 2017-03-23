@@ -100,11 +100,15 @@ A solution to avoid this is to **manually validate** before saving and then desa
 const user = new User({ name: 'john' });
 const transaction = gstore.transaction();
 
+// chaining Promise before committin
 transaction.run()
            .then(() => {
                return user.save(transaction)
+                           .then(() => {
+                               // need to chain Promise before committing
+                               return transaction.commit();
+                           });
             })
-           .then(transaction.commit) // need to chain Promise before committing
            .then((response) => {
               const apiResponse = data[0];
               // ... transaction finished
@@ -112,26 +116,27 @@ transaction.run()
               // handle error
             });
 
-
-
-
-
+// disable "pre" middlewares on entity before saving
+// and save in "sync"
 transaction.run().then() => {
-	User.get(123, null, null, transaction).then((entity) => {
-		entity.email = 'john@domain.com';
-		const valid = user.validate();
+    User.get(123, null, null, transaction)
+        .then((entity) => {
+            entity.email = 'john@domain.com';
+                
+            // validate before so we can rollback the transaction if necessary
+            const valid = user.validate();
 		
-		if (!valid) {
-		    // exit the transaction;
-		}
+            if (!valid) {
+                // rollback the transaction;
+            }
 		
-		// disable pre middleware(s)
-		user.preHooksEnabled = false;
+            // disable pre middleware(s)
+            user.preHooksEnabled = false;
 		
-		// save inside transaction in sync
-		user.save(transaction);
+            // save inside transaction in "sync"
+            user.save(transaction);
 
-		// ... any other transaction operations
+            // ... any other transaction operations
 		
 		transaction.commit().then(() => {
 		    ...
