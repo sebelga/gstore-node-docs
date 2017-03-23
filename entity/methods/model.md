@@ -15,12 +15,12 @@ blogEntity.save().then(() => {
 });
 
 // Example on middleware (schema 'pre' save)
-commentSchema.pre('save', function beforeSave(next){
+commentSchema.pre('save', function beforeSave(){
     // Reminder: in a "save" middelware, the scope (this) is the entity being saved
     const User = this.model('User');
     return User.get(this.entityData.userIdx)
                .then(() => {
-                    ...     
+                    ...   
                 });
 });
 ```
