@@ -12,10 +12,10 @@ entity.plain({ readAll: true|false, virtuals: true|false }):
 
 #### options
 
-- readAll (default: false)
+- **readAll **(default: false)
 
 Outputs **all** the data properties, regardless of the schema "read" parameter.
 
-- virtuals (default: false)  
+- **virtuals **(default: false)  
 
 Adds the schema "virtuals" to the output. (see: [schema virtuals](../../schema/schema-methods/virtual.md))
