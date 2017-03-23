@@ -10,12 +10,11 @@ const user = new User({ name:'John' });
 
 // with a Promise...
 User.update(123, { email: 'john@snow.com' })
-    .then((response) => {
-        const entity = response[0];
-        entity.datastoreEntity().then((response) => {
-            const datastoreEntity = response[0];
-            console.log(datastoreEntity.firstname); // 'John'
-        });
+    .then((entity) => {
+        entity.datastoreEntity()
+              .then((datastoreEntity) => {
+                  console.log(datastoreEntity.firstname); // 'John'
+              });
 });
 
 // with a callback
@@ -24,5 +23,5 @@ User.update(123, { email: 'john@snow.com' }, function(err, entity) {
         console.log(datastoreEntity.firstname); // 'John'
     });
 });
-
+ 
 ```
