@@ -88,22 +88,19 @@ transaction.run()
 
 #### Saving inside a Transaction with middleware on Model
 
-If you have ["pre" middlewares](../../middleware-hooks/pre-hooks.md) on the _save_ method of your Model (`mySchema.pre('save', myMiddleware)`) you need to chain the save method before being able to commit the transaction otherwise the entity won't be saved.
+If you have ["pre" middlewares](../../middleware-hooks/pre-hooks.md) on the _save_ method of your Model (`mySchema.pre('save', myMiddleware)`) you need to **chain the Promise** of the save method before committing the transaction, otherwise the entity **won't be** saved.
 
-You can avoid this by disabling the middlewares on the entity setting **preHooksEnabled** to false on the entity.
+You can avoid this by disabling the middlewares on the entity with **preHooksEnabled** set to false on the entity.
 
-By default, the entity data is validated before being saved in the Datastore (you can desactivate this behavious by setting [validateBeforeSave](#validateBeforeSave) to false in the Schema definition). The validation middleware is async, which means that to be able to save inside a transaction and at the same time validate before, you need to resolve the *save* method before being able to commit the transaction.  
-A solution to avoid this is to **manually validate** before saving and then desactivate the "pre" middelwares by setting **preHooksEnabled** to false on the entity.  
-**Important**: This solution will bypass any other middleware that you might have defined on "save" in your Schema.
-
+Examples:
 ```js
 const user = new User({ name: 'john' });
 const transaction = gstore.transaction();
 
-// chaining Promise before committin
+// option 1: chaining Promise before committing
 transaction.run()
            .then(() => {
-               return user.save(transaction)
+               return user.save(transaction) // there are some "pre" save hooks
                            .then(() => {
                                // need to chain Promise before committing
                                return transaction.commit();
@@ -116,8 +113,7 @@ transaction.run()
               // handle error
             });
 
-// disable "pre" middlewares on entity before saving
-// and save in "sync"
+// option 2: disable "pre" middlewares on entity before saving
 transaction.run().then() => {
     User.get(123, null, null, transaction)
         .then((entity) => {
