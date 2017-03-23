@@ -32,7 +32,6 @@ query.filter(...).order(...).groupBy(...).start(...);
 ### Run the query
 To execute the query call `query.run(options)`
 
-**@Returns** -- the response contains both the entities and the cursor if there are more results
 
 ```js
 query.run(
@@ -45,7 +44,7 @@ query.run(
 );
 ```
 
-**@Returns**: an object with 2 properties:
+**@Returns**: the response is an object with 2 properties:
 - entities
 - nextPageCursor // only present if there are More Results to fetch
 
