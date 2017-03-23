@@ -88,7 +88,7 @@ transaction.run()
 
 #### Saving inside a Transaction with middleware on Model
 
-If you have ["pre" middlewares](../middleware-hooks/pre-hooks.md) on the _save_ method of your Model (`mySchema.pre('save', myMiddleware)`) you need to chain the save method before being able to commit the transaction otherwise the entity won't be saved.
+If you have ["pre" middlewares](../../middleware-hooks/pre-hooks.md) on the _save_ method of your Model (`mySchema.pre('save', myMiddleware)`) you need to chain the save method before being able to commit the transaction otherwise the entity won't be saved.
 
 You can avoid this by disabling the middlewares on the entity setting **preHooksEnabled** to false on the entity.
 
