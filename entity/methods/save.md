@@ -54,6 +54,10 @@ blogPostEntity.save().then((entity) => {
     console.log(entity.entityKey.id); // auto-generated id
 }).catch(err => { ... });
 
+// changing the save method
+var blogPostEntity = new BlogPost(data);
+blogPostEntity.save(null, { method: 'insert' }).then( ... );
+
 // with a callback
 blogPostEntity.save(function onBlogPostSave(err, entity) {
     if (err) { // deal with err }
@@ -61,34 +65,33 @@ blogPostEntity.save(function onBlogPostSave(err, entity) {
     console.log(entity.entityKey.id); // auto-generated id
 });
 
-/*
- * From inside a transaction
- */
-const blogPost = new BlogPost({ title: 'My new blog post' });
+// from inside a transaction
+// Info: if you have middleware on "pre" see note below
 const transaction = gstore.transaction();
-
 transaction.run()
-           .then(() => { return user.save(transaction) })
-           .then(transaction.commit)
+           .then(() => {
+                const blogPost = new BlogPost({ title: 'My new blog post' });
+                blogPost .save(transaction);
+
+                ... // any other operation on the Transaction
+                
+                return transaction.commit();
+            })
            .then((response) => {
-              const apiResponse = data[0];
-              // ... transaction finished
+               // ... transaction finished
+               const apiResponse = data[0];
             }).catch((err) => {
               // handle error
             });
-
-/*
- * Changing the save method
- */
-
-var blogPostEntity = new BlogPost(data);
-blogPostEntity.save(null, { method: 'insert' }).then( ... );
 
 ```
 
 #### Saving inside a Transaction with middleware on Model
 
-If you have "pre" middlewares on the save method of your Model (
+If you have ["pre" middlewares](../middleware-hooks/pre-hooks.md) on the _save_ method of your Model (`mySchema.pre('save', myMiddleware)`) you need to chain the save method before being able to commit the transaction otherwise the entity won't be saved.
+
+You can avoid this by disabling the middlewares on the entity setting **preHooksEnabled** to false on the entity.
+
 By default, the entity data is validated before being saved in the Datastore (you can desactivate this behavious by setting [validateBeforeSave](#validateBeforeSave) to false in the Schema definition). The validation middleware is async, which means that to be able to save inside a transaction and at the same time validate before, you need to resolve the *save* method before being able to commit the transaction.  
 A solution to avoid this is to **manually validate** before saving and then desactivate the "pre" middelwares by setting **preHooksEnabled** to false on the entity.  
 **Important**: This solution will bypass any other middleware that you might have defined on "save" in your Schema.
@@ -97,10 +100,25 @@ A solution to avoid this is to **manually validate** before saving and then desa
 const user = new User({ name: 'john' });
 const transaction = gstore.transaction();
 
+transaction.run()
+           .then(() => {
+               return user.save(transaction)
+            })
+           .then(transaction.commit) // need to chain Promise before committing
+           .then((response) => {
+              const apiResponse = data[0];
+              // ... transaction finished
+            }).catch((err) => {
+              // handle error
+            });
+
+
+
+
+
 transaction.run().then() => {
-	User.get(123, null, null, transaction).then((response) => {
-		const user = response[0];
-		user.email = 'john@domain.com';
+	User.get(123, null, null, transaction).then((entity) => {
+		entity.email = 'john@domain.com';
 		const valid = user.validate();
 		
 		if (!valid) {
