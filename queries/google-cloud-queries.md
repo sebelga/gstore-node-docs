@@ -23,7 +23,7 @@ const query = MyModel.query(
 
 ### Chain query operators
 
-Refer to [@google-cloud/datastore](https://googlecloudplatform.github.io/google-cloud-node/#/docs/datastore/master/datastore/query) for list of operators
+Refer to [@google-cloud/datastore](https://googlecloudplatform.github.io/google-cloud-node/#/docs/datastore/master/datastore/query) for the list of operators available.
 
 ```js
 query.filter(...).order(...).groupBy(...).start(...);
@@ -45,6 +45,10 @@ query.run(
 );
 ```
 
+**@Returns**: an object with 2 properties:
+- entities
+- nextPageCursor // only present if there are More Results to fetch
+
 Example:
 ```js
 const User = require('./user.model');
@@ -60,8 +64,8 @@ const query = User.query()
 
 // with Promise
 query.run().then((response) => {
-    const entities = response[0].entities;
-    const nextPageCursor = response[0].nextPageCursor; // not present if no more results
+    const entities = response.entities;
+    const nextPageCursor = response.nextPageCursor; // not present if no more results
 });
 
 // or with a callback
@@ -101,7 +105,7 @@ transaction.run().then(() => {
     });	
 });
 
-// run options
+// run  with options
 query.run({ readAll: true, format: 'ENTITY' })
      .then( ... )
 ```
