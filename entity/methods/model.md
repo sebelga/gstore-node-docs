@@ -9,7 +9,7 @@ const BlogPost = require('blog-post.model');
 const blogEntity = new BlogPost({ title: 'Blog title' });
 
 blogEntity.save().then(() => {
-    const Image = blogEntity.model('Image');
+    const Image = blogEntity.model('Image'); // access the 'Image' Model
     const imageEntity = new Image({ uri: 'http://domain.com/image.jpg' });
     ...
 });
