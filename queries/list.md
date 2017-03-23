@@ -50,7 +50,11 @@ const BlogPost = gstore.model('BlogPost', blogPostSchema);
 
 `MyModel.list(options /*optional*/, callback /*optional*/)`
 
-**@Returns** object with both the **entities** and a **nextPageCursor** for pagination (that can be used in a future call to `MyModel.list({ start: pageCursor }, function(){ ... }`)
+**@Returns**: the response is an object with 2 properties:
+- entities
+- nextPageCursor // only present if there are more results to fetch
+
+The **nextPageCursor** is for pagination and can be used in a future call to `MyModel.list({ start: pageCursor }).then( ... )`)
 
 Example:
 ```js
@@ -58,8 +62,8 @@ const BlogPost = require('./blog-post.model');
 
 BlogPost.list()
         .then((response) => {
-            console.log(response[0].entities);
-            console.log(response[0].nextPageCursor); // only present if more results
+            console.log(response.entities);
+            console.log(response.nextPageCursor); // only present if more results
         });
 
 // with a callback
@@ -72,10 +76,10 @@ BlogPost.list(function(err, response) {
 });
 ```
 
-Example with Array of settings (order, select, filters)
+Example with an Array of settings (order, select, filters)
 
 ```js
-const querySettings = {
+const listQuerySettings= {
     order  : [
         { property: 'title' },
         { property: 'createdOn', descending: true }
@@ -83,6 +87,10 @@ const querySettings = {
     select  : ['title', 'createdOn'],
     filters : [['author', 'John Snow'], ['rating', '>',  4]]
 };
+
+blogPostSchema.queries('list', listQuerySettings);
+
+
 ```
 
 ####Filters
@@ -90,7 +98,7 @@ The **value** of a filter can also be a **function that returns a value**. This 
 
 Example
 ```js
-const querySettings = {
+const listQuerySettings = {
     filters : ['publishedOn', '<', () => new Date()],
 }
 
