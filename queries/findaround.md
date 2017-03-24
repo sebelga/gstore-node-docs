@@ -39,7 +39,9 @@ BlogPost.findAround('publishedOn', '2016-03-01', {after:20}, function onEntities
 
 **Additional options**
 
-- **readAll** {boolean} true | false -- will output all the properties regardless of the *read* parameter in the Schema
+- **readAll** {boolean} true | false  
+If set to true and with format set to "JSON" (default) it will output all the entity properties regardless of the *read* parameter defined in the Schema.
+
 - **format** {string} "JSON" (default) | "ENTITY"
 
 ```js
