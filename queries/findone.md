@@ -26,8 +26,7 @@ Example:
 const User = require('./user.model');
 
 User.findOne({ email: 'john@snow.com' })
-    .then((response) => {
-        const entity = response[0];
+    .then((entity) => {
         console.log(entity.plain()); // entityData + id
         console.log(entity.firstname)); // 'John'
 });
