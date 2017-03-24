@@ -22,12 +22,14 @@ The **options** argument is an object with *either* a "before" or an "after" key
 Examples:
 ```js
 // Find the next 20 post after march 1st
-BlogPost.findAround('publishedOn', '2016-03-01', { after: 20 }).then((response) => {
-    const entities = response[0];
-});
+BlogPost.findAround('publishedOn', '2016-03-01', { after: 20 })
+        .then((entities) => {
+            ...
+        });
 
 // Find 10 users with the lastname coming before 'Jagger'
-User.findAround('lastname', 'Jagger', { before: 10 }).then( ... );
+User.findAround('lastname', 'Jagger', { before: 10 })
+    .then( ... );
 
 // with a callback
 BlogPost.findAround('publishedOn', '2016-03-01', {after:20}, function onEntities(err, entities){
@@ -37,13 +39,13 @@ BlogPost.findAround('publishedOn', '2016-03-01', {after:20}, function onEntities
 
 **Additional options**
 
-- **readAll** {boolean} true | false
+- **readAll** {boolean} true | false -- will output all the properties regardless of the *read* parameter in the Schema
 - **format** {string} "JSON" (default) | "ENTITY"
 
 ```js
 const options = { after: 20, readAll: true, format: "ENTITY" };
 BlogPost.findAround('publishedOn', '2016-03-01', options)
-        .then((response) => {
-            const entities = response[0];
+        .then((entities) => {
+            ...
         });
 ```
