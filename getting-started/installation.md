@@ -17,10 +17,10 @@ gstore.connect(datastore);
 
 ## Aliases
 
-After a successful connection, gstore has **2 aliases** set up
+After connecting gstore to the datastore, gstore has **2 aliases** set up
 
-* `gstore.ds` The @google/datastore instance
-* `gstore.transaction`. Alias of the same google-cloud method
+* `gstore.ds`  
+The @google/datastore instance. With it you can access **all the API** of the library when needed.
 
-
+* `gstore.transaction`. Alias of the same google-cloud/datastore method
 
