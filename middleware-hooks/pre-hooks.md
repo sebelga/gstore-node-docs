@@ -1,7 +1,7 @@
 #Middleware (hooks)
 
 ### Pre hooks
-The middleware that you declare receives the original parameter(s) passed to the method. You can modify them in your **resolve** passing an object with an **__override** property containing the new parameter(s) for the target method (be careful though... with great power comes great responsibility!).  See example below.  
+Add methods to execute before "save", "delete", "findOne" or your customMethod. The middleware that you declare receives the original argument(s) passed to the method. You can modify them in your **resolve** passing an object with an **__override** property containing the new parameter(s) for the target method (be careful though... with great power comes great responsibility!).  See example below.  
 If you **reject** the Promise in a "pre" middleware, the target function is not executed.
 
 A common use case would be to hash a user's password before saving it into the Datastore.
