@@ -20,10 +20,12 @@ MyModel.deleteAll(
 )
 ```
 
+**@Returns** -- an object with a **success ** and a **message** properties.
+
 Example:
 ```js
 BlogPost.deleteAll().then((response) => {
-    console.log(response[0].message);
+    console.log(response.success);
 });
 
 
@@ -34,10 +36,10 @@ BlogPost.deleteAll(['Grandpa', 1234, 'Dad', 'keyname'], 'com.dev.new-domain')
         });
 
 // with a callback
-BlogPost.deleteAll(function(err, result){
+BlogPost.deleteAll(function(err, response){
     if (err) {// deal with err}
 
-    console.log(result.message);
+    console.log(response.message);
 });
 ```
 
