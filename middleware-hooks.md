@@ -8,5 +8,4 @@ Hooks are available for the following methods
 - Model.findOne()
 - On your custom methods
 
-Your hooks must return a Promise **and** you must use the "Promised" version of the methods (save, delete, findOne...). 
-
+Your hooks **must return a Promise** and you must use the "Promised" version of the methods, **not** the callback.
