@@ -129,15 +129,22 @@ BlogPost.list(newSettings)
 - namespace {string}
 - readAll {boolean} true | false
 - format {string} "JSON" (default) | "ENTITY"
+- showKey {boolean} true | false
 
-Use the **namespace** setting to override the default namespace.
+**namespace**
+Overrides the default namespace.
+
+**showKey**(default: false)
+
+Adds a "__key" property to the entity data with the complete Key information from the Datastore.
 
 ```js
 const newSettings = {
     ...
     namespace:'com.prod.myproject',
     readAll: true,
-    format: "ENTITY"
+    format: "ENTITY",
+    showKey: true,
 };
 
 BlogPost.list(newSettings).then( ... );
