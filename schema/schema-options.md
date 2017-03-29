@@ -48,9 +48,7 @@ Valid values are:
 
 **default: false**
 
-Override the Schema property parameter **read** \([here](../schema/other-paremeters.md#read)\) to return all the properties of the entities.
-
-
+Adds a "__key" property to the entity data with the complete Key from the Datastore.
 
 ----
 
