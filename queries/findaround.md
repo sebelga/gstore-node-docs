@@ -44,6 +44,9 @@ If set to true and with format set to "JSON" (default) it will output all the en
 
 - **format** {string} "JSON" (default) | "ENTITY"
 
+- **showKey**(default: false) 
+Adds a "__key" property to the entity data with the complete Key from the Datastore.
+
 ```js
 const options = { after: 20, readAll: true, format: "ENTITY" };
 BlogPost.findAround('publishedOn', '2016-03-01', options)
