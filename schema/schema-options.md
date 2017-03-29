@@ -44,6 +44,14 @@ Valid values are:
 * "JSON"
 * "ENTITY"
 
+##### showKey
+
+**default: false**
+
+Override the Schema property parameter **read** \([here](../schema/other-paremeters.md#read)\) to return all the properties of the entities.
+
+
+
 ----
 
 Example:
