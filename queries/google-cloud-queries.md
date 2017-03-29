@@ -43,8 +43,7 @@ query.run({
        Format of the response, either plain object or entity instances  */
     format: 'JSON',
     /* {boolean}. -- optional. Default: false
-       If set to true will return all the properties of the entity,
-       regardless of the *read* parameter defined in the Schema */
+       Adds a "__key" property to the entity data with the complete Key from the Datastore. */
     showKey: true | false
 );
 ```
