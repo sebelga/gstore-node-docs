@@ -34,13 +34,18 @@ To execute the query call `query.run(options)`
 
 
 ```js
-query.run(
+query.run({
     /* {boolean}. -- optional. Default: false
-       If set to true will return all the properties of the entity, regardless of the *read* parameter defined in the Schema */
-    <readAll>,
+       If set to true will return all the properties of the entity,
+       regardless of the *read* parameter defined in the Schema */
+    readAll: true | false,
     /* {string} -- optional. "JSON"|"ENTITY". Default: "JSON"
        Format of the response, either plain object or entity instances  */
-    <format>
+    format: 'JSON',
+    /* {boolean}. -- optional. Default: false
+       If set to true will return all the properties of the entity,
+       regardless of the *read* parameter defined in the Schema */
+    showKey: true | false
 );
 ```
 
