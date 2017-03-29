@@ -63,7 +63,8 @@ const userSchema = new Schema({
     explicitOnly: false,
     queries: {
         readAll: true,
-        format: 'ENTITY'
+        format: 'ENTITY',
+        showKey: true,
     }
 });
 ```
