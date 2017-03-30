@@ -19,12 +19,12 @@ Allows you to define a default value for a property. This value, for now, must b
 
 Although there is already a special default value for the **current datetime** of the request: `gstore.defaultValues.NOW`
 
-And if you have a modifiedOn property set in your schema, it will automatically be set to the current time each time the entity is saved.
+And if you have a **_modifiedOn _**property set in your schema, it will automatically be set to the current time **each time** the entity is saved.
 
 ```js
 const userSchema = new Schema({
     createdOn: { type: 'datetime', default: gstore.defaultValues.NOW },
-    modifiedOn: { type: 'datetime' } // will automatically be set to the current time
+    modifiedOn: { type: 'datetime' } // will automatically be updated to the current time on each "save|update"
 });
 ```
 
