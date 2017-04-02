@@ -1,7 +1,8 @@
-#Middleware (hooks)
+# Middleware \(hooks\)
 
 ### Pre hooks
-Add methods to execute before "save", "delete", "findOne" or your customMethod. The middleware that you declare receives the original argument(s) passed to the method. You can modify them in your **resolve** passing an object with an **__override** property containing the new parameter(s) for the target method (be careful though... with great power comes great responsibility!).  See example below.  
+
+Add methods to execute before "save", "delete", "findOne" or your customMethod. The middleware that you declare receives the original argument\(s\) passed to the method. You can modify them in your **resolve** passing an object with an **\_\_override** property containing the new parameter\(s\) for the target method \(be careful though... with great power comes great responsibility!\).  See example below.  
 If you **reject** the Promise in a "pre" middleware, the target function is not executed.
 
 A common use case would be to hash a user's password before saving it into the Datastore.
@@ -26,7 +27,7 @@ function hashPassword() {
         // nothing to hash... exit
         return Promise.resolve();
     }
-    
+
     return new Promise((resolve, reject) => {
         bcrypt.genSalt(5, function onSalt(err, salt) {
             if (err) {
@@ -40,7 +41,7 @@ function hashPassword() {
                 };
 
                 _this.password = hash;
-				
+
                 // resolve to go to next middleware or target method
                 return resolve();
             });
@@ -68,26 +69,36 @@ user.save()
 });
 ```
 
-**Note**
-The pre('delete') hook has its scope set on the entity to be deleted. **Except** when an *Array* of ids to delete is passed.
+**Note**  
+The pre\('delete'\) hook has its scope set on the entity to be deleted. **Except** when an _Array_ of ids to delete is passed.
 
 ```js
 blogSchema.pre('delete', function() {
-	console.log(this.entityKey); // the datastore entity key to be deleted
+    console.log(this.entityKey); // the datastore entity key to be deleted
+    
+    // Access arguments passed
+    const args = Array.prototype.slice(arguments);
+    console.log(args[0]); // 1234 (from call below)
 
-	// By default this.entityData is not present because
-	// the entity is *not* fetched from the Datastore.
-	// You could call this.datastoreEntity() here (see the Entity section)
-	// to fetch the data from the Datastore and process any other logic
-	// before resolving your middlewware
-	
-	// Access arguments passed
-	const args = Array.prototype.slice(arguments);
-	console.log(args[0]); // 1234 (from call below)
-	
-	// Here you would override the id to delete! At your own risk...
-	// The Array passed in __override are the argument(s) of the target function
-	return Promise.resolve({ __override: [1235] });
+    // By default the entity data is not present because
+    // the entity is *not* fetched from the Datastore.
+    // Though you can call "this.datastoreEntity()" here (see the "Entity" section)
+    // to fetch the data from the Datastore and process any other logic
+    // before resolving the middleware
+    
+    // example 1:
+    return this.datastoreEntity() // fetch the entity data from the Datastore
+                .then((entity) => {
+                    // entity is a gstore entity instance
+                    // You could delete an associated uploaded image for ex.
+                    return myImageHelper.deleteImage(entity.imageMeta)
+                                        .then(() => Promise.resolve()); // always resolve empty unless...
+                });
+    
+    // example 2:
+    // ... if you want to override the original argument passed resolve passing a value.
+    // Here you would override the id to delete! At your own risk...
+    return Promise.resolve(1235);
 });
 
 BlogPost.delete(1234).then(() => {...});
@@ -107,4 +118,6 @@ function middleware2() {
 
 userSchema.pre('save', [middleware1, middleware2]);
 ```
+
+
 
