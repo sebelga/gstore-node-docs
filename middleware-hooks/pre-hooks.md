@@ -75,7 +75,7 @@ The pre\('delete'\) hook has its scope set on the entity to be deleted. **Except
 ```js
 blogSchema.pre('delete', function() {
     console.log(this.entityKey); // the datastore entity key to be deleted
-    
+
     // Access arguments passed
     const args = Array.prototype.slice(arguments);
     console.log(args[0]); // 1234 (from call below)
@@ -85,16 +85,16 @@ blogSchema.pre('delete', function() {
     // Though you can call "this.datastoreEntity()" here (see the "Entity" section)
     // to fetch the data from the Datastore and process any other logic
     // before resolving the middleware
-    
+
     // example 1:
     return this.datastoreEntity() // fetch the entity data from the Datastore
                 .then((entity) => {
                     // entity is a gstore entity instance
                     // You could delete an associated uploaded image for ex.
-                    return myImageHelper.deleteImage(entity.imageMeta)
+                    return myImageHelper.deleteImage(entity.imageIdx)
                                         .then(() => Promise.resolve()); // always resolve empty unless...
                 });
-    
+
     // example 2:
     // ... if you want to override the original argument passed resolve passing a value.
     // Here you would override the id to delete! At your own risk...
