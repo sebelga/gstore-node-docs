@@ -7,7 +7,7 @@ This method accepts the following arguments:
 
 ```js
 MyModel.get(
-    /* {int|string}. -- Can also be an Array of ids to retrieve */
+    /* {int|string|Array<int|string>}. -- id(s) to retrieve */
     <id>,
     /* {Array} -- optional. ex: ['ParentEntity', 1234 ] */
     <ancestors>,
@@ -34,6 +34,11 @@ const BlogPost = require('./blog-post.model');
 // id can be an integer or a string
 BlogPost.get(123).then((entity) => {
     console.log(entity.plain());
+});
+
+// Array of ids
+BlogPost.get([1,2,3]).then((entities) => {
+    entities = entities.map(entity => entity.plain());
 });
 
 // Passing an ancestor path with a string id
