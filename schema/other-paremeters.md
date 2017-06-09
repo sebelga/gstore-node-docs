@@ -15,16 +15,18 @@ const schema = new Schema({
 
 #### default
 
-Allows you to define a default value for a property. This value, for now, must be **static** and **is not** calculated at runtime.  For example setting the default value as `uuidV4()` from the uuid package will set **the same** uuid for all the entities \(probably not the desired behaviour\). In a future release I plan to allow a function to be executed at runtime.
+Allows you to define a default value for a property. 
+You can either pass a **static** value or a **function** to be executed at runtime.
 
-Although there is already a special default value for the **current datetime** of the request: `gstore.defaultValues.NOW`
+In case you want to set the current time of the request to _date_ property you can use the `gstore.defaultValues.NOW` for default value (instead of writing a function).
 
-And if you have a **_modifiedOn _**property set in your schema, it will automatically be set to the current time **each time** the entity is saved.
+Also, if you have a **_modifiedOn _**property set in your schema, it will automatically be set to the current time **each time** the entity is saved.
 
 ```js
 const userSchema = new Schema({
-    createdOn: { type: 'datetime', default: gstore.defaultValues.NOW },
-    modifiedOn: { type: 'datetime' } // will automatically be updated to the current time on each "save|update"
+    createdOn: { type: 'datetime', default: gstore.defaultValues.NOW }, // will be set to the current time of the request
+    modifiedOn: { type: 'datetime' }, // will automatically be updated to the current time on each "save|update"
+    randomId: { default: () => uuidV4(), write: false } // function executed at runtime
 });
 ```
 
