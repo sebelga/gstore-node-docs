@@ -26,8 +26,7 @@ blogPostSchema.methods.texts = function getTexts() {
 
 const BlogPost = require('../models/blogpost.model');
 BlogPost.get(123)
-        .then((data) => {
-            const blogEntity = data[0];
+        .then((blogEntity) => {
             blogEntity.texts()
                         .then((response) => {
                             const texts = response[0].entities;
@@ -49,8 +48,7 @@ const User = require('../models/user.model');
 
 const user = new User({ name: 'John', imageIdx: 1234 });
 user.profilePicture()
-    .then((data) => {
-        const imageEntity = data[0];
+    .then((imageEntity) => {
         user.profilePicture = imageEntity.url;
         user.save()
             .then(() { ... });
