@@ -42,6 +42,21 @@ const articleSchema = new Schema({
 });
 ```
 
+For **embedded entities** you can pass one or more properties that you don't want to index by passing the property name or an Array of names.
+
+```js
+
+// In the example below, 'biography' is a property of the embedded entity 'author'
+// and 'text' & 'description' are properties of an implicit 'book' embedded entity in the array
+// Important: for embedded entities inside **Arrays** you have to specify the type to 'array' for the excludeFromIndexes to work.
+
+const mySchema = new Schema({
+    author: { type: 'object', excludeFromIndexes: 'biography' },
+    listBooks: { type: 'array', excludeFromIndexes: ['text', 'description'] },
+});
+
+```
+
 #### read
 
 If you don't want certain properties to show up in the response data of queries or when calling entity.plain\(\) \(see Entity section\), set this parameter to **false**. This is useful when you have entity properties only useful to your business logic and that you don't want to exposed publicly.
