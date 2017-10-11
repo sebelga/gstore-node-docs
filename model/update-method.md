@@ -1,6 +1,6 @@
 # Model Methods
 
-## update()
+## update\(\)
 
 This method allows you to update an entity in the Datastore.  
 It will first fetch the entity, then update its data with the new ones and finally save the data back to the Datastore
@@ -68,13 +68,13 @@ BlogPost.update(123, blogPostData, function onBlogPostUpdate(err, entity) {
 
 ### Options
 
-**replace** (default: false)
-The options argument has a *replace* property that you can set to true if you want to replace all the entity data without merging with the data in the Datastore. By default, `MyModel.update()` does **2 operations** inside one transaction:
+**replace** \(default: false\)  
+The options argument has a _replace_ property that you can set to true if you want to replace all the entity data without merging with the data in the Datastore. By default, `MyModel.update()` does **2 operations** inside one transaction:
 
-* get() the entity and merges its data with the ones passed
-* save() the entity
+* get\(\) the entity and merges its data with the ones passed
+* save\(\) the entity
 
-If you just want to override the entity data without doing any merge set *replace* to **true** in the options parameter.
+If you just want to override the entity data without doing any merge set _replace_ to **true** in the options parameter.
 
 ```js
 BlogPost.update(123, data, null, null, null, { replace:true }).then( ... );
