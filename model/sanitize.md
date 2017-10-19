@@ -15,6 +15,12 @@ const userSchema = new Schema({
     createdOn : { type: 'datetime', write: false } // write is not allowed
 });
 
+// or with a Joi schema
+const schema = new Schema({
+    name: { joi: Joi.string() },
+    createdOn: { joi: Joi.date().strip() } // strip() will remove the property when Sanitizing
+}, { joi: true });
+
 module.exports = gstore.model('User', userSchema);
 
 ```
