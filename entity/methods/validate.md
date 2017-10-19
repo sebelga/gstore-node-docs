@@ -22,6 +22,7 @@ const { error } = user.validate();
 The validate() method also returns **a Promise** if you need to chain it
 
 ```js
+const user = new User({ firstname: 'John', lastname: 'Snow' });
 
 user.validate()
     .then((value) => {
