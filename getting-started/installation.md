@@ -10,7 +10,7 @@ For all the information on how to configure the gcloud datastore, [read the docs
 
 ```js
 const datastore = require('@google-cloud/datastore')();
-const gstore = require('gstore-node');
+const gstore = require('gstore-node')();
 
 gstore.connect(datastore);
 ```
@@ -24,3 +24,17 @@ The @google/datastore instance. With it you can access **all the API** of the li
 
 * `gstore.transaction`. Alias of the same google-cloud/datastore method
 
+
+## Instances
+
+You can create new instances of gstore by passing a configuration object. Each instance is identified by its namespace. If you don't specify a namespace it will get the default instance.
+
+```
+const settings1 = {
+    namespace: 'namespace1',
+};
+const datastore1 = require('@google-cloud/datastore')();
+const gstore = require('gstore-node')(); // this is
+gstore.connect(datastore1);
+
+```
