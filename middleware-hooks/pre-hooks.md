@@ -8,7 +8,7 @@ If you **reject** the Promise in a "pre" middleware, the target function is not 
 A common use case would be to hash a user's password before saving it into the Datastore.
 
 ```js
-const gstore = require('gstore-node');
+const gstore = require('gstore-node')();
 const bscrypt = require('bcrypt-nodejs');
 
 const userSchema = new gstore.Schema({
