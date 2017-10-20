@@ -1,6 +1,6 @@
 # Entity methods
 
-## datastoreEntity()
+## datastoreEntity\(\)
 
 In case you need at any moment to fetch the entity **data** from Goolge Datastore, this method will do just that right on the entity instance.
 
@@ -18,10 +18,12 @@ User.update(123, { email: 'john@snow.com' })
 });
 
 // with a callback
-User.update(123, { email: 'john@snow.com' }, function(err, entity) {
-    entity.datastoreEntity(function(err, datastoreEntity){
+User.update(123, { email: 'john@snow.com' }, (err, entity) => {
+    entity.datastoreEntity((err, datastoreEntity) => {
         console.log(datastoreEntity.firstname); // 'John'
     });
 });
- 
 ```
+
+
+
