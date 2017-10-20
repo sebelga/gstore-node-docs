@@ -1,6 +1,6 @@
 # Entity Methods
 
-## save()
+## save\(\)
 
 After you create an entity you can persist its data to the Datastore with `entity.save()`  
 This method accepts the following arguments
@@ -20,7 +20,7 @@ entity.save(
 
 #### options
 
-The options argument has a **method** property where you can set the saving method.
+The options argument has a **method** property where you can set the saving method.  
 It default to 'upsert'.
 
 ```js
@@ -30,9 +30,10 @@ It default to 'upsert'.
 ```
 
 Example:
+
 ```js
 // blog-post.model.js
-const gstore = require('gstore-node');
+const gstore = require('gstore-node')();
 
 const blogPostSchema = new gstore.Schema({
   title: { type:'string' },
@@ -74,7 +75,7 @@ transaction.run()
                 blogPost .save(transaction);
 
                 ... // any other operation on the Transaction
-                
+
                 return transaction.commit();
             })
            .then((response) => {
@@ -83,16 +84,16 @@ transaction.run()
             }).catch((err) => {
               // handle error
             });
-
 ```
 
 #### Saving inside a Transaction with middleware on Model
 
-If you have ["pre" middlewares](../../middleware-hooks/pre-hooks.md) on the _save_ method of your Model (`mySchema.pre('save', myMiddleware)`) you need to **chain the Promise** of the save method before committing the transaction, otherwise the entity **won't be** saved.
+If you have ["pre" middlewares](../../middleware-hooks/pre-hooks.md) on the _save_ method of your Model \(`mySchema.pre('save', myMiddleware)`\) you need to **chain the Promise** of the save method before committing the transaction, otherwise the entity **won't be** saved.
 
 You can avoid this by disabling the middlewares on the entity with **preHooksEnabled** set to false on the entity.
 
 Examples:
+
 ```js
 const user = new User({ name: 'john' });
 const transaction = gstore.transaction();
@@ -118,25 +119,28 @@ transaction.run().then() => {
     User.get(123, null, null, transaction)
         .then((entity) => {
             entity.email = 'john@domain.com';
-                
+
             // validate before so we can rollback the transaction if necessary
             const valid = user.validate();
-		
+
             if (!valid) {
                 // rollback the transaction;
             }
-		
+
             // disable pre middleware(s)
             user.preHooksEnabled = false;
-		
+
             // save inside transaction in "sync"
             user.save(transaction);
 
             // ... any other transaction operations
-		
-		transaction.commit().then(() => {
-		    ...
-		});
-	});
+
+        transaction.commit().then(() => {
+            ...
+        });
+    });
 });
 ```
+
+
+
