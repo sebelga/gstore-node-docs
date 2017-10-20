@@ -11,8 +11,3 @@ Here is the list of error codes returned by the gstore Validation. Joi validatio
 - ERR_PROP_NOT_ALLOWED // Property not allowed
 - ERR_PROP_REQUIRED // Property is required
 - ERR_PROP_IN_RANGE // Value not in the defined values
-
-
-
-
-
