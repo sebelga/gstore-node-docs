@@ -12,6 +12,7 @@ Its main features are:
 * **shortcuts** queries
 * pre & post **middleware** \(hooks\)
 * **custom methods** on entity instances
+* **Joi **type and validation \([see lib](https://www.npmjs.com/package/joi)\)
 
 This library is in active development, please report any issue you might find.
 
