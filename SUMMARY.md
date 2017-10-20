@@ -42,5 +42,7 @@
   * [Post hooks](middleware-hooks/post-hooks.md)
 * [gstore Methods](save.md)
   * [save\(\)](save.md)
+* [Appendix](appendix.md)
+  * [Error Codes](appendix/error-codes.md)
 * [Credits](credits.md)
 
