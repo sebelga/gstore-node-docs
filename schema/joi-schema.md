@@ -20,3 +20,25 @@ const userSchema = new Schema({
 });
 ```
 
+Joi types can replace all the following settings of a property:
+
+- type
+- validate
+- default
+- write (corresponds to Joi.strip())
+- values
+- required
+
+But you **still need to configure** the following settings
+
+- excludeFromIndexes
+- read
+
+```js
+const schema = new Schema({
+    password: { joi: Joi.string().required(), read: false },
+    longText: { joi: Joi.string(), excludeFromIndexes: true },
+}, { joi: true });
+
+```
+
