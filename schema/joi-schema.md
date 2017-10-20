@@ -48,8 +48,8 @@ If you need even more control over the schema validation you can define an _**ex
 ```js
 const schema = new Schema({
     username: { joi: Joi.string().alphanum().min(3).max(30).required() },
-    password: { joi: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/), read: false, excludeFromIndexes: true },
-    access_token: { joi: [Joi.string(), Joi.number()], read: false, excludeFromIndexes: true },
+    password: { joi: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/) },
+    access_token: { joi: [Joi.string(), Joi.number()] },
     birthyear: { joi: Joi.number().integer().min(1900).max(2013) },
     email: { joi: Joi.string().email() }
 }, {
@@ -79,8 +79,6 @@ const schema = new Schema({
     },
 });
 ```
-
-
 
 
 
