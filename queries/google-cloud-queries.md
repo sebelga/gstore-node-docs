@@ -1,14 +1,12 @@
-#Queries
+# Queries
 
 ## @google-cloud Query
 
-gstore is built **on top of @google-cloud/datastore** so you can execute [any query from the Google library](https://googlecloudplatform.github.io/google-cloud-node/#/docs/datastore/master/datastore/query).  
+gstore is built **on top of @google-cloud/datastore** so you can execute [any query from the Google library](https://googlecloudplatform.github.io/google-cloud-node/#/docs/datastore/master/datastore/query).
 
 1. Create a query object `const query = MyModel.query(namespace /*optional*/, transaction /*optional*/)`
-`
-2. and chain the operators to build the query. `query.filter(...).order(...).start(...)`
-3. call query.run() to execute the query. `query.run([options]).then( ... )`
-
+2. Chain the operators to build the query. `query.filter(...).order(...).start(...)`
+3. Call query.run\(\) to execute the query. `query.run([options]).then( ... )`
 
 ### Create the query
 
@@ -27,11 +25,11 @@ Refer to [@google-cloud/datastore](https://googlecloudplatform.github.io/google-
 
 ```js
 query.filter(...).order(...).groupBy(...).start(...);
-```  
+```
 
 ### Run the query
-To execute the query call `query.run(options)`
 
+To execute the query call `query.run(options)`
 
 ```js
 query.run({
@@ -49,10 +47,12 @@ query.run({
 ```
 
 **@Returns**: the response is an object with 2 properties:
-- entities
-- nextPageCursor // only present if there are More Results to fetch
+
+* entities
+* nextPageCursor // only present if there are More Results to fetch
 
 Example:
+
 ```js
 const User = require('./user.model');
 
@@ -87,7 +87,7 @@ const query = User.query()
                   .filter('age', '>=', 4)
                   .order('lastname', { descending: true })
                   .start(nextPageCursor);
-                  
+
 // Query on namespace
 const namespace = 'com.dev.server';
 const query = User.query(namespace)
@@ -99,16 +99,19 @@ transaction.run().then(() => {
     // Create the query inside the transaction
     const query = User.query(null, transaction)
                       .filter('name', '=', 'John');
-   
+
     query.run().then(() => {
         // other operations inside the transaction
         ...
-  		
+
         transaction.commit().then( ... )
-    });	
+    });    
 });
 
 // run  with options
 query.run({ readAll: true, format: 'ENTITY' })
      .then( ... )
 ```
+
+
+
