@@ -51,12 +51,12 @@ const schema = new Schema({
     password: { joi: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/) },
     access_token: { joi: [Joi.string(), Joi.number()] },
     birthyear: { joi: Joi.number().integer().min(1900).max(2013) },
-    email: { joi: Joi.string().email() }
+    email: { joi: Joi.string().email() },
 }, {
     joi: {
         extra: {
             with: ['username', 'birthyear'], // if username present, birthyear must be too
-            without: ['password', 'access_token'] // if password present, access_token cannot
+            without: ['password', 'access_token'], // if password present, access_token cannot
         },
     },
 });
@@ -69,7 +69,7 @@ The validate\(\) method in Joi [accepts an options object](https://github.com/ha
 ```
 const schema = new Schema({
     username: { joi: Joi.string().alphanum().min(3).max(30).required() },
-    email: { joi: Joi.string().email() }
+    email: { joi: Joi.string().email() },
 }, {
     joi: {
         options: {
