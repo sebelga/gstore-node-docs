@@ -79,7 +79,7 @@ If you then try to save an entity with any other value it won't validate and won
 
 ```js
 const productSchema = new Schema({
-    color  : {values: [ '#ffffff', '#ff6000', '#000000' ]},
+    color  : { values: [ '#ffffff', '#ff6000', '#000000' ] },
     ...
 });
 
