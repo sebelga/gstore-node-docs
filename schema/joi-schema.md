@@ -6,7 +6,7 @@ If you need more advanced schema validation gstore-node support **Joi types and 
 
 **Important**: if you decide to use Joi, you have to use it for **all your properties**. You **cannot** mix joi and gstore types and validation.
 
-You can define a Joi type and validator by setting a _joi_ setting on your schema property and set the Schema *joi* option to **true**.
+You can define a Joi type and validator by setting a _joi_ setting on your schema property and set the Schema _joi_ option to **true**.
 
 ```js
 const { Schema } = require('gstore-node')();
@@ -22,34 +22,65 @@ const userSchema = new Schema({
 
 Joi types can replace all the following settings of a property:
 
-- type
-- validate
-- default
-- write (corresponds to Joi.strip())
-- values
-- required
+* type
+* validate
+* default
+* write \(corresponds to Joi.strip\(\)\)
+* values
+* required
 
 But you **still need to configure** the following settings
 
-- excludeFromIndexes
-- read
+* excludeFromIndexes
+* read
 
 ```js
 const schema = new Schema({
     password: { joi: Joi.string().required(), read: false },
     longText: { joi: Joi.string(), excludeFromIndexes: true },
 }, { joi: true });
-
 ```
 
 ### Advanced
 
-If you need even more control over the schema validation you can define an *extra* setting on for joi. This will be applied on the complete Joi Schema object type.
+If you need even more control over the schema validation you can define an _**extra**_** **setting for joi. This will be applied on the complete Joi Schema object type.
 
-
-
+```js
+const schema = new Schema({
+    username: { joi: Joi.string().alphanum().min(3).max(30).required() },
+    password: { joi: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/), read: false, excludeFromIndexes: true },
+    access_token: { joi: [Joi.string(), Joi.number()], read: false, excludeFromIndexes: true },
+    birthyear: { joi: Joi.number().integer().min(1900).max(2013) },
+    email: { joi: Joi.string().email() }
+}, {
+    joi: {
+        extra: {
+            with: ['username', 'birthyear'], // if username present, birthyear must be too
+            without: ['password', 'access_token'] // if password present, access_token cannot
+        },
+    },
+});
+```
 
 ### Options
+
+The validate\(\) method in Joi [accepts an options object](https://github.com/hapijs/joi/blob/v13.0.1/API.md#validatevalue-schema-options-callback). You can pass it in the Schema options.
+
+```
+const schema = new Schema({
+    username: { joi: Joi.string().alphanum().min(3).max(30).required() },
+    email: { joi: Joi.string().email() }
+}, {
+    joi: {
+        options: {
+            abortEarly: false,
+            allowUnknown: true,
+        },
+    },
+});
+```
+
+
 
 
 
