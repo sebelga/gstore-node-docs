@@ -50,6 +50,18 @@ Valid values are:
 
 Adds a "__key" property to the entity data with the complete Key from the Datastore.
 
+
+#### keyType
+
+**default: 'auto'**
+
+Defines the Key type (id or name) for the entities. By default gstore will convert '123' IDs to 123 (int). If you don't want this parsing to occur you can set the keyType to "name".
+Valid values are:
+
+* "id" (integer IDs). --> Will force to convert string to datastore.int()
+* "name" (string IDs)
+* "auto". --> If a string is passed and it is a number, it will be converted. Otherwise the id will be left "as is".
+
 ----
 
 Example:
@@ -65,6 +77,7 @@ const userSchema = new Schema({
         readAll: true,
         format: 'ENTITY',
         showKey: true,
+        keyType: 'name'
     }
 });
 ```
