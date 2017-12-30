@@ -73,11 +73,11 @@ const userSchema = new Schema({
 }, {
     validateBeforeSave: false,
     explicitOnly: false,
+    keyType: 'name',
     queries: {
         readAll: true,
         format: 'ENTITY',
         showKey: true,
-        keyType: 'name'
     }
 });
 ```
