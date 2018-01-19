@@ -41,7 +41,7 @@ BlogPost.get([1,2,3]).then((entities) => {
     entities = entities.map(entity => entity.plain());
 });
 
-// Passing an ancestor path with a string id
+// Passing an ancestor path with a Kind and a name
 const ancestors = ['Parent', 'parentName'];
 BlogPost.get('stringId', ancestors).then((entity) => { ... });
 
