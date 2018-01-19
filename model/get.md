@@ -81,7 +81,7 @@ transaction.run().then(() => {
     
 The **preserveOrder** option property is useful when you pass an array of IDs to retrieve and you want to preserve the order of those ids in the response.
 
-**Note**: setting this property to true does add some processing, especially for large sets. Only use it if you absolutely need to maintain the original order passed.
+**Note**: setting this property to *true* does add some processing, especially for large sets. Only use it if you absolutely need to maintain the original order passed.
 
 ```js
 BlogPost.get([1,2,3], null, null, null, { preserveOrder: true })
