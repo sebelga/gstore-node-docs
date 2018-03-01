@@ -98,7 +98,7 @@ blogSchema.pre('delete', function() {
     // example 2:
     // ... if you want to override the original argument passed resolve passing a value.
     // Here you would override the id to delete! At your own risk...
-    return Promise.resolve(1235);
+    return Promise.resolve({ __override: 1235 });
 });
 
 BlogPost.delete(1234).then(() => {...});
@@ -119,5 +119,11 @@ function middleware2() {
 userSchema.pre('save', [middleware1, middleware2]);
 ```
 
+### Override parameters 
 
+In the rare cases where you'd need to override the parameters in a "pre" hook, you can resolve your middleware with an object containing an `__override`property.
+
+```js
+
+```
 
