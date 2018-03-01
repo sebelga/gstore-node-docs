@@ -1,8 +1,8 @@
 # Model Methods
 
-## get()
+## get\(\)
 
-Retrieving an entity **by key** is the fastest way to read from the Datastore.  
+Get one or multiple entities from the Datastore. Retrieving an entity **by key** is the fastest way to read from the Datastore.  
 This method accepts the following arguments:
 
 ```js
@@ -52,7 +52,7 @@ BlogPost.get(1234, function onEntity(err, entity) {
 });
 ```
 
-The resulting entity has a **plain()** method that returns an object with the entity **data ** + its **id**. See [the doc here](../entity/methods/plain.md).
+The resulting entity has a **plain\(\)** method that returns an object with the entity **data ** + its **id**. See [the doc here](../entity/methods/plain.md).
 
 ```js
 BlogPost.get(123).then(entity) {
@@ -75,23 +75,43 @@ transaction.run().then(() => {
 });
 ```
 
-**options** argument
+**options** properties
 
-  - preserveOrder (default: false)
-    
-The **preserveOrder** option property is useful when you pass an array of IDs to retrieve and you want to preserve the order of those ids in the response.
+* _preserveOrder_ \(default: false\)
+* _dataloader_: a [Dataloader](https://github.com/facebook/dataloader) instance
+* _cache_ \(default: true\)
+* _ttl_ \(default: the global cache `ttl.keys` configuration\)
 
-**Note**: setting this property to *true* does add some processing, especially for large sets. Only use it if you absolutely need to maintain the original order passed.
+&gt; **preserveOrder**: This option is useful when you pass an array of IDs to retrieve and you want to preserve the order of those ids in the response.
+
+**Note**: setting this property to _true_ does add some processing, especially for large sets. Only use it if you absolutely need to maintain the original order passed.
+
+&gt; **dataloader** The Dataloader instance created for the request. [Read the documentation](/dataloader.md) for more information on how to create the instance.
+
+&gt; **cache** If you activated the cache on the gstore-node instance, you can override here the **_global_** cache configuration. If the global has been set to _true_ (default) you can pass _false_ here to bypass the cache. And if the global cache has been set to false, then you can pass _true_ here to cache specific key(s).
+
+&gt; **ttl** Overrides the global keys TTL of the cache. If you have multiple cache stores, you can pass an _Object_ with a different value for each store. See in the example below.
 
 ```js
-BlogPost.get([1,2,3], null, null, null, { preserveOrder: true })
-        .then(function(entities) {
+const gstore = require('gstore-node')();
+
+// Important! This should be done on **each** request (read the Dataloader documentation)
+const dataloader = gstore.createDataLoader();
+
+BlogPost.get([1,2,3], null, null, null, { preserveOrder: true, dataloader })
+        .then((entities) => {
             // Order is preserved
             console.log(entities[0].entityKey.id); // 1
             console.log(entities[1].entityKey.id); // 2
             console.log(entities[2].entityKey.id); // 3
         });
+
+// cache ttl options example
+BlogPost.get(123, null, null, null, { ttl: 300 })
+        .then(() => ... );
+
+// cache ttl multi stores
+BlogPost.get(123, null, null, null, { ttl: { memory: 60, redis: 900 } })
+        .then(() => ... );
+
 ```
-
-
-

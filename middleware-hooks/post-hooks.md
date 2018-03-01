@@ -2,7 +2,7 @@
 
 ### Post hooks
 
-"Post" middelwares are defined the same way as "pre" middlewares. The main difference is that if you reject the Promise of your middleware because of an error, the original method still resolves but its response has an **errorsPostHook** property added, an **Array** with the post hooks error(s).
+"Post" middelwares are defined the same way as "pre" middlewares. The main difference is that if you reject the Promise of your middleware because an error occured, the original method still resolves and a **Symbol** is added to the response containing the post hooks error(s).
 
 ```js
 // user.model.js
@@ -26,13 +26,16 @@ schema.post('save', function postSave(){
 // ....
 
 // user.controller.js
+
+const gstore = require('gstore-node')();
+
 const User = require('./user.model');
 const user = new User({ name: 'John', email: 'john@snow.com' });
 
 user.save().then((entity) => {
-	// You should do this check if you have post hooks that could fail
-    if (entity.errorsPostHook) {
-        console.log(entity.errorsPostHook[0].message); // 'Houston something went wrong.'
+    // You should do this check if you have post hooks that can fail
+    if (entity[gstore.ERR_HOOKS]) {
+        console.log(entity[gstore.ERR_HOOKS][0].message); // 'Houston something went wrong.'
     }
     ...	
 });
@@ -44,7 +47,8 @@ The "post" middleware for **delete()** does _not_ have its scope mapped to the e
 
 ```js
 userSchema.post('delete', function postDelete(response){
-    const keyDeleted = response.key; // can be one Key or an Array of entity Keys that have been deleted.
+    // can be one Key or an Array of entity Keys that have been deleted.
+    const keyDeleted = response.key;
     ...
     return Promise.resolve();
 });
@@ -54,11 +58,11 @@ You can also pass an **Array** of middleware to execute
 
 ```js
 function middleware1() {
-	return Promise.resolve();
+    return Promise.resolve();
 }
 
 function middleware2() {
-	return Promise.resolve();
+    return Promise.resolve();
 }
 
 userSchema.post('save', [middleware1, middleware2]);
@@ -79,13 +83,13 @@ transaction.run().then(() => {
     BlogPost.delete(123, null, null, transaction);
 
     transaction.commit()
-                .then((data) => {
-                    transaction.execPostHooks() // execute "post" hooks
-                               .then(() => {
-                                    const apiResponse = data[0];
-                                    // all done!
-                                });
+        .then((data) => {
+            transaction.execPostHooks() // execute "post" hooks
+                .then(() => {
+                    const apiResponse = data[0];
+                    // all done!
                 });
+            });
 });
 
 ```
