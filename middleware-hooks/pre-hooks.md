@@ -5,7 +5,9 @@
 Add methods to execute before "save", "delete", "findOne" or your customMethod. The middleware that you declare receives the original argument\(s\) passed to the method. You can modify them in your **resolve** passing an object with an **\_\_override** property containing the new parameter\(s\) for the target method \(be careful though... with great power comes great responsibility!\).  See example below.  
 If you **reject** the Promise in a "pre" middleware, the target function is not executed.
 
-A common use case would be to hash a user's password before saving it into the Datastore.
+#### Example
+
+Hook to hash a user's password before saving it into the Datastore.
 
 ```js
 const gstore = require('gstore-node')();
@@ -119,11 +121,31 @@ function middleware2() {
 userSchema.pre('save', [middleware1, middleware2]);
 ```
 
-### Override parameters 
+### Override parameters
 
 In the rare cases where you'd need to override the parameters in a "pre" hook, you can resolve your middleware with an object containing an `__override`property.
 
 ```js
+const userSchema = new gstore.Schema({
+    user: { type: 'string' },
+    email: { type: 'string', validate: 'isEmail' },
+    password: { type: 'string', excludeFromIndexes: true }
+});
 
+userSchema.pre('findOne', (...args) => {
+    if (args[0].email === 'john@snow.com') {
+        return Promise.resolve({ __override: [
+            args[0], // we keep the original props|values passed
+            ['Dad', 'Targaryen'] // we add an Ancestor to the Query for this user
+        ]});
+    }
+    return Promise.resolve();
+});
+
+// ...
+
+// Whenever you will search for this user,
+// the Query will occur on the Ancestor ['Dad', 'Targaryen'];
+User.findOne({ email: 'john@snow.com' }).then((user) => { ... })
 ```
 
