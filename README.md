@@ -13,6 +13,7 @@ Its main features are:
 * pre & post **middleware** \(hooks\)
 * **custom methods** on entity instances
 * **Joi** type and validation \([see documentation](https://www.npmjs.com/package/joi)\)
+* **cache** layer (Keys and Queries) to speed up entities fetching
 
 This library is in active development, please report any issue you might find.
 
