@@ -123,7 +123,7 @@ userSchema.pre('save', [middleware1, middleware2]);
 
 ### Override parameters
 
-In the rare cases where you'd need to override the parameters in a "pre" hook, you can resolve your middleware with an object containing an `__override`property.
+In the rare cases (maybe during a migration of data) where you'd need to override the parameters in a "pre" hook, you can resolve your middleware with an object containing an `__override`property.
 
 ```js
 const userSchema = new gstore.Schema({
