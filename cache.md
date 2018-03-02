@@ -50,7 +50,7 @@ const default = {
 };
 ```
 
-Refer to the gstore-cache](https://github.com/sebelga/gstore-cache) for  detailed explanation of the config properties.
+Refer to the [gstore-cache](https://github.com/sebelga/gstore-cache) for  a detailed explanation of the configuration properties.
 
 ##### Extra config
 
@@ -60,15 +60,47 @@ There is a special _gobal_ config only for gstore-node. By default it is set to 
 
 #### Custom configuration
 
-Refer to the gstore-cache documentation for a detailed explanation of the config properties.
+You can change any of the configuration. You only need to pass the config you want to override.
 
 ```js
 // server.js
 
 const cacheConfig = {
-    stores: [{ store: 'memory', max: 200 }],
     ttl: { keys: 1200 },
     queries: -1, // don't cache queries
+};
+
+const gstore = require('gstore-node')({ cache: cacheConfig }); 
+
+// multi stores example
+
+const redisStore = require('cache-manager-redis-store');
+
+const cacheConfig = {
+    stores: [
+    {
+        store: 'memory',
+        max: 100,
+        ttl: 15,
+    },
+    {
+        store: redisStore,
+        host: 'localhost', // default value
+        port: 6379, // default value
+        // ... any other config for redis
+    }],
+    ttl: {
+        stores: {
+            memory: {
+                keys: 10,
+                queries: 5,
+            },
+            redis: {
+                keys: 60 * 60,
+                queries: 60 * 60
+            },
+        }
+    }
 };
 
 const gstore = require('gstore-node')({ cache: cacheConfig }); 
@@ -94,6 +126,3 @@ const { cache } = gstore;
 cache.get('somekey').then(...);
 cache.set('someKey', { name: 'john' }).then(...);
 ```
-
-You can of course desactivate \(or activate it\) on a per request basis, or change the TTL \(time to live\) value.
-
