@@ -46,15 +46,24 @@ const default = {
         keys: 'gck:', // Gstore Cache Key
         queries: 'gcq:', // Gstore Cache Query
     },
+    global: true,
 };
 ```
+
+Refer to the gstore-cache](https://github.com/sebelga/gstore-cache) for  detailed explanation of the config properties.
+
+##### Extra config
+
+`global (default: true)`
+
+There is a special _gobal_ config only for gstore-node. By default it is set to **true**. If you set it to false, then you will have to explicitly set it to true on each Model or Entity method call.
 
 #### Custom configuration
 
 Refer to the gstore-cache documentation for a detailed explanation of the config properties.
 
 ```js
-// server.js (Application Bootstrap)
+// server.js
 
 const cacheConfig = {
     stores: [{ store: 'memory', max: 200 }],
@@ -70,7 +79,8 @@ const gstore = require('gstore-node')({ cache: cacheConfig });
 
 #### Access the cache instance
 
-You can access any time the underlying gstore-cache instance and call its methods. You might want to cache other data than the keys or queries returned by gstore-node. Just call the cache set/mset/get/mset/del methods directly to manage your cache.
+You can access at any time the underlying gstore-cache instance and call its API. If you need to cache custom data (others than _keys_ or _queries_ managed gstore-node), just call the set/mset/get/mset/del methods directly on the cache instance.  
+For more information on those methods refer to the [gstore-cache documentation](https://github.com/sebelga/gstore-cache). 
 
 ```js
 // Anywhere in your Appication
