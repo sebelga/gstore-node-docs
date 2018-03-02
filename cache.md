@@ -113,7 +113,7 @@ const gstore = require('gstore-node')({ cache: cacheConfig });
 
 #### Access the cache instance
 
-You can access at any time the underlying gstore-cache instance and call its API. If you need to cache custom data \(others than _keys_ or _queries_ managed gstore-node\), just call the set/mset/get/mset/del methods directly on the cache instance.  
+You can access at any time the underlying gstore-cache instance and call its API. If you need to cache custom data \(other the than _keys_ or _queries_ managed gstore-node\), just call the set/mset/get/mset/del methods directly on the cache instance.  
 For more information on those methods refer to the [gstore-cache documentation](https://github.com/sebelga/gstore-cache).
 
 ```js
@@ -128,6 +128,72 @@ const { cache } = gstore;
 cache.get('somekey').then(...);
 cache.set('someKey', { name: 'john' }).then(...);
 ```
+
+#### Advanced Cache for Queries
+
+gstore-cache has an advanced cache for queries when you provide a _Redis_ store \(either as single store or in a multi-store\). It detects the _Kind_ of the entities on which the query is run. It then not only cache the response of the query but also a reference to it in a Redis _Set_. There is one Redis Set by Entity Kind.
+
+This means that you can have an infinite TTL \(0\) for the queries on the Redis store. Then each time an entity is added/updated/deleted gstore-node will automatically remove all the queries references in the Set and clear their cache data.
+
+#### `gstore.cache.queries.kset(key, data, entityKinds)`
+
+In case you have a complex data, coming from several entity Kinds, you can save that query and link the entiy Kinds related to it. This means that if any of the entity kind is modified later, this cache will be deleted.
+
+kset` for (Kind Set) accepts 3 parameters:
+* _key_ : a custom cache key you want to give to this data
+* _data_: the data to cche
+* _entityKinds_: one or multiple entityKinds related to the data
+
+Let see it with an example:
+
+```js
+const gstore = require('gstore-node')();
+const { cache } = gstore;
+
+const Posts = require('./posts.model');
+const Users = require('./users.model');
+
+/**
+ * Handler to fetch all the data for our Home Page
+ */
+const fetchHomeData = () => {
+    // Check the cache first...
+    cache.get('website:home').then(data => {
+        if (data) {
+            return data;
+        }
+
+        // Cache not found, query the data
+        const queryPosts = Posts.query()
+            .filter('category', 'tech')
+            .limit(10)
+            .order('publishedOn', { descending: true });
+
+        const queryTopStories = Posts.query()
+            .order('score', { descending: true })
+            .limit(3);
+
+        const queryProducts = Products.query().filter('featured', true);
+
+        return Promise.all([queryPosts.run(), queryTopStories.run(), queryProducts.run()]).then(result => {
+            // Build our data object
+            const homeData = {
+                posts: result[0],
+                topStories: result[1],
+                products: result[2],
+            };
+
+            // We save the result of the 3 queries to the cache ("website:home" key)
+            // and link the data to the "Posts" & "Products" Entity Kinds.
+            // We can now safely keep the cache infinitely until we add/edit or delete a "Posts" or a "Products".
+            return cache.queries.kset('website:home', homeData, ['Posts', 'Products']);
+        });
+    });
+};
+```
+
+
+
 
 
 
