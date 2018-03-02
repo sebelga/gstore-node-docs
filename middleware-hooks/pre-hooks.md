@@ -121,9 +121,25 @@ function middleware2() {
 userSchema.pre('save', [middleware1, middleware2]);
 ```
 
+### Dataloader instance
+
+In case you provided a Dataloader instance to a Model.update\(\) call, it will be added to the entity being saved. This means that it is accessible from inside your "pre" save hooks.
+
+```js
+function myPreSaveMiddleware() {
+    // fetch some other entity with the "model" helper
+    return this.model('User')
+        .get(this.author, null, null, null, { dataloader: this.dataloader })
+        .then((user) => {
+            this.authorDetails = user;
+            return this; 
+        });
+}
+```
+
 ### Override parameters
 
-In the rare cases (maybe during a migration of data) where you'd need to override the parameters in a "pre" hook, you can resolve your middleware with an object containing an `__override`property.
+In the rare cases \(maybe during a migration of data\) where you'd need to override the parameters in a "pre" hook, you can resolve your middleware with an object containing an `__override`property.
 
 ```js
 const userSchema = new gstore.Schema({
@@ -148,4 +164,6 @@ userSchema.pre('findOne', (...args) => {
 // the Query will occur on the Ancestor ['Dad', 'Targaryen'];
 User.findOne({ email: 'john@snow.com' }).then((user) => { ... })
 ```
+
+
 
