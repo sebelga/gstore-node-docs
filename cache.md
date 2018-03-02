@@ -1,12 +1,14 @@
 # Cache
 
-![](https://github.com/sebelga/gstore-cache/raw/master/logo/logo.gif)gstore-node integrates fully with the [gstore-cache manager](https://github.com/sebelga/gstore-cache). Caching the entities \(both Keys and Queries\) and clearing the cache is automatically done for you. Just initialize gstore with the cache turned on and call it a day :\)
+![](https://github.com/sebelga/gstore-cache/raw/master/logo/logo.gif)gstore-node integrates fully with the [gstore-cache](https://github.com/sebelga/gstore-cache) manager. Let's say that gstore-cache has been created for gstore-node but it has been made available in a separate npm package so that it can be used without gstore-node...
 
-gstore-cache uses the powerful [node-cache-manager](https://github.com/BryanDonovan/node-cache-manager) underneath. This means that you can have several cache stores with different TTL settings for each store.
+The advantage of using gstore-cache with gstore-node is that all the management of the cache \(set/get/delete\) is done for you. Just initialize gstore with the cache turned on and call it a day :\)
+
+gstore-cache uses underneath the powerful [node-cache-manager](https://github.com/BryanDonovan/node-cache-manager). This means that you can have multiple cache stores with different TTL settings for each one and that, out of the box, you get a [LRU memory cache](https://www.npmjs.com/package/lru-cache) instance.
 
 ## Activate the cache
 
-You activate the cache passing a configuration object to the gstore initialization. You can also just pass **true** and the default cache configuration of gstore-cache will be used.
+You activate the cache by passing a configuration object during the gstore initialization. You can also just pass **true** and the default cache settings of gstore-cache will be used.
 
 #### Default settings
 
@@ -15,7 +17,37 @@ You activate the cache passing a configuration object to the gstore initializati
 
 const gstore = require('gstore-node')({ cache: true }); 
 
-//
+// ------------------------------
+// Default Settings:
+// ------------------------------
+
+const default = {
+    stores: [
+        {
+            store: 'memory',
+            max: 100,
+        },
+    ],
+    ttl: {
+        keys: 60 * 10, // 10 minutes
+        queries: 5, // 5 seconds
+        // the "stores" setting below is only used when there are multiple stores
+        stores: {
+            memory: {
+                keys: 60 * 5, // 5 minutes
+                queries: 5,
+            },
+            redis: {
+                keys: 60 * 60 * 24, // 1 day
+                queries: 0, // infinite
+            },
+        },
+    },
+    cachePrefix: {
+        keys: 'gck:', // Gstore Cache Key
+        queries: 'gcq:', // Gstore Cache Query
+    },
+};
 ```
 
 #### Access the cache instance
