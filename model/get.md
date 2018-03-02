@@ -1,6 +1,6 @@
 # Model Methods
 
-## get()
+## get\(\)
 
 Retrieving an entity **by key** is the fastest way to read from the Datastore.  
 This method accepts the following arguments:
@@ -52,7 +52,7 @@ BlogPost.get(1234, function onEntity(err, entity) {
 });
 ```
 
-The resulting entity has a **plain()** method that returns an object with the entity **data ** + its **id**. See [the doc here](../entity/methods/plain.md).
+The resulting entity has a **plain\(\)** method that returns an object with the entity **data ** + its **id**. See [the doc here](../entity/methods/plain.md).
 
 ```js
 BlogPost.get(123).then(entity) {
@@ -75,16 +75,24 @@ transaction.run().then(() => {
 });
 ```
 
-**options** argument
+**options** properties
 
-  - preserveOrder (default: false)
-    
+* preserveOrder \(default: false\)
+* dataloader \(a Dataloader instance\)
+
 The **preserveOrder** option property is useful when you pass an array of IDs to retrieve and you want to preserve the order of those ids in the response.
 
-**Note**: setting this property to *true* does add some processing, especially for large sets. Only use it if you absolutely need to maintain the original order passed.
+**Note**: setting this property to _true_ does add some processing, especially for large sets. Only use it if you absolutely need to maintain the original order passed.
+
+The **dataloader** instance must be created on _each_ request. [Read the documentation](/dataloader.md) for more information on this.
 
 ```js
-BlogPost.get([1,2,3], null, null, null, { preserveOrder: true })
+const gstore = require('gstore-node')();
+
+// Important! This should be done on **each** request (read the Dataloader documentation)
+const dataloader = gstore.createDataLoader();
+
+BlogPost.get([1,2,3], null, null, null, { preserveOrder: true, dataloader })
         .then(function(entities) {
             // Order is preserved
             console.log(entities[0].entityKey.id); // 1
