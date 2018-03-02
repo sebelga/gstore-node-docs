@@ -8,19 +8,18 @@ gstore-cache uses underneath the powerful [node-cache-manager](https://github.co
 
 ## Activate the cache
 
-You activate the cache by passing a configuration object during the gstore initialization. You can also just pass **true** and the default cache settings of gstore-cache will be used.
+You activate the cache by passing a configuration object during the gstore initialization. You can also just pass **true** and the default cache config of gstore-cache will be used.
 
-#### Default settings
+#### Default configuration
 
 ```js
 // server.js (Application Bootstrap)
 
-const gstore = require('gstore-node')({ cache: true }); 
+require('gstore-node')({ cache: true }); 
 
 // ------------------------------
-// Default Settings:
+// Default config:
 // ------------------------------
-
 const default = {
     stores: [
         {
@@ -48,6 +47,25 @@ const default = {
         queries: 'gcq:', // Gstore Cache Query
     },
 };
+```
+
+#### Custom configuration
+
+Refer to the gstore-cache documentation for a detailed explanation of the config properties.
+
+```js
+// server.js (Application Bootstrap)
+
+const cacheConfig = {
+    stores: [{ store: 'memory', max: 200 }],
+    ttl: { keys: 1200 },
+    queries: -1, // don't cache queries
+};
+
+const gstore = require('gstore-node')({ cache: cacheConfig }); 
+
+// ...
+
 ```
 
 #### Access the cache instance
