@@ -160,6 +160,7 @@ const fetchHomeData = () => {
     // Check the cache first...
     cache.get('website:home').then(data => {
         if (data) {
+            // in the cache... great!
             return data;
         }
 
