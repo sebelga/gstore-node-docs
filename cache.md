@@ -1,10 +1,10 @@
 # Cache
 
-![](https://github.com/sebelga/gstore-cache/raw/master/logo/logo.gif)gstore-node integrates fully with the [gstore-cache](https://github.com/sebelga/gstore-cache) manager. Let's say that gstore-cache has been created for gstore-node but it has been made available in a separate npm package so that it can be used without gstore-node...
+![](https://github.com/sebelga/gstore-cache/raw/master/logo/logo.gif)gstore-node integrates fully with the [gstore-cache](https://github.com/sebelga/gstore-cache) manager. Well, let's say that gstore-cache has been created for gstore-node but it has been made available as a separate npm package for those who don't use gstore-node.
 
-The advantage of using gstore-cache with gstore-node is that all the management of the cache \(set/get/delete\) is done for you. Just initialize gstore with the cache turned on and call it a day :\)
+The advantage of using gstore-cache from within gstore-node is that all the management of the cache \(setting/clearing\) is done for you. Just initialize gstore with the cache turned on and call it a day :\)
 
-gstore-cache uses underneath the powerful [node-cache-manager](https://github.com/BryanDonovan/node-cache-manager). This means that you can have multiple cache stores with different TTL settings for each one and that, out of the box, you get a [LRU memory cache](https://www.npmjs.com/package/lru-cache) instance.
+gstore-cache uses underneath the powerful [node-cache-manager](https://github.com/BryanDonovan/node-cache-manager). This means that you can have multiple cache stores with different TTL settings for each one and that you get a [LRU memory cache](https://www.npmjs.com/package/lru-cache) instance for free.
 
 ## Activate the cache
 
@@ -20,6 +20,7 @@ require('gstore-node')({ cache: true });
 // ------------------------------
 // Default config:
 // ------------------------------
+
 const default = {
     stores: [
         {
@@ -56,21 +57,23 @@ Refer to the [gstore-cache](https://github.com/sebelga/gstore-cache) for  a deta
 
 `global (default: true)`
 
-There is a special _gobal_ config only for gstore-node. By default it is set to **true**. If you set it to false, then you will have to explicitly set it to true on each Model or Entity method call.
+There is a special _gobal_ config only used by gstore-node. It will globally turn the cache on for all key fetching or queries. If you set it to false, then you will have to explicitly set the cache option to true when calling any Model or Entity method.
 
 #### Custom configuration
 
-You can change any of the configuration. You only need to pass the config you want to override.
+You can change any of the configuration. You only need to pass what you want to override.
 
 ```js
 // server.js
 
 const cacheConfig = {
     ttl: { keys: 1200 },
-    queries: -1, // don't cache queries
+    queries: -1, // ===> don't cache queries (unless overriden
 };
 
 const gstore = require('gstore-node')({ cache: cacheConfig }); 
+
+// --------------------------------------------------------------
 
 // multi stores example
 
@@ -106,13 +109,12 @@ const cacheConfig = {
 const gstore = require('gstore-node')({ cache: cacheConfig }); 
 
 // ...
-
 ```
 
 #### Access the cache instance
 
-You can access at any time the underlying gstore-cache instance and call its API. If you need to cache custom data (others than _keys_ or _queries_ managed gstore-node), just call the set/mset/get/mset/del methods directly on the cache instance.  
-For more information on those methods refer to the [gstore-cache documentation](https://github.com/sebelga/gstore-cache). 
+You can access at any time the underlying gstore-cache instance and call its API. If you need to cache custom data \(others than _keys_ or _queries_ managed gstore-node\), just call the set/mset/get/mset/del methods directly on the cache instance.  
+For more information on those methods refer to the [gstore-cache documentation](https://github.com/sebelga/gstore-cache).
 
 ```js
 // Anywhere in your Appication
@@ -126,3 +128,6 @@ const { cache } = gstore;
 cache.get('somekey').then(...);
 cache.set('someKey', { name: 'john' }).then(...);
 ```
+
+
+
