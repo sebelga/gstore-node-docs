@@ -40,9 +40,11 @@
 * [Middleware \(hooks\)](middleware-hooks.md)
   * [Pre hooks](middleware-hooks/pre-hooks.md)
   * [Post hooks](middleware-hooks/post-hooks.md)
+* Cache / Dataloader
+  * [Dataloader](dataloader.md)
 * [gstore Methods](save.md)
   * [save\(\)](save.md)
 * [Appendix](appendix.md)
   * [Error Codes](appendix/error-codes.md)
-* [Credits](credits.md)
+* Cache / Dataloader
 
