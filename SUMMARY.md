@@ -42,6 +42,7 @@
   * [Post hooks](middleware-hooks/post-hooks.md)
 * Cache / Dataloader
   * [Dataloader](dataloader.md)
+  * [Cache](cache.md)
 * [gstore Methods](save.md)
   * [save\(\)](save.md)
 * [Appendix](appendix.md)
