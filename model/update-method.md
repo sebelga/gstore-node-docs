@@ -68,10 +68,27 @@ BlogPost.update(123, blogPostData, function onBlogPostUpdate(err, entity) {
 
 ### Options
 
-**replace** \(default: false\)  
-The options argument has a _replace_ property that you can set to true if you want to replace all the entity data without merging with the data in the Datastore. By default, `MyModel.update()` does **2 operations** inside one transaction:
+**options** properties
 
-* get\(\) the entity and merges its data with the ones passed
+* _dataloader_ \(a Dataloader instance\)
+* _replace_ \(Boolean. default: false\)
+
+**dataloader**
+The **dataloader** instance must be created on _each_ request. [Read the documentation](/dataloader.md) for more information on this.
+
+```js
+const gstore = require('gstore-node')();
+
+// Important! This should be done on **each** request (read the Dataloader documentation)
+const dataloader = gstore.createDataLoader();
+BlogPost.update(123, data, null, null, null, { dataloader }).then( ... );
+```
+
+
+**replace** 
+If you set it to _true_ gstore will replace the the entity data in the Datastore without merging the data first. By default, `MyModel.update()` does **2 operations** inside one transaction:
+
+* get\(\) the entity and merges its data with the new data
 * save\(\) the entity
 
 If you just want to override the entity data without doing any merge set _replace_ to **true** in the options parameter.
@@ -79,17 +96,9 @@ If you just want to override the entity data without doing any merge set _replac
 ```js
 BlogPost.update(123, data, null, null, null, { replace:true }).then( ... );
 
-// which is the save as doing
+// which is the same as doing
 
 const blogPost = new BlogPost(data, 123);
 blogPost.save().then( ... );
 ```
-
-If no callback is passed, it will return a **Promise**
-
-```js
-
-```
-
-
 
