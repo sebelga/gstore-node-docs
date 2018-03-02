@@ -67,11 +67,11 @@ module.exports = { getUser };
  * In our book route handler we need to fetch the book and then its author + cover image
  */
  const gstore = require('gstore-node')();
- 
+
  const images = require('../images/images');
  const users = require('../images/images');
  const Book = require('./book.model');
- 
+
  const getBook = (req, res) => {
      const dataloader = gstore.createDataLoader();
 
@@ -84,7 +84,7 @@ module.exports = { getUser };
              ]).then((entities) => {
                  book.cover = entities[0];
                  book.author = entities[1];
-                 
+
                  res.json(book);
              });
          ));
@@ -102,7 +102,7 @@ const Post = require('./posts.model');
 const getPost = async(id, dataloader) => {
     const post = await Post.get(id, null, null, null, { dataloader });
     const user = await post.model('User').get(post.author, null, null, null, { dataloader });
-    
+
     console.log(user.id); // 123
 
     post.author = user;
@@ -117,7 +117,7 @@ const User = require('.users.model');
 
 const updateUser = (id, data, dataloader) => {
     console.log(id); // 123 (same user as above);
-    
+
     /**
      * Dataloader already has the user with id "123" in its memoization cache
      * so during the entity update gstore won't hit the Datastore to fetch the entity
@@ -126,7 +126,6 @@ const updateUser = (id, data, dataloader) => {
      */
     return User.update(id, data, null, null, null, { dataloader })
 };
-
 ```
 
 
