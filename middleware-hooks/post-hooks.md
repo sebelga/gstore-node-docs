@@ -2,7 +2,7 @@
 
 ### Post hooks
 
-"Post" middelwares are defined the same way as "pre" middlewares. The main difference is that if you reject the Promise of your middleware because of an error, the original method still resolves but a **Symbol** is added to the response containing the post hooks error(s).
+"Post" middelwares are defined the same way as "pre" middlewares. The main difference is that if you reject the Promise of your middleware because an error occured, the original method still resolves and a **Symbol** is added to the response containing the post hooks error(s).
 
 ```js
 // user.model.js
