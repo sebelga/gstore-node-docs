@@ -12,5 +12,5 @@ gstore-node provides a **helper** to create a Dataloader instance that works wit
 Let's see it through some examples.
 
 ```js
-
+// todo
 ```
