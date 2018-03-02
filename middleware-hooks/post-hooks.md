@@ -27,16 +27,15 @@ schema.post('save', function postSave(){
 
 // user.controller.js
 
-// promised-hooks is a dependency of gstore-node, you don't need to install it
-const hooks = require('promised-hooks');
+const gstore = require('gstore-node')();
 
 const User = require('./user.model');
 const user = new User({ name: 'John', email: 'john@snow.com' });
 
 user.save().then((entity) => {
     // You should do this check if you have post hooks that can fail
-    if (entity[hooks.ERRORS]) {
-        console.log(entity[hooks.ERRORS][0].message); // 'Houston something went wrong.'
+    if (entity[gstore.ERR_HOOKS]) {
+        console.log(entity[gstore.ERR_HOOKS][0].message); // 'Houston something went wrong.'
     }
     ...	
 });
