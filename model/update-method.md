@@ -74,7 +74,8 @@ BlogPost.update(123, blogPostData, function onBlogPostUpdate(err, entity) {
 * _replace_ \(Boolean. default: false\)
 
 **dataloader**
-The **dataloader** instance must be created on _each_ request. [Read the documentation](/dataloader.md) for more information on this.
+The **dataloader** instance must be created on _each_ request. [Read the documentation](/dataloader.md) for more information on this.  
+The dataloader instance will be added to the entity instance being saved. This means that it is available in your "pre" save middlewares (attached on the "this" scope (`const dataloader = this.dataloader;`))
 
 ```js
 const gstore = require('gstore-node')();
