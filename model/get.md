@@ -77,14 +77,20 @@ transaction.run().then(() => {
 
 **options** properties
 
-* preserveOrder \(default: false\)
-* dataloader \(a Dataloader instance\)
+* _preserveOrder_ \(default: false\)
+* _dataloader_: a [Dataloader](https://github.com/facebook/dataloader) instance
+* _cache_ \(default: true\)
+* _ttl_ \(default: the cache `ttl.keys` configuration\)
 
-The **preserveOrder** option property is useful when you pass an array of IDs to retrieve and you want to preserve the order of those ids in the response.
+&gt; **preserveOrder** option property is useful when you pass an array of IDs to retrieve and you want to preserve the order of those ids in the response.
 
 **Note**: setting this property to _true_ does add some processing, especially for large sets. Only use it if you absolutely need to maintain the original order passed.
 
-The **dataloader** instance must be created on _each_ request. [Read the documentation](/dataloader.md) for more information on this.
+&gt; **dataloader** instance must be created on _each_ request. [Read the documentation](/dataloader.md) for more information on how to create the instance.
+
+&gt; **cache** If you activated the cache on the gstore-node instance, you can override here the "global" cache configuration. If the global is set to _true_ (default) you can pass _false_ here in the options to bypass the cache. And if the global cache is set to false then you can pass true here to cache specific key(s).
+
+&gt; **ttl** Override the ttl value of the cache. If you have multiple cache stores, you can pass an object. See in the example below.
 
 ```js
 const gstore = require('gstore-node')();
@@ -99,7 +105,13 @@ BlogPost.get([1,2,3], null, null, null, { preserveOrder: true, dataloader })
             console.log(entities[1].entityKey.id); // 2
             console.log(entities[2].entityKey.id); // 3
         });
+
+// cache ttl options example
+BlogPost.get(123, null, null, null, { ttl: 300 })
+        .then(() => ... );
+
+// cache ttl multi stores
+BlogPost.get(123, null, null, null, { ttl: { memory: 60, redis: 900 } })
+        .then(() => ... );
+
 ```
-
-
-
