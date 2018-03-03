@@ -2,7 +2,7 @@
 
 ## get\(\)
 
-Retrieving an entity **by key** is the fastest way to read from the Datastore.  
+Get one or multiple entities from the Datastore. Retrieving an entity **by key** is the fastest way to read from the Datastore.  
 This method accepts the following arguments:
 
 ```js
