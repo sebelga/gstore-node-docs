@@ -6,6 +6,8 @@ The advantage of using gstore-cache from within gstore-node is that all the mana
 
 gstore-cache uses underneath the powerful [node-cache-manager](https://github.com/BryanDonovan/node-cache-manager). This means that you can have multiple cache stores with different TTL settings for each one and that you get a [LRU memory cache](https://www.npmjs.com/package/lru-cache) instance for free.
 
+**Important:** Since v2.7.0 of node-cache-manager it is possible to set/get and delete multiple keys at once from the cache stores. Although this feature is available, you still need to provide a store that support it. At the time of this writing, only the _memory_ store and the [node-cache-manager-redis-store](https://github.com/dabroek/node-cache-manager-redis-store) support it. If you provide [another store engine](https://github.com/BryanDonovan/node-cache-manager#store-engines) that does not support _mget_ or _mset_ you will still be able to use the cache but you won't be able to fetch **multiple** keys from the Datastore and cache them.
+
 ## Activate the cache
 
 You activate the cache by passing a configuration object during the gstore initialization. You can also just pass **true** and the default cache config of gstore-cache will be used.
