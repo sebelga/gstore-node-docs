@@ -10,7 +10,7 @@ gstore-cache uses underneath the powerful [node-cache-manager](https://github.co
 
 ## Activate the cache
 
-You activate the cache by passing a configuration object during the gstore initialization. You can also just pass **true** and the default cache config of gstore-cache will be used.
+You activate the cache by passing a configuration object during the gstore initialization. You can also just pass **true** and the default cache configuration will be used.
 
 #### Default configuration
 
@@ -20,14 +20,14 @@ You activate the cache by passing a configuration object during the gstore initi
 require('gstore-node')({ cache: true }); 
 
 // ------------------------------
-// Default config:
+// Default configuration
 // ------------------------------
 
 const default = {
     stores: [
         {
             store: 'memory',
-            max: 100,
+            max: 100, // maximum number of item in the cache
         },
     ],
     ttl: {
@@ -59,7 +59,7 @@ Refer to the [gstore-cache](https://github.com/sebelga/gstore-cache) for  a deta
 
 `global (default: true)`
 
-There is a special _gobal_ config only used by gstore-node. It will globally turn the cache on for all key fetching or queries. If you set it to false, then you will have to explicitly set the cache option to true when calling any Model or Entity method.
+There is a special _gobal_ config only used by gstore-node. It will turn the cache on globally for all keys and queries fetching. If you set global to _false_, then you will have to explicitly set the cache option to true when calling any Model or Entity method.
 
 #### Custom configuration
 
