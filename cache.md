@@ -113,7 +113,7 @@ const gstore = require('gstore-node')({ cache: cacheConfig });
 // ...
 ```
 
-#### Access the cache instance
+## Access the cache instance
 
 You can access at any time the underlying gstore-cache **instance** and call its API. If you need to cache custom data \(other the than _keys_ or _queries_ managed gstore-node\), just call the set/mset/get/mset/del methods directly on the cache instance.  
 For more information on the API refer to the [gstore-cache documentation](https://github.com/sebelga/gstore-cache#api).
@@ -131,20 +131,24 @@ cache.get('somekey').then(...);
 cache.set('someKey', { name: 'john' }).then(...);
 ```
 
-#### Advanced Cache for Queries
+## Advanced Cache for Queries
 
-gstore-cache has an advanced cache for queries when you provide a _Redis_ store \(either as single store or in a multi-store\). It detects the _Kind_ of the entities on which the query is run. It then not only cache the response of the query but also a reference to it in a Redis _Set_. There is one Redis Set by Entity Kind.
+gstore-cache has an advanced cache for queries **when you provide a _Redis_ store** \(either as single store or in a multi-store\). gstore-cache detects the _Kind_ of the entities on which the query is run to be able to not only cache the data of the query but also a reference to it in a Redis _Set_. It creates one Redis Set by _Entity Kind_.
 
-This means that you can have an infinite TTL \(0\) for the queries on the Redis store. Then each time an entity is added/updated/deleted gstore-node will automatically remove all the queries references in the Set and clear their cache data.
+This means that you can have an infinite TTL \(0\) for the queries on the Redis store. Each time an entity is added/updated/deleted gstore-node will automatically remove all the queries references from the Entity Kind Set and clear the cache data from the queries.
+
+### Useful methods
+
+All the cache management of gstore-cache is done for you by gstore-node. There is though one useful method that you might need:
 
 #### `gstore.cache.queries.kset(key, data, entityKinds)`
 
-In case you have a complex query where the data comes from different entity Kinds, you can save that query and link the entiy Kinds related to it with the `kset()` method. Later, if any of the entity kind declared here is added/updated/deleted, gstore will clear query data from the cache.
+In case you have a complex query where the data comes from different entity Kinds, `kset()` lets you save its data in the cache and **link** the Entiy Kinds related to it. Later, if _any_ Entity Kind passed here is added/updated or deleted, gstore will remove the query from the cache.
 
-kset\` for \(Kind Set\) accepts 3 parameters:
+`kset()` (for **k**ind **s**et\) accepts 3 parameters:
 
 * _key_ : a custom cache key you want to give to this data
-* _data_: the data to cche
+* _data_: the data to cache
 * _entityKinds_: one or multiple entityKinds related to the data
 
 Let see it with an example:
