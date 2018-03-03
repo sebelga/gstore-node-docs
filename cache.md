@@ -139,7 +139,8 @@ This means that you can have an infinite TTL \(0\) for the queries on the Redis 
 
 In case you have a complex query where the data comes from different entity Kinds, you can save that query and link the entiy Kinds related to it with the `kset()` method. Later, if any of the entity kind declared here is added/updated/deleted, gstore will clear query data from the cache.
 
-kset` for (Kind Set) accepts 3 parameters:
+kset\` for \(Kind Set\) accepts 3 parameters:
+
 * _key_ : a custom cache key you want to give to this data
 * _data_: the data to cche
 * _entityKinds_: one or multiple entityKinds related to the data
@@ -192,9 +193,6 @@ const fetchHomeData = () => {
     });
 };
 ```
-
-
-
 
 
 
