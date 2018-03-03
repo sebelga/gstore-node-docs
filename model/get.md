@@ -82,15 +82,15 @@ transaction.run().then(() => {
 * _cache_ \(default: true\)
 * _ttl_ \(default: the cache `ttl.keys` configuration\)
 
-&gt; **preserveOrder** option property is useful when you pass an array of IDs to retrieve and you want to preserve the order of those ids in the response.
+&gt; **preserveOrder**: This option is useful when you pass an array of IDs to retrieve and you want to preserve the order of those ids in the response.
 
 **Note**: setting this property to _true_ does add some processing, especially for large sets. Only use it if you absolutely need to maintain the original order passed.
 
-&gt; **dataloader** instance must be created on _each_ request. [Read the documentation](/dataloader.md) for more information on how to create the instance.
+&gt; **dataloader** The Dataloader instance created for the request. [Read the documentation](/dataloader.md) for more information on how to create the instance.
 
-&gt; **cache** If you activated the cache on the gstore-node instance, you can override here the "global" cache configuration. If the global is set to _true_ (default) you can pass _false_ here in the options to bypass the cache. And if the global cache is set to false then you can pass true here to cache specific key(s).
+&gt; **cache** If you activated the cache on the gstore-node instance, you can override here the **_global_** cache configuration. If the global has been set to _true_ (default) you can pass _false_ here to bypass the cache. And if the global cache has been set to false, then you can pass _true_ here to cache specific key(s).
 
-&gt; **ttl** Override the ttl value of the cache. If you have multiple cache stores, you can pass an object. See in the example below.
+&gt; **ttl** Overrides the ttl value of the cache. If you have multiple cache stores, you can pass an _Object_ of values. See in the example below.
 
 ```js
 const gstore = require('gstore-node')();
@@ -99,7 +99,7 @@ const gstore = require('gstore-node')();
 const dataloader = gstore.createDataLoader();
 
 BlogPost.get([1,2,3], null, null, null, { preserveOrder: true, dataloader })
-        .then(function(entities) {
+        .then((entities) => {
             // Order is preserved
             console.log(entities[0].entityKey.id); // 1
             console.log(entities[1].entityKey.id); // 2
