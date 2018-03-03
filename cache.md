@@ -115,8 +115,8 @@ const gstore = require('gstore-node')({ cache: cacheConfig });
 
 #### Access the cache instance
 
-You can access at any time the underlying gstore-cache instance and call its API. If you need to cache custom data \(other the than _keys_ or _queries_ managed gstore-node\), just call the set/mset/get/mset/del methods directly on the cache instance.  
-For more information on those methods refer to the [gstore-cache documentation](https://github.com/sebelga/gstore-cache).
+You can access at any time the underlying gstore-cache **instance** and call its API. If you need to cache custom data \(other the than _keys_ or _queries_ managed gstore-node\), just call the set/mset/get/mset/del methods directly on the cache instance.  
+For more information on the API refer to the [gstore-cache documentation](https://github.com/sebelga/gstore-cache#api).
 
 ```js
 // Anywhere in your Appication
