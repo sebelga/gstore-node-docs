@@ -183,18 +183,20 @@ const fetchHomeData = () => {
 
         const queryProducts = Products.query().filter('featured', true);
 
-        return Promise.all([queryPosts.run(), queryTopStories.run(), queryProducts.run()]).then(result => {
-            // Build our data object
-            const homeData = {
-                posts: result[0],
-                topStories: result[1],
-                products: result[2],
-            };
+        return Promise.all([queryPosts.run(), queryTopStories.run(), queryProducts.run()])
+            .then(result => {
+                // Build our data object
+                const homeData = {
+                    posts: result[0],
+                    topStories: result[1],
+                    products: result[2],
+                };
 
-            // We save the result of the 3 queries to the cache ("website:home" key)
-            // and link the data to the "Posts" & "Products" Entity Kinds.
-            // We can now safely keep the cache infinitely until we add/edit or delete a "Posts" or a "Products".
-            return cache.queries.kset('website:home', homeData, ['Posts', 'Products']);
+                // We save the result of the 3 queries to the cache ("website:home" key)
+                // and link the data to the "Posts" & "Products" Entity Kinds.
+                // We can now safely keep the cache infinitely, gstore will take care
+                // of clearing the cache when a "Posts" or "Products" is added/edited or deleted.
+                return cache.queries.kset('website:home', homeData, ['Posts', 'Products']);
         });
     });
 };
