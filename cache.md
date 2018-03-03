@@ -63,14 +63,14 @@ There is a special _gobal_ config only used by gstore-node. It will turn the cac
 
 #### Custom configuration
 
-You can change any of the configuration. You only need to pass what you want to override.
+To change the configuration you only need to provide what you want to override.
 
 ```js
 // server.js
 
 const cacheConfig = {
     ttl: { keys: 1200 },
-    queries: -1, // ===> don't cache queries (unless overriden
+    queries: -1, // ===> don't cache queries (can be overriden later on a specific query call)
 };
 
 const gstore = require('gstore-node')({ cache: cacheConfig }); 
@@ -92,7 +92,7 @@ const cacheConfig = {
         store: redisStore,
         host: 'localhost', // default value
         port: 6379, // default value
-        // ... any other config for redis
+        // ... any other configuration for Redis
     }],
     ttl: {
         stores: {
