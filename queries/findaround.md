@@ -10,14 +10,14 @@ MyModel.findAround(
     <property>,
     /* {string} -- The property value */
     <value>,
-    /* {object} -- { before|after: limit, readAll: boolean, format: string } */
+    /* {object} -- { before|after: Number [, ... ] } */
     <options>,
     /* {function} -- optional. The callback, if not passed a Promise is returned */
     <callback>
 )
 ```
 
-The **options** argument is an object with *either* a "before" or an "after" key with the corresponding limit of entities to retrieve.
+The **options** argument is an object that _must_ contain *either* a "before" or an "after" property setting the limit of entities to retrieve.
 
 Examples:
 ```js
