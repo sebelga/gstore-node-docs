@@ -12,6 +12,7 @@ It supports the following queries parameters
 - ancestors
 - filters (default operator is "=" and does not need to be passed)
 - start
+- offset
 
 **INFO**: "order", "select" & "filters" can also be **Arrays** of settings
 
@@ -42,8 +43,7 @@ const listQuerySettings = {
 // Add settings to schema
 blogPostSchema.queries('list', listQuerySettings);
 
-// Create Model
-const BlogPost = gstore.model('BlogPost', blogPostSchema);
+module.exports = gstore.model('BlogPost', blogPostSchema);
 ```
 
 **2. Use anywhere**
@@ -54,7 +54,7 @@ const BlogPost = gstore.model('BlogPost', blogPostSchema);
 - entities
 - nextPageCursor // only present if there are more results to fetch
 
-The **nextPageCursor** is for pagination and can be used in a future call to `MyModel.list({ start: pageCursor }).then( ... )`)
+The **nextPageCursor** is for pagination and can be used in a future call to `MyModel.list({ start: pageCursor })`)
 
 Example:
 ```js
@@ -63,7 +63,7 @@ const BlogPost = require('./blog-post.model');
 BlogPost.list()
         .then((response) => {
             console.log(response.entities);
-            console.log(response.nextPageCursor); // only present if more results
+            console.log(response.nextPageCursor); // only present if there are more results
         });
 
 // with a callback
@@ -89,18 +89,17 @@ const listQuerySettings= {
 };
 
 blogPostSchema.queries('list', listQuerySettings);
-
-
 ```
 
 ####Filters
-The **value** of a filter can also be a **function that returns a value**. This function will be executed on each request. Usefull for dynamic value for example when retrieving the current date.
+
+The **value** of a filter can also be a **function that returns a value**. This function will be executed on each request. Useful for dynamic value for example when retrieving the current date.
 
 Example
 ```js
 const listQuerySettings = {
     filters : ['publishedOn', '<', () => new Date()],
-}
+};
 
 ...
 
@@ -110,43 +109,53 @@ BlogPost.list().then((response) => {
 ```
 
 ####Override settings
-The global configuration defined on the Schema can be overridden anytime by passing new settings as first argument. `Model.list(newSettings)`
+
+The global configuration defined on the Schema can be overridden anytime by passing new settings as options argument. `Model.list(options)`
 
 ```js
-const newSettings = {
+const options = {
     limit: 20,
     start: 'somPageCursorFromPreviousQuery'
 };
 
-BlogPost.list(newSettings)
+BlogPost.list(options)
         .then(function(response) {
             ...
         });
 ```
 
-**Additional settings** available in override
+**Additional options parameters**
 
 - namespace {string}
 - readAll {boolean} true | false
 - format {string} "JSON" (default) | "ENTITY"
 - showKey {boolean} true | false
+- cache {boolean} true | false
+- ttl {number | object}
 
 **namespace**
 Overrides the default namespace.
 
-**showKey**(default: false)
+**showKey** (default: false)
 
 Adds a "__key" property to the entity data with the complete Key information from the Datastore.
 
+**cache** (default: the "global" cache configuration)    
+"true" = read from the cache and prime the cache with the query response.  
+
+**ttl** (default: the `cache.ttl.queries` value)
+Custom TTL value for the cache. For multi-store it can be an object of TTL values.
+
 ```js
-const newSettings = {
+const options = {
     ...
     namespace:'com.prod.myproject',
     readAll: true,
     format: "ENTITY",
     showKey: true,
+    ttl: { memory: 60, redis: 600 }
 };
 
-BlogPost.list(newSettings).then( ... );
+BlogPost.list(options).then( ... );
 
 ```
