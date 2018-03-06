@@ -80,7 +80,7 @@ transaction.run().then(() => {
 * _preserveOrder_ \(default: false\)
 * _dataloader_: a [Dataloader](https://github.com/facebook/dataloader) instance
 * _cache_ \(default: true\)
-* _ttl_ \(default: the cache `ttl.keys` configuration\)
+* _ttl_ \(default: the global cache `ttl.keys` configuration\)
 
 &gt; **preserveOrder**: This option is useful when you pass an array of IDs to retrieve and you want to preserve the order of those ids in the response.
 
@@ -90,7 +90,7 @@ transaction.run().then(() => {
 
 &gt; **cache** If you activated the cache on the gstore-node instance, you can override here the **_global_** cache configuration. If the global has been set to _true_ (default) you can pass _false_ here to bypass the cache. And if the global cache has been set to false, then you can pass _true_ here to cache specific key(s).
 
-&gt; **ttl** Overrides the ttl value of the cache. If you have multiple cache stores, you can pass an _Object_ of values. See in the example below.
+&gt; **ttl** Overrides the global keys TTL of the cache. If you have multiple cache stores, you can pass an _Object_ with a different value for each store. See in the example below.
 
 ```js
 const gstore = require('gstore-node')();
