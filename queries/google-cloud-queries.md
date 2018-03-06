@@ -48,7 +48,7 @@ query.run({
     cache: true|false,
     /* {number|object} -- optional. Default: the cache.ttl.keys value
        Custom TTL value for the cache. For multi-store it can be an object of ttl values  */
-    ttl: 3600
+    ttl: <number> | <Object>
 );
 ```
 
