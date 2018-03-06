@@ -2,7 +2,7 @@
 
 ## @google-cloud Query
 
-gstore is built **on top of @google-cloud/datastore** so you can execute [any query from the Google library](https://googlecloudplatform.github.io/google-cloud-node/#/docs/datastore/master/datastore/query).
+gstore is built **on top of @google-cloud/datastore** so you can execute [any query from the Google library](https://cloud.google.com/nodejs/docs/reference/datastore/1.3.x/Query).
 
 1. Create a query object `const query = MyModel.query(namespace /*optional*/, transaction /*optional*/)`
 2. Chain the operators to build the query. `query.filter(...).order(...).start(...)`
