@@ -43,8 +43,8 @@ query.run({
     /* {boolean}. -- optional. Default: false
        Adds a "__key" property to the entity data with the complete Key from the Datastore. */
     showKey: true|false,
-    /* {boolean}. -- optional. Default: the "global" cache config
-        Read from the cache (and prime the cache with the response) */
+    /* {boolean}. -- optional. Default: the "global" cache configuration
+       "true" = read from the cache and prime the cache with the query response */
     cache: true|false,
     /* {number|object} -- optional. Default: the cache.ttl.keys value
        Custom TTL value for the cache. For multi-store it can be an object of ttl values  */
