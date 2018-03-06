@@ -47,6 +47,13 @@ If set to true and with format set to "JSON" (default) it will output all the en
 - **showKey**(default: false) 
 Adds a "__key" property to the entity data with the complete Key from the Datastore.
 
+**cache** (default: the "global" cache configuration)    
+"true" = read from the cache and prime the cache with the query response.  
+
+**ttl** (default: the global `cache.ttl.queries` value)
+Custom TTL value for the cache. For multi-store it can be an object of TTL values.
+
+
 ```js
 const options = { after: 20, readAll: true, format: "ENTITY" };
 BlogPost.findAround('publishedOn', '2016-03-01', options)
