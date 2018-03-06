@@ -128,7 +128,7 @@ BlogPost.list(options)
 
 - namespace {string}
 - readAll {boolean} true | false
-- format {string} "JSON" (default) | "ENTITY"
+- format {string} "JSON" | "ENTITY" (default: "JSON")
 - showKey {boolean} true | false
 - cache {boolean} true | false
 - ttl {number | object}
