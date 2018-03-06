@@ -36,13 +36,19 @@ query.run({
     /* {boolean}. -- optional. Default: false
        If set to true will return all the properties of the entity,
        regardless of the *read* parameter defined in the Schema */
-    readAll: true | false,
+    readAll: true|false,
     /* {string} -- optional. "JSON"|"ENTITY". Default: "JSON"
        Format of the response, either plain object or entity instances  */
     format: 'JSON',
     /* {boolean}. -- optional. Default: false
        Adds a "__key" property to the entity data with the complete Key from the Datastore. */
-    showKey: true | false
+    showKey: true|false,
+    /* {boolean}. -- optional. Default: the "global" cache config
+        Read from the cache (and prime the cache with the response) */
+    cache: true|false,
+    /* {number|object} -- optional. Default: the cache.ttl.keys value
+       Custom TTL value for the cache. For multi-store it can be an object of ttl values  */
+    ttl: 3600
 );
 ```
 
@@ -111,7 +117,10 @@ transaction.run().then(() => {
 // run  with options
 query.run({ readAll: true, format: 'ENTITY' })
      .then( ... )
+
+// cache ttl     
+query.run({ ttl: 3600 }).then( ... )
+
+// cache ttl multi-store
+query.run({ ttl: { memory: 600, redis: 3600 }).then( ... )
 ```
-
-
-
