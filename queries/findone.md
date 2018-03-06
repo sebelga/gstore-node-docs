@@ -54,7 +54,7 @@ User.findOne({ email: 'john@snow.com' }, null, null, { cache: false })
 });
 
 // Custom TTL for cache
-// ttl === -1 means to not cache
+// ttl set to "-1" means to not cache for this store
 User.findOne({ email: 'john@snow.com' }, null, null, { ttl: { memory: -1, redis: 300 } })
     .then((entity) => {
         console.log(entity.plain()); // entityData + id
