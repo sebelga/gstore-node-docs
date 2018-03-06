@@ -51,13 +51,22 @@ Adds a "__key" property to the entity data with the complete Key from the Datast
 "true" = read from the cache and prime the cache with the query response.  
 
 **ttl** (default: the global `cache.ttl.queries` value)
-Custom TTL value for the cache. For multi-store it can be an object of TTL values.
+Custom TTL value for the cache. For multi-store it can be an _Object_ of TTL values.
 
 
 ```js
 const options = { after: 20, readAll: true, format: "ENTITY" };
 BlogPost.findAround('publishedOn', '2016-03-01', options)
-        .then((entities) => {
-            ...
-        });
+        .then((entities) => { ... });
+
+// disable caching
+const options = { after: 20, cache: false };
+BlogPost.findAround('publishedOn', '2016-03-01', options).then(...);
+
+// set TTL for this query
+// ttl can also be an object for multi-store ---> { memory: 600, redis: 3600 }
+const options = { after: 20, ttl: 600 };
+BlogPost.findAround('publishedOn', '2016-03-01', options).then(...);
+
+
 ```
