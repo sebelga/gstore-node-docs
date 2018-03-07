@@ -133,7 +133,7 @@ cache.set('someKey', { name: 'john' }).then(...);
 
 ## Advanced Cache for Queries
 
-gstore-cache has an advanced cache for queries **when you provide a _Redis_ store** \(either as single store or in a multi-store\). gstore-cache detects the _Kind_ of the entities on which the query is run to be able to not only cache the data of the query but also a reference to it in a Redis _Set_. It creates one Redis Set by _Entity Kind_.
+gstore-cache has an advanced cache for queries **when you provide a **_**Redis**_** store** \(either as single store or in a multi-store\). gstore-cache detects the _Kind_ of the entities on which the query is run to be able to not only cache the data of the query but also a reference to it in a Redis _Set_. It creates one Redis Set by _Entity Kind_.
 
 This means that you can have an infinite TTL \(0\) for the queries on the Redis store. Each time an entity is added/updated/deleted gstore-node will automatically remove all the queries references from the Entity Kind Set and clear the cache data from the queries.
 
@@ -145,7 +145,7 @@ All the cache management of gstore-cache is done for you by gstore-node. There i
 
 In case you have a complex query where the data comes from different entity Kinds, `kset()` lets you save its data in the cache and **link** the Entiy Kinds related to it. Later, if _any_ Entity Kind passed here is added/updated or deleted, gstore will remove the query from the cache.
 
-`kset()` (for **k**ind **s**et\) accepts 3 parameters:
+`kset()` \(for **k**ind **s**et\) accepts 3 parameters:
 
 * _key_ : a custom cache key you want to give to this data
 * _data_: the data to cache
@@ -200,6 +200,50 @@ const fetchHomeData = () => {
         });
     });
 };
+```
+
+## Transactions
+
+For the most part you don't have to worry about clearing the cache as gstore-node automatically does it for you each time you add/edit or delete an entity.  
+It cannot do it for you when you are inside transactions as it does not know if the transaction succeeded or not. So when you are doing several actions on entities inside a transaction, you will then have to make sure to clear the cache.
+
+Let see it with an example, refer to [the API of gstore-cache](https://github.com/sebelga/gstore-cache#api) for any doubt.
+
+```js
+const gstore = require('gstore-node')();
+const transaction = gstore.transaction();
+
+const User = require('./user.model');
+const Post = require('../posts/post.model');
+
+transaction.run()
+    .then(() => {
+        return User.get(123, null, null, transaction)
+            .then((user) => {
+                const post = new Post({ title: 'My new Blog Post', authorId: user.id });
+                post.save(transaction);
+                
+                // We update the total of posts for this user
+                user.totalPosts += 1;
+                user.save(transaction);
+                
+                transaction.commit()
+                    .then(() => {
+                        // Transaction successful... we need to clear the cache now
+                        
+                        // 1. Delete the cache for "User" Entity Kind (both the key passed **and**
+                        // the queries linked to "User" will be deleted
+                        const promise1 = User.clearCache(User.key(123));
+                        
+                        // 2. Delete the cache for "Post". Here no key is passed, we just want
+                        // to make sure that any query data cached linked to "Post" is deleted
+                        const promise2 = Post.clearCache();
+
+                        return Promise.all([promise1, promise2]);
+                    });
+            });
+        
+    })
 ```
 
 
