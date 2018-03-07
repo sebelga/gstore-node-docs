@@ -205,9 +205,9 @@ const fetchHomeData = () => {
 ## Transactions
 
 For the most part you don't have to worry about clearing the cache as gstore-node automatically does it for you each time you add/edit or delete an entity.  
-It cannot do it for you when you are inside transactions as it does not know if the transaction succeeded or not. So when you are doing several actions on entities inside a transaction, you will then have to make sure to clear the cache.
+It cannot do it for you though when you are updating entities inside a transaction as it does not know if the transaction succeeded or not. So you will have to clear the cache manually after a transaction succeed.
 
-Let see it with an example, refer to [the API of gstore-cache](https://github.com/sebelga/gstore-cache#api) for any doubt.
+Let see it with an example.
 
 ```js
 const gstore = require('gstore-node')();
@@ -222,27 +222,27 @@ transaction.run()
             .then((user) => {
                 const post = new Post({ title: 'My new Blog Post', authorId: user.id });
                 post.save(transaction);
-                
+
                 // We update the total of posts for this user
                 user.totalPosts += 1;
                 user.save(transaction);
-                
+
                 transaction.commit()
                     .then(() => {
                         // Transaction successful... we need to clear the cache now
-                        
-                        // 1. Delete the cache for "User" Entity Kind (both the key passed **and**
-                        // the queries linked to "User" will be deleted
+
+                        // 1. Delete the cache for "User" Entity Kind
+                        // ---> both the key passed **and** the queries linked to "User" will be deleted
                         const promise1 = User.clearCache(User.key(123));
-                        
+
                         // 2. Delete the cache for "Post". Here no key is passed, we just want
-                        // to make sure that any query data cached linked to "Post" is deleted
+                        // to make sure that all query data cached linked to "Post" is deleted
                         const promise2 = Post.clearCache();
 
                         return Promise.all([promise1, promise2]);
                     });
             });
-        
+
     })
 ```
 
