@@ -22,6 +22,7 @@
     * [excludeFromIndexes\(\)](model/other-methods.md)
     * [sanitize\(\)](model/sanitize.md)
     * [key\(\)](model/key.md)
+    * [clearCache\(\)](model/clearcache.md)
 * [Entity](entity/creation.md)
   * [Creation](entity/creation.md)
   * [Properties](entity/properties.md)
