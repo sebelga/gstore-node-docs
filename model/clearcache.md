@@ -5,7 +5,7 @@
 Clear all the queries from the cache linked to the Model Entity Kind. You can also pass one or several keys to delete from the cache.  
 You normally don't have to call this method as gstore-node does it for you **automatically** each time you add/edit or delete an entity.
 
-When updating the entities inside a transaction, gstore does not clear the cache as it does not know if the transaction is going to succeed. This is when you have to call this method manually.
+When updating the entities inside a transaction, gstore does not clear the cache as it does not know if the transaction is going to succeed. This is when you have to call this method manually. See an [example with transaction](/cache.md#Transactions) in the cache documentation.
 
 ```js
 MyModel.clearCache(
