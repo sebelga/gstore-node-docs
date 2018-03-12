@@ -6,6 +6,14 @@ If you need more advanced schema validation gstore-node support **Joi types and 
 
 **Important**: if you decide to use Joi, you have to use it for **all your properties**. You **cannot** mix joi and gstore types and validation.
 
+### Install
+
+First make sure you have Joi installed
+
+```js
+  npm install joi --save
+```
+
 You can define a Joi type and validator by setting a _joi_ setting on your schema property and set the Schema _joi_ option to **true**.
 
 ```js
