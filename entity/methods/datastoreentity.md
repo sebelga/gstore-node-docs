@@ -2,7 +2,7 @@
 
 ## datastoreEntity\(\)
 
-In case you need at any moment to fetch the entity **data** from Goolge Datastore, this method will do just that right on the entity instance.
+In case you need at any moment to fetch the entity **data** from Google Datastore, this method will do just that right on the entity instance.
 
 ```js
 const User = require('user.model');
