@@ -127,12 +127,11 @@ In case you provided a Dataloader instance to a Model.update\(\) call, it will b
 
 ```js
 function myPreSaveMiddleware() {
-    // fetch some other entity with the "model" helper
+    // fetch the BlogPost author detail with the "entity.model()" method
     return this.model('User')
         .get(this.author, null, null, null, { dataloader: this.dataloader })
         .then((user) => {
             this.authorDetails = user;
-            return this; 
         });
 }
 ```
