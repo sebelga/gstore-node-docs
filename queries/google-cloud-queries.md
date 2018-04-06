@@ -46,7 +46,7 @@ query.run({
     /* {boolean}. -- optional. Default: the "global" cache configuration
        "true" = read from the cache and prime the cache with the query response */
     cache: true|false,
-    /* {number|object} -- optional. Default: the cache.ttl.keys value
+    /* {number|object} -- optional. Default: the cache.ttl.queries value
        Custom TTL value for the cache. For multi-store it can be an object of ttl values  */
     ttl: <number> | <Object>
 );
