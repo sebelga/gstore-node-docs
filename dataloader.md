@@ -98,7 +98,7 @@ To understand memoization, let's see it with another example.
 ```js
 const Post = require('./posts.model');
 
-// dataloader is coming from the request
+// dataloader is passed from the request to our getPost() method
 const getPost = async(id, dataloader) => {
     const post = await Post.get(id, null, null, null, { dataloader });
     const user = await post.model('User').get(post.author, null, null, null, { dataloader });
@@ -115,6 +115,7 @@ const getPost = async(id, dataloader) => {
 
 const User = require('.users.model');
 
+// the same instance of dataloader is passed to updateUser()
 const updateUser = (id, data, dataloader) => {
     console.log(id); // 123 (same user as above);
 
