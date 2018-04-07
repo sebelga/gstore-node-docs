@@ -23,15 +23,21 @@ The properties explicitly declared will still be validated.
 
 #### queries
 
-An object to set global settings for your queries. These settings can be overridden on each query:
+An options object to set global configuration for your queries. These settings can be overridden on specific queries:
 
-##### readAll
+- `queries.readAll`
+- `queries.format`
+- `queries.showKey`
+- `queries.cache`
+- `queries.ttl`
+
+##### > readAll
 
 **default: false**
 
 Override the Schema property parameter **read** \([here](../schema/other-paremeters.md#read)\) to return all the properties of the entities.
 
-##### format
+##### > format
 
 **default: "JSON"**
 
@@ -44,11 +50,36 @@ Valid values are:
 * "JSON"
 * "ENTITY"
 
-##### showKey
+##### > showKey
 
 **default: false**
 
 Adds a "__key" property to the entity data with the complete Key from the Datastore.
+
+##### > cache
+
+**default:** the _global_ cache configuration
+"true" = read from the cache and prime the cache with the query response.
+
+##### > ttl
+**default:** the global `cache.ttl.queries`configuration  
+Custom TTL value for the cache. For multi-store it can be an Object of TTL values.
+
+```js
+{
+    queries: { ttl: 3600 };
+}
+
+// multi-store
+{
+    queries: {
+        ttl: {
+            memory: 600,
+            redis: 3600,
+        }
+    }
+} 
+```
 
 
 #### keyType
