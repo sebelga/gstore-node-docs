@@ -30,6 +30,7 @@ An options object to set global configuration for your queries. These settings c
 - `queries.showKey`
 - `queries.cache`
 - `queries.ttl`
+- `queries.consistency`
 
 ##### > readAll
 
@@ -80,6 +81,10 @@ Custom TTL value for the cache. For multi-store it can be an Object of TTL value
     }
 } 
 ```
+
+##### > consistency
+
+Specify either "strong" or "eventual". If not specified, default values are chosen by Datastore for the operation. Learn more about strong and eventual consistency [here](https://cloud.google.com/datastore/docs/articles/balancing-strong-and-eventual-consistency-with-google-cloud-datastore).
 
 
 #### keyType
