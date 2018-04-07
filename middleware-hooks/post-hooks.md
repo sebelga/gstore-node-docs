@@ -43,12 +43,11 @@ user.save().then((entity) => {
 ```
 
 **Note**
-The "post" middleware for **delete()** does _not_ have its scope mapped to the entity as the entity is not fetched from the datastore. But the response contains the key(s) of the entitie(s) deleted.
+The response from a "post" hook on **delete()** contains the key(s) of the entitie(s) deleted.
 
 ```js
-userSchema.post('delete', function postDelete(response){
-    // can be one Key or an Array of entity Keys that have been deleted.
-    const keyDeleted = response.key;
+// key can be one Key or an Array of Keys deleted
+userSchema.post('delete', function postDelete({ key }){
     ...
     return Promise.resolve();
 });
