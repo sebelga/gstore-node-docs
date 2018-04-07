@@ -32,6 +32,7 @@ The options accepts also the following properties
 - showKey {boolean} true | false
 - cache {boolean} true | false
 - ttl {number | object}
+- consistency {'strong' | 'eventual'}
 
 **namespace**
 Overrides the default gstore instance namespace.
@@ -56,6 +57,11 @@ const options = {
     ttl: { memory: 60, redis: 600 }
 };
 ```
+
+**consistency**
+Specify either "strong" or "eventual". If not specified, default values are chosen by Datastore for the operation. Learn more about strong and eventual consistency [here](https://cloud.google.com/datastore/docs/articles/balancing-strong-and-eventual-consistency-with-google-cloud-datastore).
+
+
 
 Example
 
