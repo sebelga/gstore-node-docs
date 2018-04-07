@@ -4,7 +4,13 @@
 
 Shortcut for listing entities from a Model. For complete control (pagination, start, end...) use the [@google-cloud queries](./google-cloud-queries.md). **List queries** are meant to quickly list entities with predefined settings (that can be overridden on a query).
 
-It supports the following queries parameters
+### 1. Configure "list" query options on the Schema
+
+`entitySchema.queries('list', options);`
+
+#### options
+
+The options object accepts the following "queries" properties
 
 - limit
 - order
@@ -14,11 +20,42 @@ It supports the following queries parameters
 - start
 - offset
 
-**INFO**: "order", "select" & "filters" can also be **Arrays** of settings
+**INFO**: "order", "select" & "filters" can also be **Arrays** of settings (see example below).
 
-**1. Configure List query settings on your Model Schema**
 
-`entitySchema.queries('list', { ...settings });`
+**Additional configuration**
+The options accepts also the following properties
+
+- namespace {string}
+- readAll {boolean} true | false
+- format {string} "JSON" | "ENTITY" (default: "JSON")
+- showKey {boolean} true | false
+- cache {boolean} true | false
+- ttl {number | object}
+
+**namespace**
+Overrides the default gstore instance namespace.
+
+**showKey** (default: false)
+
+Adds a "__key" property to the entity data with the complete Key information from the Datastore.
+
+**cache** (default: the "global" cache configuration)    
+"true" = read from the cache and prime the cache with the query response.  
+
+**ttl** (default: the `cache.ttl.queries` value)
+Custom TTL value for the cache. For multi-store it can be an object of TTL values.
+
+```js
+const options = {
+    ...
+    namespace:'com.prod.myproject',
+    readAll: true,
+    format: "ENTITY",
+    showKey: true,
+    ttl: { memory: 60, redis: 600 }
+};
+```
 
 Example
 
@@ -32,21 +69,21 @@ const blogPostSchema = new gstore.Schema({
 });
 
 // List query settings
-const listQuerySettings = {
+const listQueryOptions = {
     limit : 10,
     order : { property: 'title', descending: true }, // descending defaults to false and is optional
     select : 'title',
     ancestors : ['Parent', 123],  // will add an "hasAncestor" filter
-    filters : ['isDraft', false] // operator defaults to "=",
+    filters : ['isDraft', false] // operator defaults to "=" and is optional,
 };
 
-// Add settings to schema
-blogPostSchema.queries('list', listQuerySettings);
+// Configure "list" shortcut Query
+blogPostSchema.queries('list', listQueryOptions);
 
 module.exports = gstore.model('BlogPost', blogPostSchema);
 ```
 
-**2. Use anywhere**
+### 2. Use anywhere
 
 `MyModel.list(options /*optional*/, callback /*optional*/)`
 
@@ -54,17 +91,17 @@ module.exports = gstore.model('BlogPost', blogPostSchema);
 - entities
 - nextPageCursor // only present if there are more results to fetch
 
-The **nextPageCursor** is for pagination and can be used in a future call to `MyModel.list({ start: pageCursor })`)
+The **nextPageCursor** is for pagination and can be used in a future call to `MyModel.list({ start: pageCursor })`
 
 Example:
 ```js
 const BlogPost = require('./blog-post.model');
 
 BlogPost.list()
-        .then((response) => {
-            console.log(response.entities);
-            console.log(response.nextPageCursor); // only present if there are more results
-        });
+    .then((response) => {
+        console.log(response.entities);
+        console.log(response.nextPageCursor); // only present if there are more results
+    });
 
 // with a callback
 BlogPost.list(function(err, response) {
@@ -76,10 +113,10 @@ BlogPost.list(function(err, response) {
 });
 ```
 
-Example with an Array of settings (order, select, filters)
+Example with Arrays of values (order, select, filters)
 
 ```js
-const listQuerySettings= {
+const listQueryOptions = {
     order  : [
         { property: 'title' },
         { property: 'createdOn', descending: true }
@@ -88,7 +125,7 @@ const listQuerySettings= {
     filters : [['author', 'John Snow'], ['rating', '>',  4]]
 };
 
-blogPostSchema.queries('list', listQuerySettings);
+blogPostSchema.queries('list', listQueryOptions);
 ```
 
 ####Filters
@@ -110,7 +147,7 @@ BlogPost.list().then((response) => {
 
 ####Override settings
 
-The global configuration defined on the Schema can be overridden anytime by passing new settings as options argument. `Model.list(options)`
+The global configuration set on the Schema can be overridden anytime by passing a new options object. `Model.list(options)`
 
 ```js
 const options = {
@@ -119,43 +156,6 @@ const options = {
 };
 
 BlogPost.list(options)
-        .then(function(response) {
-            ...
-        });
+    .then((response) => { ... });
 ```
 
-**Additional options parameters**
-
-- namespace {string}
-- readAll {boolean} true | false
-- format {string} "JSON" | "ENTITY" (default: "JSON")
-- showKey {boolean} true | false
-- cache {boolean} true | false
-- ttl {number | object}
-
-**namespace**
-Overrides the default namespace.
-
-**showKey** (default: false)
-
-Adds a "__key" property to the entity data with the complete Key information from the Datastore.
-
-**cache** (default: the "global" cache configuration)    
-"true" = read from the cache and prime the cache with the query response.  
-
-**ttl** (default: the `cache.ttl.queries` value)
-Custom TTL value for the cache. For multi-store it can be an object of TTL values.
-
-```js
-const options = {
-    ...
-    namespace:'com.prod.myproject',
-    readAll: true,
-    format: "ENTITY",
-    showKey: true,
-    ttl: { memory: 60, redis: 600 }
-};
-
-BlogPost.list(options).then( ... );
-
-```
