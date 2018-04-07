@@ -1,5 +1,7 @@
 # Error Codes
 
+- ERR_ENTITY_NOT_FOUND // When fetching an entity by Key that is not in Datastore
+
 ## Validation
 
 Here is the list of error codes returned by the gstore Validation. Joi validation will have different code, please refer to their documentation.
