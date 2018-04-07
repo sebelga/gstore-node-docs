@@ -53,6 +53,8 @@ Adds a "__key" property to the entity data with the complete Key from the Datast
 - **ttl** (default: the global `cache.ttl.queries` value)
 Custom TTL value for the cache. For multi-store it can be an _Object_ of TTL values.
 
+- **consistency**  Specify either "strong" or "eventual". If not specified, default values are chosen by Datastore for the operation. Learn more about strong and eventual consistency [here](https://cloud.google.com/datastore/docs/articles/balancing-strong-and-eventual-consistency-with-google-cloud-datastore).
+
 
 ```js
 const options = { after: 20, readAll: true, format: "ENTITY" };
