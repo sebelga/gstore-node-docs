@@ -48,7 +48,10 @@ query.run({
     cache: true|false,
     /* {number|object} -- optional. Default: the cache.ttl.queries value
        Custom TTL value for the cache. For multi-store it can be an object of ttl values  */
-    ttl: <number> | <Object>
+    ttl: <number> | <Object>,
+    /* Specify either "strong" or "eventual". If not specified, default values are chosen
+       by Datastore for the operation.*/
+    consistency: 'strong' | 'eventual'
 );
 ```
 
