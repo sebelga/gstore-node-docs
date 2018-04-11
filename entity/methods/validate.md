@@ -9,7 +9,7 @@ This methods validates an entity data.
 If the error is null, it is valid. The value returned is the entityData sanitized (unknown properties removed).
 
 ```js
-const schema = new Schema({ firstname: { type: 'string' }, lastname: { type: 'string' } });
+const schema = new Schema({ firstname: { type: String }, lastname: { type: String } });
 const User = gstore.model('User', schema);
 
 const user = new User({ firstname: 'John', lastname: 'Snow' });
