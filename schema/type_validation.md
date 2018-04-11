@@ -4,19 +4,19 @@
 
 You can set a _type _for a schema property adding a "type" parameter to it.
 
-`new Schema({ name: { type: 'string' }})`
+`new Schema({ name: { type: String }})`
 
 Valid types are
 
-* string
-* int \(an integer or a gcloud.datastore.int\)
-* double \(a float or a gcloud.datastore.double\)
-* boolean
-* datetime\(\*\)
-* array
-* object
-* geoPoint \(a gcloud.datastore.geoPoint\)
-* buffer
+* String
+* Number \(an integer or a gcloud.datastore.int\)
+* Array
+* Object
+* Boolean
+* Date\(\*\)
+* Buffer
+* Schema.Types.Double \(a float or a gcloud.datastore.double\)
+* Schema.Types.GeoPoint \(a gcloud.datastore.geoPoint\)
 
 \(\*\) Valid datetime are javascript Date\(\) or a string with the following format: 'YYYY-MM-DD' \| 'YYYY-MM-DD 00:00:00' \| 'YYYY-MM-DD 00:00:00.000' \| 'YYYY-MM-DDT00:00:00'
 
@@ -24,14 +24,14 @@ So back to our previous example of a User Model, we would probably have somethin
 
 ```js
 const userSchema = new Schema({
-    name: { type: 'string' },
-    lastname: { type: 'string' },
-    password: { type: 'string' },
-    email: { type: 'string' },
-    votes: { type: 'int' },
-    dateOfBirth: { type: 'datetime' },
-    createdOn: { type: 'datetime' },
-    modifiedOn: { type: 'datetime' }
+    name: { type: String },
+    lastname: { type: String },
+    password: { type: String },
+    email: { type: String },
+    votes: { type: Number },
+    dateOfBirth: { type: Date },
+    createdOn: { type: Date },
+    modifiedOn: { type: Date }
 });
 ```
 
@@ -40,7 +40,7 @@ Note: you are not forced to set a type, if you don't define one, then **any **ty
 ```js
 const userSchema = new Schema({
     name: {}, // any type
-    email: { type: 'string' }
+    email: { type: String }
 });
 ```
 
