@@ -13,7 +13,7 @@ Example:
 
 const options = { explicitOnly: false };
 const blogPostSchema = new Schema({
-    title: { type: 'string' }
+    title: { type: String }
 }, options);
 
 BlogPost = gstore.model('BlogPost', blogPostSchema);
