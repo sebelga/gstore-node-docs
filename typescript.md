@@ -28,10 +28,9 @@ const schema = new Schema<UserTypes>({
 
 // Pass it on Model creation
 const User = gstore.model<UserTypes>('User', schema);
-
 ```
 
-It you want to allow other properties to be set appart from the ones declared (see `explicitOnly` option in the Schema options, this is how you should create your Model:
+It you want to allow **other properties** apart from those declared \(see `explicitOnly` option in the [Schema options](/schema/schema-options.md)\), this is how you should create your Model:
 
 ```js
 type UserType = {
@@ -53,5 +52,7 @@ const schema = new Schema<UserTypes>({
 
 // Allow UserTypes + any other properties on the Model
 const User = gstore.model<UserTypes & {[propName: string]: any}>('User', schema);
-
 ```
+
+
+
