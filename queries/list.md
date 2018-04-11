@@ -70,8 +70,8 @@ Example
 
 // Create Schema
 const blogPostSchema = new gstore.Schema({
-    title : { type: 'string' },
-    isDraft: { type: 'boolean' }
+    title : { type: String },
+    isDraft: { type: Boolean }
 });
 
 // List query settings
