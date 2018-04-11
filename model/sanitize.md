@@ -11,8 +11,8 @@ This methods will clean and do basic formatting of an entity data. You should al
 // user.model.js
 
 const userSchema = new Schema({
-    name : { type: 'string' },
-    createdOn : { type: 'datetime', write: false } // write is not allowed
+    name : { type: String },
+    createdOn : { type: Date, write: false } // write is not allowed
 });
 
 // or with a Joi schema
