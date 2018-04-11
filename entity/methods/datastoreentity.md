@@ -7,7 +7,7 @@ In case you need at any moment to fetch the entity **data** from Google Datastor
 ```js
 // user.model.js
 
-const userSchema = new Schema({ name: { type: 'string' }, pictIdx: { type: 'int' });
+const userSchema = new Schema({ name: { type: String }, pictIdx: { type: Number });
 
 schema.pre('delete', function() {
     // The scope "this" is the entity to be deleted.
