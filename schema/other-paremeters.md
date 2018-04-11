@@ -24,8 +24,8 @@ Also, if you have a **_modifiedOn _**property set in your schema, it will automa
 
 ```js
 const userSchema = new Schema({
-    createdOn: { type: 'datetime', default: gstore.defaultValues.NOW }, // will be set to the current time of the request
-    modifiedOn: { type: 'datetime' }, // will automatically be updated to the current time on each "save|update"
+    createdOn: { type: Date, default: gstore.defaultValues.NOW }, // will be set to the current time of the request
+    modifiedOn: { type: Date }, // will automatically be updated to the current time on each "save|update"
     randomId: { default: () => uuidV4(), write: false } // function executed at runtime
 });
 ```
@@ -37,8 +37,8 @@ to **true**.
 
 ```js
 const articleSchema = new Schema({
-    author: { type: 'string' },
-    text: { type: 'string', excludeFromIndexes: true } // indexes size is limited, so very long text can't be indexed
+    author: { type: String },
+    text: { type: String, excludeFromIndexes: true } // indexes size is limited, so very long text can't be indexed
 });
 ```
 
@@ -51,8 +51,8 @@ For **embedded entities** you can pass one or more properties that you don't wan
 // Important: for embedded entities inside **Arrays** you have to specify the type to 'array' for the excludeFromIndexes to work.
 
 const mySchema = new Schema({
-    author: { type: 'object', excludeFromIndexes: 'biography' },
-    listBooks: { type: 'array', excludeFromIndexes: ['text', 'description'] },
+    author: { type: Object, excludeFromIndexes: 'biography' },
+    listBooks: { type: Array, excludeFromIndexes: ['text', 'description'] },
 });
 
 ```
@@ -99,8 +99,8 @@ If you want to define a mandatory property, set its **required** parameter to tr
 ```js
 // Schema:
 const userSchema = new Schema({
-    name: { type: 'string' }
-    email: { type: 'string',  validate: 'isEmail', required: true }
+    name: { type: String }
+    email: { type: String,  validate: 'isEmail', required: true }
 });
 
 // In a Controller request:
@@ -117,12 +117,12 @@ user.save()
 
 ```js
 var entitySchema = new Schema({
-    name:  {type: 'string'},
+    name:  {type: String},
     lastname:  {excludeFromIndexes: true},
     email: {validate: 'isEmail', required: true},
     website :  {validate: 'isURL', optional: true},
-    modified:  {type: 'boolean', default: false, read:false}, // won't show up in queries
-    createdOn: {type:'datetime', default: gstore.defaultValues.NOW, write:false} // will be removed from data on sanitize()
+    modified:  {type: Boolean, default: false, read:false}, // won't show up in queries
+    createdOn: {type: Date, default: gstore.defaultValues.NOW, write:false} // will be removed from data on sanitize()
     ...
 });
 ```
