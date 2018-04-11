@@ -18,7 +18,6 @@ type UserType = {
 }
 
 // Pass it on Schema creation
-
 const schema = new Schema<UserTypes>({
     userName: { type: String },
     email: { type: String },
@@ -27,6 +26,32 @@ const schema = new Schema<UserTypes>({
     birthday: { type: Date, optional: true }
 });
 
+// Pass it on Model creation
 const User = gstore.model<UserTypes>('User', schema);
+
+```
+
+It you want to allow other properties to be set appart from the ones declared (see `explicitOnly` option in the Schema options, this is how you should create your Model:
+
+```js
+type UserType = {
+    userName: string;
+    email: string;
+    age?: number; // optional
+    tags?: string[]; // optional
+    birthday?: Date; // optional
+}
+
+// Schema with "explicitOnly" set to "false"
+const schema = new Schema<UserTypes>({
+    userName: { type: String },
+    email: { type: String },
+    age: { type: Number, optional: true },
+    tags: { type: Array, optional: true },
+    birthday: { type: Date, optional: true }
+}, { explicitOnly: false });
+
+// Allow UserTypes + any other properties on the Model
+const User = gstore.model<UserTypes & {[propName: string]: any}>('User', schema);
 
 ```
