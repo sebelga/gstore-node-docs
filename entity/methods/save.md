@@ -36,8 +36,8 @@ Example:
 const gstore = require('gstore-node')();
 
 const blogPostSchema = new gstore.Schema({
-  title: { type:'string' },
-  createdOn: { type:'datetime', default: gstore.defaultValues.NOW }
+  title: { type: String },
+  createdOn: { type: Date, default: gstore.defaultValues.NOW }
 });
 
 module.exports = gstore.model('BlogPost', blogPostSchema);
@@ -49,7 +49,6 @@ const BlogPost = require('./blog-post.model');
 
 const data = { title: 'My first blog post' };
 const blogPostEntity = new BlogPost(data);
-
 
 blogPostEntity.save().then((entity) => {
     console.log(entity.entityKey.id); // auto-generated id
@@ -70,20 +69,20 @@ blogPostEntity.save(function onBlogPostSave(err, entity) {
 // Info: if you have middleware on "pre" see note below
 const transaction = gstore.transaction();
 transaction.run()
-           .then(() => {
-                const blogPost = new BlogPost({ title: 'My new blog post' });
-                blogPost .save(transaction);
+    .then(() => {
+        const blogPost = new BlogPost({ title: 'My new blog post' });
+        blogPost.save(transaction);
 
-                ... // any other operation on the Transaction
+        // ... any other operation on the Transaction
 
-                return transaction.commit();
-            })
-           .then((response) => {
-               // ... transaction finished
-               const apiResponse = data[0];
-            }).catch((err) => {
-              // handle error
-            });
+        return transaction.commit();
+    })
+    .then((response) => {
+        // ... transaction finished
+        const apiResponse = data[0];
+    }).catch((err) => {
+       // handle error
+    });
 ```
 
 #### Saving inside a Transaction with middleware on Model
