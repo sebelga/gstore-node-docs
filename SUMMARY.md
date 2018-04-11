@@ -48,4 +48,5 @@
   * [save\(\)](save.md)
 * [Appendix](appendix.md)
   * [Error Codes](appendix/error-codes.md)
+* [Typescript](typescript.md)
 
