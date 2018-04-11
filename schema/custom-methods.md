@@ -26,11 +26,11 @@ blogPostSchema.methods.texts = function getTexts() {
 
 const BlogPost = require('../models/blogpost.model');
 BlogPost.get(123)
-        .then((blogEntity) => {
-            blogEntity.texts()
-                        .then((response) => {
-                            const texts = response[0].entities;
-                        });
+    .then((blogEntity) => {
+        blogEntity.texts()
+            .then((response) => {
+                const texts = response[0].entities;
+            });
         });
 ```
 
