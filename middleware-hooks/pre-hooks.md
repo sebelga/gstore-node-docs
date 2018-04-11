@@ -14,9 +14,9 @@ const gstore = require('gstore-node')();
 const bscrypt = require('bcrypt-nodejs');
 
 const userSchema = new gstore.Schema({
-    user: { type: 'string' },
-    email: { type: 'string', validate: 'isEmail' },
-    password: { type: 'string', excludeFromIndexes: true }
+    user: { type: String },
+    email: { type: String, validate: 'isEmail' },
+    password: { type: String, excludeFromIndexes: true }
 });
 
 // Hash password middleware
