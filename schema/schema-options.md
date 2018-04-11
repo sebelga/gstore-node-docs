@@ -104,8 +104,8 @@ Example:
 
 ```js
 const userSchema = new Schema({
-    username : { type: 'string' },
-    email: { type: 'string', validate: 'isEmail' }
+    username : { type: String },
+    email: { type: String, validate: 'isEmail' }
 }, {
     validateBeforeSave: false,
     explicitOnly: false,
