@@ -48,7 +48,7 @@ userSchema.virtual('fullname').set(function(name) {
 const User = gstore.model('User', schema);
 
 const user = new User();
-user.set('fullname', 'John Snow');
+user.fullname = 'John Snow';
 
 console.log(user.firstname); // 'John';
 console.log(user.lastname); // 'Snow';
