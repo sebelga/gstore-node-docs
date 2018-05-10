@@ -1,5 +1,9 @@
 # Typescript support
 
+![](/assets/typescript-gstore.png)
+
+
+
 gstore-node support Typescript. You just need to create a custom `type` and pass it to the Schema and Model creation.
 
 Let see it with an example
