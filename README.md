@@ -19,3 +19,13 @@ of the [@google-cloud-node](https://github.com/GoogleCloudPlatform/google-cloud-
 
 
 
+### Repository
+
+[https://github.com/sebelga/gstore-node](https://github.com/sebelga/gstore-node)
+
+### Support
+
+[https://github.com/sebelga/gstore-node/issues](https://github.com/sebelga/gstore-node/issues)
+
+
+
