@@ -5,7 +5,7 @@
 When creating a Schema you can pass a second object with a set of options. This object is **optional** you only need to pass it if you need to override the default values.
 
 ```js
-const mySchema = new Schema({...properties}, {... options});
+const mySchema = new Schema({...properties}, {...options});
 ```
 
 #### validateBeforeSave
@@ -18,51 +18,51 @@ By default each time an entity is saved it is validated. You can disable this be
 
 **default: true**
 
-To allow undeclared properties on a Schema set **explicitOnly** to false. This will bring back the magic of _Schemaless_ datastores.  
-The properties explicitly declared will still be validated.
+To allow undeclared properties on a Schema set **explicitOnly** to false. This will bring back the magic of _Schemaless_ to your entities. The properties explicitly declared will still be validated but any other will be accepted.
 
 #### queries
 
 An options object to set global configuration for your queries. These settings can be overridden on specific queries:
 
-- `queries.readAll`
-- `queries.format`
-- `queries.showKey`
-- `queries.cache`
-- `queries.ttl`
-- `queries.consistency`
+* `queries.readAll`
+* `queries.format`
+* `queries.showKey`
+* `queries.cache`
+* `queries.ttl`
+* `queries.consistency`
 
-##### > readAll
+##### &gt; readAll
 
 **default: false**
 
 Override the Schema property parameter **read** \([here](../schema/other-paremeters.md#read)\) to return all the properties of the entities.
 
-##### > format
+##### &gt; format
 
 **default: "JSON"**
 
 By default queries will return plain JSON objects with the entity **data** + the "**id**" of the entity added automatically.  
-If you prefer, you can have **gstore instances** of the entities returned \(with all the extra methods like "save\(\), model\(\)", ...\).
+If you prefer, you can have gstore **entity instances** returned \(with all its methods "save\(\), delete\(\)", ...\).
 
-The response format can be set here globally but it can be overriden later in each query.  
+The response format can be defined here globally but it can be overridden later in each query.  
 Valid values are:
 
 * "JSON"
 * "ENTITY"
 
-##### > showKey
+##### &gt; showKey
 
 **default: false**
 
-Adds a "__key" property to the entity data with the complete Key from the Datastore.
+Adds a "\_\_key" property to the entity data with the complete Key from the Datastore.
 
-##### > cache
+##### &gt; cache
 
-**default:** the _global_ cache configuration
+**default:** the _global_ cache configuration  
 "true" = read from the cache and prime the cache with the query response.
 
-##### > ttl
+##### &gt; ttl
+
 **default:** the global `cache.ttl.queries`configuration  
 Custom TTL value for the cache. For multi-store it can be an Object of TTL values.
 
@@ -79,26 +79,25 @@ Custom TTL value for the cache. For multi-store it can be an Object of TTL value
             redis: 3600,
         }
     }
-} 
+}
 ```
 
-##### > consistency
+##### &gt; consistency
 
 Specify either "strong" or "eventual". If not specified, default values are chosen by Datastore for the operation. Learn more about strong and eventual consistency [here](https://cloud.google.com/datastore/docs/articles/balancing-strong-and-eventual-consistency-with-google-cloud-datastore).
-
 
 #### keyType
 
 **default: 'auto'**
 
-Defines the Key type (id or name) for the entities. By default gstore will convert '123' IDs to 123 (int). If you don't want this parsing to occur you can set the keyType to "name".
+Defines the Key type \(id or name\) for the entities. By default gstore will convert '123' IDs to 123 \(int\). If you don't want this parsing to occur you can set the keyType to "name".  
 Valid values are:
 
-* "id" (integer IDs). --> Will force to convert string to datastore.int()
-* "name" (string IDs)
-* "auto". --> If a string is passed and it is a number, it will be converted. Otherwise the id will be left "as is".
+* "id" \(integer IDs\). --&gt; Will force to convert string to datastore.int\(\)
+* "name" \(string IDs\)
+* "auto". --&gt; If a string is passed and it is a number, it will be converted. Otherwise the id will be left "as is".
 
-----
+---
 
 Example:
 
