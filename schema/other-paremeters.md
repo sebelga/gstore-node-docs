@@ -1,10 +1,10 @@
 # Schema
 
-## Properties parameters
+## Additional properties settings
 
 #### optional
 
-By default if a schema property value is not defined it will be set to null or to its default value \(if any\). If you don't want this behaviour you can define it as _optional_ and if no value is passed, this property will not be saved in the Datastore.
+By default if a value is not provided it will be set to null or to its _default _value \(if any\). If you don't want this behavior you can define it as _optional_ and if no value is passed, this property will not be saved in the Datastore.
 
 ```js
 const schema = new Schema({
@@ -15,12 +15,12 @@ const schema = new Schema({
 
 #### default
 
-Allows you to define a default value for a property. 
+Allows you to define a default value for a property.   
 You can either pass a **static** value or a **function** to be executed at runtime.
 
-In case you want to set the current time of the request to _date_ property you can use the `gstore.defaultValues.NOW` for default value (instead of writing a function).
+In case you want to set the current time of the request to _date_ property you can use the `gstore.defaultValues.NOW` for default value \(instead of writing a function\).
 
-Also, if you have a **_modifiedOn _**property set in your schema, it will automatically be set to the current time **each time** the entity is saved.
+Also, if you have a _modifiedOn _property set in your schema, it will automatically be set to the **current time of the request** when the  entity is saved.
 
 ```js
 const userSchema = new Schema({
@@ -32,8 +32,7 @@ const userSchema = new Schema({
 
 #### excludeFromIndexes
 
-By default all properties are **included** in the Datastore indexes. If you don't want some properties to be indexed set their 'excludeFromIndexes' parameter  
-to **true**.
+By default all properties are **included** in the Datastore indexes. If you don't want some property to be indexed set its _excludeFromIndexes _setting to **true**.
 
 ```js
 const articleSchema = new Schema({
@@ -45,7 +44,6 @@ const articleSchema = new Schema({
 For **embedded entities** you can pass one or more properties that you don't want to index by passing the property name or an Array of names.
 
 ```js
-
 // In the example below, 'biography' is a property of the embedded entity 'author'
 // and 'text' & 'description' are properties of an implicit 'book' embedded entity in the array
 // Important: for embedded entities inside **Arrays** you have to specify the type to 'array' for the excludeFromIndexes to work.
@@ -54,7 +52,6 @@ const mySchema = new Schema({
     author: { type: Object, excludeFromIndexes: 'biography' },
     listBooks: { type: Array, excludeFromIndexes: ['text', 'description'] },
 });
-
 ```
 
 #### read
