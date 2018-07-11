@@ -99,7 +99,7 @@ Valid values are:
 
 ---
 
-Example:
+#### Complete example:
 
 ```js
 const userSchema = new Schema({
