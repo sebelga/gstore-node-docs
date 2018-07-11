@@ -1,12 +1,14 @@
 ## Installation
 
-```sh
+```bash
  npm install gstore-node --save
+ # or
+ yarn add gstore-node
 ```
 
 ## Connect to the Google Cloud Node library
 
-For all the information on how to configure the gcloud datastore, [read the docs here](https://googlecloudplatform.github.io/google-cloud-node/#/docs/datastore/master/datastore).
+For all the information on how to configure the gcloud datastore, [read the docs here](https://cloud.google.com/nodejs/docs/reference/datastore/1.4.x/Datastore).
 
 ```js
 const datastore = require('@google-cloud/datastore')();
@@ -30,24 +32,20 @@ You can create new instances of gstore by passing a configuration object. Each i
 
 ```js
 // server.js
-const settings1 = { namespace: 'namespace1' };
-const datastore1 = require('@google-cloud/datastore')(settings1);
-const gstore = require('gstore-node')(); // this is will be the default gstore instance
-gstore.connect(datastore1);
+const datastore1 = require('@google-cloud/datastore')({ namespace: 'namespace1' });
+const gstore1 = require('gstore-node')(); // this is will be the default gstore instance
+gstore1.connect(datastore1);
 
-const settings2 = { namespace: 'namespace2' };
-const datastore2 = require('@google-cloud/datastore')(settings2);
-const gstore2 = require('gstore-node')(settings2);
+const datastore2 = require('@google-cloud/datastore')({ namespace: 'namespace2' });
+const gstore2 = require('gstore-node')({ namespace: 'namespace2' });
 gstore2.connect(datastore2);
 
 
-// anywhere in your models/controllers/...
+// anywhere in your application...
 
 const gstore = require('gstore-node')(); // Get default instance
 // or
 const gstore = require('gstore-node')({ namespace: 'namespace2' }); // Get the second instance
-
-
 ```
 
 
