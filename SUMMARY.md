@@ -7,7 +7,7 @@
   * [Type validation](schema/type_validation.md)
   * [Value validation](schema/value_validation.md)
   * [Additional properties settings](schema/other-paremeters.md)
-  * [Options](schema/schema-options.md)
+  * [Schema options](schema/schema-options.md)
   * [Joi Schema](schema/joi-schema.md)
   * [Methods](schema/schema-methods/path.md)
     * [path\(\)](schema/schema-methods/path.md)
