@@ -2,7 +2,7 @@
 
 ## Types validation
 
-You can set a _type _for a schema property adding a "type" parameter to it.
+You can define a type for a schema property passing a "type" parameter to it.
 
 `new Schema({ name: { type: String }})`
 
