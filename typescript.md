@@ -2,16 +2,22 @@
 
 ![](/assets/typescript-gstore.png)
 
+gstore-node supports Typescript. Make sure you have installed the Types definition file for @google-cloud/datastore first:
 
+```sh
+npm install --save @types/google-cloud__datastore 
+```
 
-gstore-node support Typescript. You just need to create a custom `type` and pass it to the Schema and Model creation.
+Once you have installed the types for google Datastore, you just need to create a custom `Type` for your schema and pass it to the Schema and Model instance.
 
 Let see it with an example
 
 ```js
 // user.schema.ts
 
-const gstore = require('gstore-node')();
+import GstoreNode from 'gstore-node';
+
+const gstore = GstoreNode();
 
 type UserType = {
     userName: string;
@@ -34,7 +40,7 @@ const schema = new Schema<UserType>({
 const User = gstore.model<UserType>('User', schema);
 ```
 
-It you want to allow **other properties** apart from those declared \(see `explicitOnly` option in the [Schema options](/schema/schema-options.md)\), this is how you should create your Model:
+It you want to allow **other properties** apart from those declared \(see `explicitOnly` option in the [Schema options](/schema/schema-options.md)\), this is how you would create your Model:
 
 ```js
 type UserType = {
@@ -43,7 +49,7 @@ type UserType = {
     age?: number; // optional
     tags?: string[]; // optional
     birthday?: Date; // optional
-}
+} & {[propName: string]: any}; // Allow any other properties
 
 // Schema with "explicitOnly" set to "false"
 const schema = new Schema<UserType>({
@@ -52,10 +58,9 @@ const schema = new Schema<UserType>({
     age: { type: Number, optional: true },
     tags: { type: Array, optional: true },
     birthday: { type: Date, optional: true }
-}, { explicitOnly: false });
+}, { explicitOnly: false }); // explicitOnly set to "false"
 
-// Allow UserTypes + any other properties on the Model
-const User = gstore.model<UserType & {[propName: string]: any}>('User', schema);
+const User = gstore.model<UserType>('User', schema);
 ```
 
 
