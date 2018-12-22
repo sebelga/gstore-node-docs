@@ -1,4 +1,5 @@
-# ![](/assets/logo.png)
+
+![](/assets/logo.png)
 
 # gstore-node
 
@@ -18,7 +19,6 @@ of the [@google-cloud-node](https://github.com/GoogleCloudPlatform/google-cloud-
 * [**Typescript**](/typescript.md) support
 
 
-
 ### Repository
 
 [https://github.com/sebelga/gstore-node](https://github.com/sebelga/gstore-node)
@@ -26,6 +26,3 @@ of the [@google-cloud-node](https://github.com/GoogleCloudPlatform/google-cloud-
 ### Support
 
 [https://github.com/sebelga/gstore-node/issues](https://github.com/sebelga/gstore-node/issues)
-
-
-
