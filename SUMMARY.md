@@ -1,19 +1,21 @@
 # Summary
 
-* [Getting Started](getting-started/index.md)
+* Getting Started
+  * [Introduction](getting-started/index.md)
   * [Motivation](getting-started/motivation.md)
   * [Installation](getting-started/installation.md)
-* [Schema](schema/index.md)
+* Schema
+  * [About](schema/index.md)
   * [Type validation](schema/type_validation.md)
   * [Value validation](schema/value_validation.md)
   * [Additional properties settings](schema/other-paremeters.md)
   * [Schema options](schema/schema-options.md)
   * [Joi Schema](schema/joi-schema.md)
-  * [Methods](schema/schema-methods/path.md)
-    * [path\(\)](schema/schema-methods/path.md)
-    * [virtual\(\)](schema/schema-methods/virtual.md)
+  * Methods
+    * [path()](schema/schema-methods/path.md)
+    * [virtual()](schema/schema-methods/virtual.md)
   * [Custom methods](schema/custom-methods.md)
-* [Model](model/creation.md)
+* Model
   * [Creation](model/creation.md)
   * [Methods](model/get.md)
     * [GET](model/get.md)
@@ -23,31 +25,31 @@
     * [key\(\)](model/key.md)
     * [sanitize\(\)](model/sanitize.md)
     * [clearCache\(\)](model/clearcache.md)
-* [Entity](entity/creation.md)
+* Entity
   * [Creation](entity/creation.md)
   * [Properties](entity/properties.md)
-  * [Methods](entity/methods/save.md)
+  * Methods
     * [SAVE](entity/methods/save.md)
     * [plain\(\)](entity/methods/plain.md)
     * [model\(\)](entity/methods/model.md)
     * [datastoreEntity\(\)](entity/methods/datastoreentity.md)
     * [validate\(\)](entity/methods/validate.md)
-* [Queries]
+* Queries
   * [@google-cloud Query](queries/google-cloud-queries.md)
-  * [list](queries/list.md)
-  * [findOne](queries/findone.md)
-  * [deleteAll](queries/deleteall.md)
-  * [findAround](queries/findaround.md)
-* [Middleware (hooks)]
+  * [list\(\)](queries/list.md)
+  * [findOne\(\)](queries/findone.md)
+  * [deleteAll\(\)](queries/deleteall.md)
+  * [findAround\(\)](queries/findaround.md)
+* Middleware \(hooks\)
   * [About](middleware-hooks.md)
   * [Pre hooks](middleware-hooks/pre-hooks.md)
   * [Post hooks](middleware-hooks/post-hooks.md)
-* [Cache / Dataloader](/dataloader.md#dataloader)
+* Cache / Dataloader
   * [Dataloader](dataloader.md)
   * [Cache](cache.md)
-* [gstore Methods](save.md)
+* gstore Methods
   * [save\(\)](save.md)
-* [Appendix](appendix.md)
+* Appendix
   * [Error Codes](appendix/error-codes.md)
 * [Typescript](typescript.md)
 
