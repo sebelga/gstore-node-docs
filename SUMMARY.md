@@ -1,7 +1,7 @@
 # Summary
 
 * Getting Started
-  * [Introduction](getting-started/introduction.md)
+  * [Presentation](getting-started/presentation.md)
   * [Motivation](getting-started/motivation.md)
   * [Installation](getting-started/installation.md)
 * Schema
