@@ -1,7 +1,5 @@
 # Schema methods
 
-## path\(\)
-
 Getter / Setter for schemas paths.
 
 ```js
