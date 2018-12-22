@@ -1,12 +1,10 @@
 # Schema
 
-## Joi Schema
-
 If you need more advanced schema validation gstore-node support **Joi types and validator** for your properties. [Joi ](https://www.npmjs.com/package/joi)is a powerful schema description language with a [great API](https://github.com/hapijs/joi/blob/v13.0.1/API.md) to validate your fields. It it specially useful for complex embedded entities validation or if you need more precision on your validation.
 
 **Important**: if you decide to use Joi, you have to use it for **all your properties**. You **cannot** mix joi and gstore types and validation.
 
-### Install
+## Install
 
 First make sure you have Joi installed
 
@@ -50,7 +48,7 @@ const schema = new Schema({
 }, { joi: true });
 ```
 
-### Advanced
+## Advanced
 
 If you need even more control over the schema validation you can define an _**extra**_** **setting for joi. This will be applied on the complete Joi Schema object type.
 
@@ -71,7 +69,7 @@ const schema = new Schema({
 });
 ```
 
-### Options
+## Options
 
 The validate\(\) method in Joi [accepts an options object](https://github.com/hapijs/joi/blob/v13.0.1/API.md#validatevalue-schema-options-callback). You can pass it in the Schema options.
 
@@ -88,6 +86,3 @@ const schema = new Schema({
     },
 });
 ```
-
-
-
