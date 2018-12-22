@@ -32,13 +32,14 @@
     * [model\(\)](entity/methods/model.md)
     * [datastoreEntity\(\)](entity/methods/datastoreentity.md)
     * [validate\(\)](entity/methods/validate.md)
-* [Queries](queries/google-cloud-queries.md)
+* [Queries]
   * [@google-cloud Query](queries/google-cloud-queries.md)
   * [list](queries/list.md)
   * [findOne](queries/findone.md)
   * [deleteAll](queries/deleteall.md)
   * [findAround](queries/findaround.md)
-* [Middleware \(hooks\)](middleware-hooks.md)
+* [Middleware (hooks)]
+  * [About](middleware-hooks.md)
   * [Pre hooks](middleware-hooks/pre-hooks.md)
   * [Post hooks](middleware-hooks/post-hooks.md)
 * [Cache / Dataloader](/dataloader.md#dataloader)
