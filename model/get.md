@@ -86,7 +86,7 @@ transaction.run().then(() => {
 
 **Note**: setting this property to _true_ does add some processing, especially for large sets. Only use it if you absolutely need to maintain the original order passed.
 
-&gt; **dataloader** The Dataloader instance created for the request. [Read the documentation](./dataloader.md) for more information on how to create the instance.
+&gt; **dataloader** The Dataloader instance created for the request. [Read the documentation](../dataloader.md) for more information on how to create the instance.
 
 &gt; **cache** If you activated the cache on the gstore-node instance, you can override here the **_global_** cache configuration. If the global has been set to _true_ (default) you can pass _false_ here to bypass the cache. And if the global cache has been set to false, then you can pass _true_ here to cache specific key(s).
 
