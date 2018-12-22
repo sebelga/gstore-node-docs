@@ -1,6 +1,8 @@
 # Cache
 
-![](https://github.com/sebelga/nsql-cache/raw/master/logo/logo.gif)gstore-node integrates the **[nsql-cache](https://github.com/sebelga/gstore-cache)** manager. This means that the cache management \(add, remove, invalidate) is done for you. Just initialize gstore-node with the cache turned on and call it a day.
+![](https://github.com/sebelga/nsql-cache/raw/master/logo/logo.gif)
+
+gstore-node integrates the **[nsql-cache](https://github.com/sebelga/gstore-cache)** manager. This means that the cache management \(add, remove, invalidate) is done for you. Just initialize gstore-node with the cache turned on and call it a day.
 
 nsql-cache uses underneath the powerful [node-cache-manager](https://github.com/BryanDonovan/node-cache-manager). This means that you can have multiple cache stores with different TTL settings in each one. It also means that you get a [LRU memory cache](https://www.npmjs.com/package/lru-cache) instance out of the box that will give a boost to your application right away.
 
