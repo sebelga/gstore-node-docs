@@ -2,7 +2,7 @@
 
 Virtuals are properties that are added to the entities at runtime that are not persisted in the Datastore. You can both define a **getter** and a **setter**.
 
-**getter**
+## getter
 
 ```js
 const userSchema = new Schema({
@@ -29,7 +29,7 @@ const response = user.plain({ virtuals: true });
 console.log(response.fullname); // 'John Snow';
 ```
 
-**setter**
+## setter
 
 ```js
 const userSchema = new Schema({
