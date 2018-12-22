@@ -1,7 +1,5 @@
 #Queries
 
-## findOne
-
 Quickly find an entity by passing key/value pairs. You can optionally pass an ancestors array or a namespace.
 
 **@Returns** an gstore entity **instance** of the Model.
@@ -23,7 +21,7 @@ MyModel.findOne(
 )
 ```
 
-### options
+## options
 
 The options argument accepts the following properties:
 
@@ -33,10 +31,8 @@ The options argument accepts the following properties:
 - **ttl** (default: the global `cache.ttl.queries` value)
 Custom TTL value for the cache. For multi-store it can be an _Object_ of TTL values.
 
-
-
-
 Example:
+
 ```js
 const User = require('./user.model');
 

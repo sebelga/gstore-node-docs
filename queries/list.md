@@ -1,10 +1,8 @@
 # Queries
 
-## list()
-
 Shortcut for listing entities from a Model. For complete control (pagination, start, end...) use the [@google-cloud queries](./google-cloud-queries.md). When you configure a `list()` shortcut query on a Schema, you can then later quickly fetch entities with pre-configured settings, like the _order by_ or _limit_ (those settings can be overridden later on).
 
-### 1. Configure "list" query options on the Schema
+## 1. Configure "list" query options on the Schema
 
 `entitySchema.queries('list', options);`
 
@@ -21,7 +19,6 @@ The options object accepts the following "queries" properties
 - offset
 
 **INFO**: "order", "select" & "filters" can also be **Arrays** of settings (see example below).
-
 
 **Additional configuration**
 The options accepts also the following properties
@@ -61,9 +58,7 @@ const options = {
 **consistency**
 Specify either "strong" or "eventual". If not specified, default values are chosen by Datastore for the operation. Learn more about strong and eventual consistency [here](https://cloud.google.com/datastore/docs/articles/balancing-strong-and-eventual-consistency-with-google-cloud-datastore).
 
-
-
-Example
+Example:
 
 ```js
 // blog-post.model.js
@@ -89,7 +84,7 @@ blogPostSchema.queries('list', listQueryOptions);
 module.exports = gstore.model('BlogPost', blogPostSchema);
 ```
 
-### 2. Use anywhere
+## 2. Use anywhere
 
 `MyModel.list(options /*optional*/, callback /*optional*/)`
 
@@ -100,6 +95,7 @@ module.exports = gstore.model('BlogPost', blogPostSchema);
 The **nextPageCursor** is for pagination and can be used in a future call to `MyModel.list({ start: pageCursor })`
 
 Example:
+
 ```js
 const BlogPost = require('./blog-post.model');
 
@@ -134,7 +130,7 @@ const listQueryOptions = {
 blogPostSchema.queries('list', listQueryOptions);
 ```
 
-####Filters
+### Filters
 
 The **value** of a filter can also be a **function that returns a value**. This function will be executed on each request. Useful for dynamic value for example when retrieving the current date.
 
@@ -151,7 +147,7 @@ BlogPost.list().then((response) => {
 });
 ```
 
-####Override settings
+### Override settings
 
 The global configuration set on the Schema can be overridden anytime by passing a new options object. `Model.list(options)`
 
@@ -164,4 +160,3 @@ const options = {
 BlogPost.list(options)
     .then((response) => { ... });
 ```
-

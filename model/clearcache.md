@@ -1,7 +1,5 @@
 # Model Methods
 
-## clearCache\(\)
-
 Clear all the queries from the cache linked to the Model Entity Kind. You can also pass one or several keys to delete from the cache.  
 You normally don't have to call this method as gstore-node does it for you **automatically** each time you add/edit or delete an entity.
 
@@ -29,6 +27,3 @@ User.clearCache([key1, key2])
         // Read the cache documentation for more information on this.
     });
 ```
-
-
-

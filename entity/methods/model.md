@@ -1,7 +1,5 @@
 # Entity methods
 
-## model()
-
 With this method you can access a Model from an entity instance.
 
 ```js

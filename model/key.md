@@ -1,6 +1,5 @@
 # Model Methods
 
-## key()
 Generates one or several entity key(s) for the Model.
 This method accepts the following arguments:
 

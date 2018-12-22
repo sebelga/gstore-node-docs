@@ -15,7 +15,7 @@ of the [@google-cloud-node](https://github.com/GoogleCloudPlatform/google-cloud-
 * pre & post **middleware** \(hooks\)
 * **custom methods** on entity instances
 * **Joi** type and validation \([documentation](https://www.npmjs.com/package/joi)\)
-* [**cache**](/cache.md) layer to speed up entities fetching
+* [**cache**](/cache-dataloader/cache.md) layer to speed up entities fetching
 * [**Typescript**](/typescript.md) support
 
 

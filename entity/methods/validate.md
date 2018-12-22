@@ -1,7 +1,5 @@
 # Entity methods
 
-## validate()
-
 This methods validates an entity data.
 
 **@Returns** an object with an **error** and a **value** property

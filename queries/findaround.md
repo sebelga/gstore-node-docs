@@ -1,7 +1,5 @@
 #Queries
 
-## findAround
-
 Find entities before or after an entity based on a property and a value.
 
 ```js
@@ -69,6 +67,4 @@ BlogPost.findAround('publishedOn', '2016-03-01', options).then(...);
 // ttl can also be an object for multi-store ---> { memory: 600, redis: 3600 }
 const options = { after: 20, ttl: 600 };
 BlogPost.findAround('publishedOn', '2016-03-01', options).then(...);
-
-
 ```

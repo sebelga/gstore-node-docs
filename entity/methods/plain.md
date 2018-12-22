@@ -1,7 +1,5 @@
 # Entity Methods
 
-## plain()
-
 This methods returns the entity **data** and its entity key **id** (int or string)
 
 It accepts one optional **options** argument
@@ -14,7 +12,7 @@ entity.plain({
 }):
 ```
 
-#### options
+### options
 
 - **readAll **(default: false)
 

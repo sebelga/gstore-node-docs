@@ -1,7 +1,5 @@
 # Entity Methods
 
-## save\(\)
-
 After you create an entity you can persist its data to the Datastore with `entity.save()`  
 This method accepts the following arguments
 
@@ -18,7 +16,7 @@ entity.save(
 
 **@Returns** -- the entity saved
 
-#### options
+### options
 
 The options argument has a **method** property where you can set the saving method.  
 It default to 'upsert'.
@@ -85,7 +83,7 @@ transaction.run()
     });
 ```
 
-#### Saving inside a Transaction with middleware on Model
+### Saving inside a Transaction with middleware on Model
 
 If you have ["pre" middlewares](../../middleware-hooks/pre-hooks.md) on the _save_ method of your Model \(`mySchema.pre('save', myMiddleware)`\) you need to **chain the Promise** of the save method before committing the transaction, otherwise the entity **won't be** saved.
 
@@ -140,6 +138,3 @@ transaction.run().then() => {
     });
 });
 ```
-
-
-

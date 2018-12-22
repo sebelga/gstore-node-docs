@@ -21,7 +21,7 @@
     * [GET](model/get.md)
     * [UPDATE](model/update-method.md)
     * [DELETE](model/delete.md)
-    * [excludeFromIndexes\(\)](model/other-methods.md)
+    * [excludeFromIndexes\(\)](model/exclude-from-indexes.md)
     * [key\(\)](model/key.md)
     * [sanitize\(\)](model/sanitize.md)
     * [clearCache\(\)](model/clearcache.md)
@@ -41,15 +41,15 @@
   * [deleteAll\(\)](queries/deleteall.md)
   * [findAround\(\)](queries/findaround.md)
 * Middleware \(hooks\)
-  * [About](middleware-hooks.md)
+  * [About](middleware-hooks/about.md)
   * [Pre hooks](middleware-hooks/pre-hooks.md)
   * [Post hooks](middleware-hooks/post-hooks.md)
 * Cache / Dataloader
-  * [Dataloader](dataloader.md)
-  * [Cache](cache.md)
+  * [Dataloader](cache-dataloader/dataloader.md)
+  * [Cache](cache-dataloader/cache.md)
 * gstore Methods
-  * [save\(\)](save.md)
+  * [save\(\)](gstore-methods/save.md)
+* [Typescript](typescript.md)
 * Appendix
   * [Error Codes](appendix/error-codes.md)
-* [Typescript](typescript.md)
-
+  * [Credits](appendix/credits.md)

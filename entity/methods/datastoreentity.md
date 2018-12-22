@@ -1,7 +1,5 @@
 # Entity methods
 
-## datastoreEntity\(\)
-
 In case you need at any moment to fetch the entity **data** from Google Datastore, this method will do just that right on the entity instance. It is useful for example in "pre" delete hooks where the entity to be deleted is passed but we don't have its data. 
 
 ```js
@@ -34,6 +32,3 @@ const User = require('user.model');
 User.delete(123).then(...);
 
 ```
-
-
-

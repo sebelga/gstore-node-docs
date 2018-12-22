@@ -1,7 +1,5 @@
 #Queries
 
-## deleteAll
-
 If you need to delete all the entities of a Model, this shortcut query will do just that.
 It queries the entitites by batches of 500 (maximum set by the Datastore) and delete them then repeat the query.
 
@@ -42,4 +40,3 @@ BlogPost.deleteAll(function(err, response){
     console.log(response.message);
 });
 ```
-
