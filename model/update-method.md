@@ -1,7 +1,5 @@
 # Model Methods
 
-## update()
-
 This method allows you to update an entity in the Datastore.  
 It will first fetch the entity, then update its data with the new ones and finally save the data back to the Datastore
 
@@ -66,7 +64,7 @@ BlogPost.update(123, blogPostData, function onBlogPostUpdate(err, entity) {
 });
 ```
 
-### Options
+## Options
 
 **options** properties
 
@@ -102,4 +100,3 @@ BlogPost.update(123, data, null, null, null, { replace:true }).then( ... );
 const blogPost = new BlogPost(data, 123);
 blogPost.save().then( ... );
 ```
-
