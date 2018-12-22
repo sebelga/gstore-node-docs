@@ -1,6 +1,6 @@
 # Model Methods
 
-## get\(\)
+## get()
 
 Get one or multiple entities from the Datastore. Retrieving an entity **by key** is the fastest way to read from the Datastore.  
 This method accepts the following arguments:
@@ -52,7 +52,7 @@ BlogPost.get(1234, function onEntity(err, entity) {
 });
 ```
 
-The resulting entity has a **plain\(\)** method that returns an object with the entity **data ** + its **id**. See [the doc here](../entity/methods/plain.md).
+The resulting entity has a **plain()** method that returns an object with the entity **data ** + its **id**. See [the doc here](../entity/methods/plain.md).
 
 ```js
 BlogPost.get(123).then(entity) {
@@ -77,16 +77,16 @@ transaction.run().then(() => {
 
 **options** properties
 
-* _preserveOrder_ \(default: false\)
+* _preserveOrder_ (default: false)
 * _dataloader_: a [Dataloader](https://github.com/facebook/dataloader) instance
-* _cache_ \(default: true\)
-* _ttl_ \(default: the global cache `ttl.keys` configuration\)
+* _cache_ (default: true)
+* _ttl_ (default: the global cache `ttl.keys` configuration)
 
 &gt; **preserveOrder**: This option is useful when you pass an array of IDs to retrieve and you want to preserve the order of those ids in the response.
 
 **Note**: setting this property to _true_ does add some processing, especially for large sets. Only use it if you absolutely need to maintain the original order passed.
 
-&gt; **dataloader** The Dataloader instance created for the request. [Read the documentation](/dataloader.md) for more information on how to create the instance.
+&gt; **dataloader** The Dataloader instance created for the request. [Read the documentation](./dataloader.md) for more information on how to create the instance.
 
 &gt; **cache** If you activated the cache on the gstore-node instance, you can override here the **_global_** cache configuration. If the global has been set to _true_ (default) you can pass _false_ here to bypass the cache. And if the global cache has been set to false, then you can pass _true_ here to cache specific key(s).
 
