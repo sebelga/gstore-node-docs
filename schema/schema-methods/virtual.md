@@ -1,7 +1,5 @@
 # Schema methods
 
-## virtual()
-
 Virtuals are properties that are added to the entities at runtime that are not persisted in the Datastore. You can both define a **getter** and a **setter**.
 
 **getter**
@@ -55,6 +53,3 @@ console.log(user.lastname); // 'Snow';
 ```
 
 **Note:** You can save entities without worrying about the virtuals as they are **removed** from the entity data automatically.
-
-
-
