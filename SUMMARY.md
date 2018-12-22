@@ -17,7 +17,7 @@
   * [Custom methods](schema/custom-methods.md)
 * Model
   * [Creation](model/creation.md)
-  * [Methods](model/get.md)
+  * Methods
     * [GET](model/get.md)
     * [UPDATE](model/update-method.md)
     * [DELETE](model/delete.md)
