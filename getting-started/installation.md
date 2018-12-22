@@ -1,4 +1,4 @@
-## Installation
+## Npm dependency
 
 ```bash
  npm install gstore-node --save
