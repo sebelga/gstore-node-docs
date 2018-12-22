@@ -1,6 +1,6 @@
 # Summary
 
-* [Getting Started](README.md)
+* [Getting Started](getting-started/index.md)
   * [Motivation](getting-started/motivation.md)
   * [Installation](getting-started/installation.md)
 * [Schema](schema/index.md)
