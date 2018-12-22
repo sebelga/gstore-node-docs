@@ -1,7 +1,5 @@
 # Model Methods
 
-## delete()
-
 This method allows you to delete an entity in the Datastore. It accepts the following arguments:
 
 ```js
