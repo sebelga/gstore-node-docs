@@ -1,8 +1,6 @@
 # Schema
 
-## Additional properties settings
-
-#### optional
+### optional
 
 By default if a value is not provided it will be set to null or to its _default _value \(if any\). If you don't want this behavior you can define it as _optional_ and if no value is passed, this property will not be saved in the Datastore.
 
@@ -13,7 +11,7 @@ const schema = new Schema({
 });
 ```
 
-#### default
+### default
 
 Allows you to define a default value for a property.   
 You can either pass a **static** value or a **function** to be executed at runtime.
@@ -30,7 +28,7 @@ const userSchema = new Schema({
 });
 ```
 
-#### excludeFromIndexes
+### excludeFromIndexes
 
 By default all properties are **included** in the Datastore indexes. If you don't want some property to be indexed set its _excludeFromIndexes _setting to **true**.
 
@@ -54,7 +52,7 @@ const mySchema = new Schema({
 });
 ```
 
-#### read
+### read
 
 If you don't want certain properties to show up in the response data of queries or when calling entity.plain\(\) \(see Entity section\), set this parameter to **false**. This is useful when you have entity properties only useful to your business logic and that you don't want to exposed publicly.
 
@@ -64,7 +62,7 @@ This parameter can be overridden on a query basis by passing a _readAll_ option 
 * **globally** in list\(\) and a Schema _queries_ settings
 * **inline** option of list\(\), query\(\) and findAround\(\) queries
 
-#### write
+### write
 
 If you want to protect certain properties to be written by a untrusted source, you can set their _write_ parameter to **false**. You can then call **sanitize\(\)** \(see Model section\) on a Model passing the user data and those properties will be removed from the data to be saved in the Datastore.
 
@@ -89,7 +87,7 @@ function createBlogPost(req, res) {
 }
 ```
 
-#### required
+### required
 
 If you want to define a mandatory property, set its **required** parameter to true. If the value passed for property is **undefined**, **null** or an **empty string** it will not validate and will not be saved in the Datastore.
 
@@ -110,7 +108,7 @@ user.save()
     });
 ```
 
-### Complete parameters example
+## Complete parameters example
 
 ```js
 var entitySchema = new Schema({
