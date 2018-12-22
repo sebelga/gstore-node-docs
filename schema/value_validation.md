@@ -1,7 +1,5 @@
 # Schema
 
-## Value validation
-
 gstore uses the great validator library \([https://github.com/chriso/validator.js](https://github.com/chriso/validator.js)\) to validate input values so you can use any of the validations from that library.
 
 ```js
