@@ -1,8 +1,8 @@
-#Queries
+# Queries
 
-## list
+## list()
 
-Shortcut for listing entities from a Model. For complete control (pagination, start, end...) use the [@google-cloud queries](./google-cloud-queries.md). **List queries** are meant to quickly list entities with predefined settings (that can be overridden on a query).
+Shortcut for listing entities from a Model. For complete control (pagination, start, end...) use the [@google-cloud queries](./google-cloud-queries.md). When you configure a `list()` shortcut query on a Schema, you can then later quickly fetch entities with pre-configured settings, like the _order by_ or _limit_ (those settings can be overridden later on).
 
 ### 1. Configure "list" query options on the Schema
 
