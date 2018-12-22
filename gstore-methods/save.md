@@ -1,7 +1,5 @@
 # gstore Methods
 
-## save()
-
 gstore has a global method "save" that is an alias of the original @google-cloud/datastore save() method, with the exception that you can pass it an Entity **instance** or an **Array** of entities instances and this method will first convert the instances to the correct Datastore format before saving.
 
 This method accepts the following arguments:
@@ -79,6 +77,4 @@ transaction.run().then(() => {
              gstore.save(entities, transaction).then( ... );
          });
 });
-
-
 ```
