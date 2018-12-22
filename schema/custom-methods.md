@@ -1,7 +1,5 @@
 # Schema
 
-## Custom Methods
-
 Custom methods can be added to entities instances through their Schemas.
 
 `schema.methods.<methodName> = function(){ ... }`
@@ -68,6 +66,3 @@ user.profilePict(function onProfilePict(err, imageEntity) {
     user.save().then(() { ... });
 });
 ```
-
-
-
