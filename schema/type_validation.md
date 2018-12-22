@@ -1,7 +1,5 @@
 # Schema
 
-## Types validation
-
 You can define a type for a schema property passing a "type" parameter to it.
 
 `new Schema({ name: { type: String }})`
