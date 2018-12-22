@@ -1,26 +1,24 @@
 # Schema
 
-## Options
-
 When creating a Schema you can pass a second object with a set of options. This object is **optional** you only need to pass it if you need to override the default values.
 
 ```js
 const mySchema = new Schema({...properties}, {...options});
 ```
 
-#### validateBeforeSave
+### validateBeforeSave
 
 **default: true**
 
 By default each time an entity is saved it is validated. You can disable this behaviour by setting **validateBeforeSave** to false.
 
-#### explicitOnly
+### explicitOnly
 
 **default: true**
 
 To allow undeclared properties on a Schema set **explicitOnly** to false. This will bring back the magic of _Schemaless_ to your entities. The properties explicitly declared will still be validated but any other will be accepted.
 
-#### queries
+### queries
 
 An options object to set global configuration for your queries. These settings can be overridden on specific queries:
 
@@ -31,13 +29,13 @@ An options object to set global configuration for your queries. These settings c
 * `queries.ttl`
 * `queries.consistency`
 
-##### &gt; readAll
+#### &gt; readAll
 
 **default: false**
 
 Override the Schema property parameter **read** \([here](../schema/other-paremeters.md#read)\) to return all the properties of the entities.
 
-##### &gt; format
+#### &gt; format
 
 **default: "JSON"**
 
@@ -50,18 +48,18 @@ Valid values are:
 * "JSON"
 * "ENTITY"
 
-##### &gt; showKey
+#### &gt; showKey
 
 **default: false**
 
 Adds a "\_\_key" property to the entity data with the complete Key from the Datastore.
 
-##### &gt; cache
+#### &gt; cache
 
 **default:** the _global_ cache configuration  
 "true" = read from the cache and prime the cache with the query response.
 
-##### &gt; ttl
+#### &gt; ttl
 
 **default:** the global `cache.ttl.queries`configuration  
 Custom TTL value for the cache. For multi-store it can be an Object of TTL values.
@@ -82,11 +80,11 @@ Custom TTL value for the cache. For multi-store it can be an Object of TTL value
 }
 ```
 
-##### &gt; consistency
+#### &gt; consistency
 
 Specify either "strong" or "eventual". If not specified, default values are chosen by Datastore for the operation. Learn more about strong and eventual consistency [here](https://cloud.google.com/datastore/docs/articles/balancing-strong-and-eventual-consistency-with-google-cloud-datastore).
 
-#### keyType
+### keyType
 
 **default: 'auto'**
 
@@ -99,7 +97,7 @@ Valid values are:
 
 ---
 
-#### Complete example:
+### Complete example:
 
 ```js
 const userSchema = new Schema({
@@ -116,6 +114,3 @@ const userSchema = new Schema({
     }
 });
 ```
-
-
-
