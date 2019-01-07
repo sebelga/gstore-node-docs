@@ -69,7 +69,7 @@ module.exports = { getUser };
  const gstore = require('gstore-node')();
 
  const images = require('../images/images');
- const users = require('../images/images');
+ const users = require('../users/users');
  const Book = require('./book.model');
 
  const getBook = (req, res) => {
