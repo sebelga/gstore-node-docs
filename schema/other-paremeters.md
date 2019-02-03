@@ -52,6 +52,36 @@ const mySchema = new Schema({
 });
 ```
 
+### excludeFromRead
+
+For **embedded entities** you can provide an array of properties that you don't want to be returned in the queries result or when calling `entity.plain()` 
+
+```javascript
+const articleSchema = new Schema({
+    author: { type: String },
+    book: { type: Object, excludeFromRead: ['secret'] }
+});
+
+const ArticleModel = gstore.model('Article', articleSchema);
+const article = new ArticleModel({ author: 'John', book: { title: 'Book title', secret: 'some secret value' } });
+
+console.log(article.plain()); // { author: 'John', book: { title: 'Book title' } };
+
+// Or from the result of a Query
+ArticleModel.list()
+    .then(({ entities }) => {
+        entities.forEach((article) => {
+            console.log(article.book.secret); // undefined
+        })
+    })
+```
+
+For **embedded entities** you can pass one or more properties that you don't want to index by passing the property name or an Array of names.
+
+```javascript
+
+```
+
 ### read
 
 If you don't want certain properties to show up in the response data of queries or when calling entity.plain\(\) \(see Entity section\), set this parameter to **false**. This is useful when you have entity properties only useful to your business logic and that you don't want to exposed publicly.
