@@ -1,8 +1,8 @@
-# Create a gstore node instance
+# Create a gstore instance
 
 ## Instantiate
 
-In order to get a gstore instance, import the module and then call it and provide a. You can do this in multiple places of your application, **the same gstore instance will always be returned**.
+In order to get a gstore instance, import the module and then call it and provide an optional configuration object. The gstore instances are cached so you can do this in multiple places of your application, **the same instance will always be returned**.
 
 ```javascript
 const GstoreNode = require('gstore-node');
@@ -13,11 +13,11 @@ const gstore = GstoreNode(/*optional*/<config>);
 
 Optionally you can provide a configuration object when creating the instance with the following properties:
 
-### namespace (string)
+### namespace \(string\)
 
-String (`default: "gstore"`)
+String \(`default: "gstore-node"`\)
 
-This allows you to create multiple instances of gstore. The following example will create 2 instances of gstore that can connect to 2 different Datastore client instances (see below).
+This allows you to create multiple instances of gstore. The following example will create 2 instances of gstore that can connect to 2 different Datastore client instances \(see below\).
 
 ```javascript
 const GstoreNode = require('gstore-node');
@@ -34,9 +34,14 @@ const gstoreInstance1 = require('gstore-node')({ namespace: 'instance-1' }); // 
 
 ### errorOnEntityNotFound
 
-Boolean (`default: true`)
+Boolean \(`default: true`\)
 
-By default if you fetch an entity by Key and the entity is not found in the Datastore, gstore wil throw a "_ERR_ENTITY_NOT_FOUND_" error. If you prefer to have `null` returned when an entity is not found, set `errorOnEntityNotFound` to `false`.
+By default if you fetch an entity by Key and the entity is not found in the Datastore, gstore will throw an "_ERR\_ENTITY\_NOT\_FOUND_" error. If you prefer to have `null` returned when an entity is not found, set `errorOnEntityNotFound` to `false`.
+
+```text
+const GstoreNode = require('gstore-node');
+const gstore = GstoreNode({ errorOnEntityNotFound: false });
+```
 
 ### cache
 
@@ -65,3 +70,4 @@ After connecting gstore to the datastore, gstore has **2 aliases** set up
 
 * `gstore.ds` The underlying @google/datastore instance. This allows you to access **the full API** of the Datastore client whenever needed.
 * `gstore.transaction`. Alias of the same google-cloud/datastore method
+

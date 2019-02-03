@@ -1,5 +1,6 @@
 # Table of contents
 
+* [Introduction](About.md)
 * [Getting Started](getting-started/README.md)
   * [Motivation](getting-started/motivation.md)
   * [Installation](getting-started/installation.md)
