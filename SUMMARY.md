@@ -2,9 +2,9 @@
 
 * [Introduction](README.md)
 * [Getting Started](getting-started/README.md)
-  * [Presentation](getting-started/presentation.md)
   * [Motivation](getting-started/motivation.md)
   * [Installation](getting-started/installation.md)
+  * [Create a gstore instance](getting-started/instantiate.md)
 * [Schema](schema/README.md)
   * [About](schema/index.md)
   * [Type validation](schema/type_validation.md)
