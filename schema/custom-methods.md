@@ -1,4 +1,4 @@
-# Schema
+# Custom methods
 
 Custom methods can be added to entities instances through their Schemas.
 
@@ -6,7 +6,7 @@ Custom methods can be added to entities instances through their Schemas.
 
 Make sure **not to** use arrow function as you would lose the scope of the entity instance.
 
-```js
+```javascript
 const blogPostSchema = new Schema({ title: {} });
 
 // Custom method to retrieve all children Text entities
@@ -34,7 +34,7 @@ BlogPost.get(123)
 
 Note how entities instances can access other models through `entity.model('MyModel')`. _Denormalization_ can then easily be done with a custom method:
 
-```js
+```javascript
 // Add custom "profilePict()" method on the User Schema
 userSchema.methods.profilePicture = function profilePicture() {
     // Any type of query can be done here
@@ -66,3 +66,4 @@ user.profilePict(function onProfilePict(err, imageEntity) {
     user.save().then(() { ... });
 });
 ```
+

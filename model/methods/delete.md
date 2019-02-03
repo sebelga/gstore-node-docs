@@ -1,8 +1,8 @@
-# Model Methods
+# DELETE
 
 This method allows you to delete an entity in the Datastore. It accepts the following arguments:
 
-```js
+```javascript
 MyModel.delete(
     /* {int|string}. -- Can also be an Array of ids to delete */
     <id>,
@@ -23,14 +23,14 @@ MyModel.delete(
 ```
 
 **@returns** -- an object with the following properties
-    - success -- a boolean set to true if one or serveral entity(ies) has/have been deleted or false if not.
-    - key -- the entity key(s) that have been deleted
-    - apiResponse -- the api response from @google-cloud-node
----
+
+* success -- a boolean set to true if one or serveral entity\(ies\) has/have been deleted or false if not.
+* key -- the entity key\(s\) that have been deleted
+* apiResponse -- the api response from @google-cloud-node
 
 Examples:
 
-```js
+```javascript
 const BlogPost = require('./blog-post.model');
 
 BlogPost.delete(123).then((response) => {
@@ -55,7 +55,7 @@ BlogPost.delete(123, function onBlogPostDelete(err, response) {
     if (err) {
         // deal with err
     }
-    
+
     ...
 });
 
@@ -81,11 +81,11 @@ transaction.run().then(() => {
 transaction.run().then(() => ( 
    BlogPost.delete(123, null, null, transaction)
            .then(transaction.commit)
-   	    .then(() => {
+           .then(() => {
                 ...
-    	    });
+            });
 )).catch((err) => {
     // handle errors 
 });
-
 ```
+

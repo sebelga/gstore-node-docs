@@ -1,9 +1,9 @@
-# Entity Methods
+# SAVE
 
 After you create an entity you can persist its data to the Datastore with `entity.save()`  
 This method accepts the following arguments
 
-```js
+```javascript
 entity.save(
     /* {Transaction} -- optional. Will execute the save operation inside this transaction */
     <transaction>,
@@ -16,12 +16,12 @@ entity.save(
 
 **@Returns** -- the entity saved
 
-### options
+## options
 
 The options argument has a **method** property where you can set the saving method.  
 It default to 'upsert'.
 
-```js
+```javascript
 {
   method: 'upsert|insert|update', // default: 'upsert'
 }
@@ -29,7 +29,7 @@ It default to 'upsert'.
 
 Example:
 
-```js
+```javascript
 // blog-post.model.js
 const gstore = require('gstore-node')();
 
@@ -41,7 +41,7 @@ const blogPostSchema = new gstore.Schema({
 module.exports = gstore.model('BlogPost', blogPostSchema);
 ```
 
-```js
+```javascript
 // blog-post.controller.js
 const BlogPost = require('./blog-post.model');
 
@@ -83,15 +83,15 @@ transaction.run()
     });
 ```
 
-### Saving inside a Transaction with middleware on Model
+## Saving inside a Transaction with middleware on Model
 
-If you have ["pre" middlewares](../../middleware-hooks/pre-hooks.md) on the _save_ method of your Model \(`mySchema.pre('save', myMiddleware)`\) you need to **chain the Promise** of the save method before committing the transaction, otherwise the entity **won't be** saved.
+If you have ["pre" middlewares]() on the _save_ method of your Model \(`mySchema.pre('save', myMiddleware)`\) you need to **chain the Promise** of the save method before committing the transaction, otherwise the entity **won't be** saved.
 
 You can avoid this by disabling the middlewares on the entity with **preHooksEnabled** set to false on the entity.
 
 Examples:
 
-```js
+```javascript
 const user = new User({ name: 'john' });
 const transaction = gstore.transaction();
 
@@ -138,3 +138,4 @@ transaction.run().then() => {
     });
 });
 ```
+

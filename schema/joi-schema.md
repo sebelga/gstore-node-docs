@@ -1,4 +1,4 @@
-# Schema
+# Joi Schema
 
 If you need more advanced schema validation gstore-node support **Joi types and validator** for your properties. [Joi ](https://www.npmjs.com/package/joi)is a powerful schema description language with a [great API](https://github.com/hapijs/joi/blob/v13.0.1/API.md) to validate your fields. It it specially useful for complex embedded entities validation or if you need more precision on your validation.
 
@@ -8,13 +8,13 @@ If you need more advanced schema validation gstore-node support **Joi types and 
 
 First make sure you have Joi installed
 
-```js
+```javascript
   npm install joi --save
 ```
 
 You can define a Joi type and validator by setting a _joi_ setting on your schema property and set the Schema _joi_ option to **true**.
 
-```js
+```javascript
 const { Schema } = require('gstore-node')();
 const Joi = require('joi');
 
@@ -40,7 +40,7 @@ But you **still need to configure** the following settings
 * read
 * write
 
-```js
+```javascript
 const schema = new Schema({
     password: { joi: Joi.string().required(), read: false },
     createdAt: { joi: Joi.date().default(Date.now), write: false },
@@ -50,9 +50,9 @@ const schema = new Schema({
 
 ## Advanced
 
-If you need even more control over the schema validation you can define an _**extra**_** **setting for joi. This will be applied on the complete Joi Schema object type.
+If you need even more control over the schema validation you can define an _**extra**_ ****setting for joi. This will be applied on the complete Joi Schema object type.
 
-```js
+```javascript
 const schema = new Schema({
     username: { joi: Joi.string().alphanum().min(3).max(30).required() },
     password: { joi: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/) },
@@ -73,7 +73,7 @@ const schema = new Schema({
 
 The validate\(\) method in Joi [accepts an options object](https://github.com/hapijs/joi/blob/v13.0.1/API.md#validatevalue-schema-options-callback). You can pass it in the Schema options.
 
-```
+```text
 const schema = new Schema({
     username: { joi: Joi.string().alphanum().min(3).max(30).required() },
     email: { joi: Joi.string().email() },
@@ -86,3 +86,4 @@ const schema = new Schema({
     },
 });
 ```
+

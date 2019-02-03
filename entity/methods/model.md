@@ -1,8 +1,8 @@
-# Entity methods
+# model\(\)
 
 With this method you can access a Model from an entity instance.
 
-```js
+```javascript
 const BlogPost = require('blog-post.model');
 const blogEntity = new BlogPost({ title: 'Blog title' });
 
@@ -22,3 +22,4 @@ commentSchema.pre('save', function beforeSave(){
                 });
 });
 ```
+

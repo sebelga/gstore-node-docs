@@ -1,4 +1,4 @@
-#Queries
+# findOne\(\)
 
 Quickly find an entity by passing key/value pairs. You can optionally pass an ancestors array or a namespace.
 
@@ -6,7 +6,7 @@ Quickly find an entity by passing key/value pairs. You can optionally pass an an
 
 This method accepts the following arguments:
 
-```js
+```javascript
 MyModel.findOne(
     /* {object}. -- Key/Value pairs to look for */
     <propsValues>,
@@ -21,19 +21,16 @@ MyModel.findOne(
 )
 ```
 
-## options
+## options
 
 The options argument accepts the following properties:
 
-- **cache** (default: the "global" cache configuration)    
-"true" = read from the cache and prime the cache with the query response.  
-
-- **ttl** (default: the global `cache.ttl.queries` value)
-Custom TTL value for the cache. For multi-store it can be an _Object_ of TTL values.
+* **cache** \(default: the "global" cache configuration\) "true" = read from the cache and prime the cache with the query response.
+* **ttl** \(default: the global `cache.ttl.queries` value\) Custom TTL value for the cache. For multi-store it can be an _Object_ of TTL values.
 
 Example:
 
-```js
+```javascript
 const User = require('./user.model');
 
 User.findOne({ email: 'john@snow.com' })
@@ -66,5 +63,5 @@ User.findOne({ email: 'john@snow.com' }, function onEntity(err, entity) {
     console.log(entity.plain());
     console.log(entity.get('name'));
 });
-
 ```
+

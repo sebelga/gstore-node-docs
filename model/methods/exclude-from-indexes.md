@@ -1,12 +1,12 @@
-# Model Methods
+# excludeFromIndexes\(\)
 
-When you create a Schemaless Models (with **explicityOnly ** set to false on your Schema), all the properties not declared explicitly will automatically be added to your indexes in the Datastore.
+When you create a Schemaless Models \(with **explicityOnly**  set to false on your Schema\), all the properties not declared explicitly will automatically be added to your indexes in the Datastore.
 
 If you don't want this behaviour you can call `Model.excludeFromIndexes(property)` passing a **string** property or an **Array** of properties. If one of the property passed is already declared on the Schema, this method will set its excludeFromIndexes value to **true**.
 
 Example:
 
-```js
+```javascript
 // Your model declaration
 
 const options = { explicitOnly: false };
@@ -41,5 +41,5 @@ BlogPost.excludeFromIndexes('text');
 
 // now you can save the entity
 blogPost.save().then(() => { ... });
-
 ```
+

@@ -1,8 +1,8 @@
-# Entity methods
+# datastoreEntity\(\)
 
-In case you need at any moment to fetch the entity **data** from Google Datastore, this method will do just that right on the entity instance. It is useful for example in "pre" delete hooks where the entity to be deleted is passed but we don't have its data. 
+In case you need at any moment to fetch the entity **data** from Google Datastore, this method will do just that right on the entity instance. It is useful for example in "pre" delete hooks where the entity to be deleted is passed but we don't have its data.
 
-```js
+```javascript
 // user.model.js
 
 const userSchema = new Schema({ name: { type: String }, pictIdx: { type: Number });
@@ -12,7 +12,7 @@ schema.pre('delete', function() {
     // At this stage we don't have its data but we need it in order
     // to check if there is an Image to delete with the User.
     // We use datastoreEntity() for that.
-    
+
     return this.datastoreEntity().then(entity => {
         if (!entity.pictIdx) {
             return;
@@ -30,5 +30,5 @@ module.exports = gstore.model('User', userSchema);
 
 const User = require('user.model');
 User.delete(123).then(...);
-
 ```
+

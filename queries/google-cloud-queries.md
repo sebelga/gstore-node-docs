@@ -1,4 +1,4 @@
-# Queries
+# @google-cloud Query
 
 gstore is built **on top of @google-cloud/datastore** so you can execute [any query from the Google library](https://cloud.google.com/nodejs/docs/reference/datastore/2.0.x/Query).
 
@@ -8,7 +8,7 @@ gstore is built **on top of @google-cloud/datastore** so you can execute [any qu
 
 ## Create the query
 
-```js
+```javascript
 const query = MyModel.query(
     /* {string}. -- optional. A namespace to execute the query */
     <namespace>,
@@ -21,7 +21,7 @@ const query = MyModel.query(
 
 Refer to [@google-cloud/datastore](https://cloud.google.com/nodejs/docs/reference/datastore/2.0.x/Query) for the list of operators available.
 
-```js
+```javascript
 query.filter(...).order(...).groupBy(...).start(...);
 ```
 
@@ -29,7 +29,7 @@ query.filter(...).order(...).groupBy(...).start(...);
 
 To execute the query call `query.run(options)`
 
-```js
+```javascript
 query.run({
     /* {boolean}. -- optional. Default: false
        If set to true will return all the properties of the entity,
@@ -60,7 +60,7 @@ query.run({
 
 Example:
 
-```js
+```javascript
 const User = require('./user.model');
 
 // 1. Build the query
@@ -125,3 +125,4 @@ query.run({ ttl: 3600 }).then( ... )
 // cache ttl multi-store
 query.run({ ttl: { memory: 600, redis: 3600 }).then( ... )
 ```
+

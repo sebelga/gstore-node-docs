@@ -1,55 +1,57 @@
-# Summary
+# Table of contents
 
-* Getting Started
+* [Introduction](README.md)
+* [Getting Started](getting-started/README.md)
   * [Presentation](getting-started/presentation.md)
   * [Motivation](getting-started/motivation.md)
   * [Installation](getting-started/installation.md)
-* Schema
+* [Schema](schema/README.md)
   * [About](schema/index.md)
   * [Type validation](schema/type_validation.md)
   * [Value validation](schema/value_validation.md)
   * [Additional properties settings](schema/other-paremeters.md)
   * [Schema options](schema/schema-options.md)
   * [Joi Schema](schema/joi-schema.md)
-  * Methods
-    * [path()](schema/schema-methods/path.md)
-    * [virtual()](schema/schema-methods/virtual.md)
+  * [Methods](schema/methods/README.md)
+    * [path\(\)](schema/methods/path.md)
+    * [virtual\(\)](schema/methods/virtual.md)
   * [Custom methods](schema/custom-methods.md)
-* Model
+* [Model](model/README.md)
   * [Creation](model/creation.md)
-  * Methods
-    * [GET](model/get.md)
-    * [UPDATE](model/update-method.md)
-    * [DELETE](model/delete.md)
-    * [excludeFromIndexes\(\)](model/exclude-from-indexes.md)
-    * [key\(\)](model/key.md)
-    * [sanitize\(\)](model/sanitize.md)
-    * [clearCache\(\)](model/clearcache.md)
-* Entity
+  * [Methods](model/methods/README.md)
+    * [GET](model/methods/get.md)
+    * [UPDATE](model/methods/update-method.md)
+    * [DELETE](model/methods/delete.md)
+    * [excludeFromIndexes\(\)](model/methods/exclude-from-indexes.md)
+    * [key\(\)](model/methods/key.md)
+    * [sanitize\(\)](model/methods/sanitize.md)
+    * [clearCache\(\)](model/methods/clearcache.md)
+* [Entity](entity/README.md)
   * [Creation](entity/creation.md)
   * [Properties](entity/properties.md)
-  * Methods
+  * [Methods](entity/methods/README.md)
     * [SAVE](entity/methods/save.md)
     * [plain\(\)](entity/methods/plain.md)
     * [model\(\)](entity/methods/model.md)
     * [datastoreEntity\(\)](entity/methods/datastoreentity.md)
     * [validate\(\)](entity/methods/validate.md)
-* Queries
+* [Queries](queries/README.md)
   * [@google-cloud Query](queries/google-cloud-queries.md)
   * [list\(\)](queries/list.md)
   * [findOne\(\)](queries/findone.md)
   * [deleteAll\(\)](queries/deleteall.md)
   * [findAround\(\)](queries/findaround.md)
-* Middleware \(hooks\)
+* [Middleware \(hooks\)](middleware-hooks/README.md)
   * [About](middleware-hooks/about.md)
   * [Pre hooks](middleware-hooks/pre-hooks.md)
   * [Post hooks](middleware-hooks/post-hooks.md)
-* Cache / Dataloader
+* [Cache / Dataloader](cache-dataloader/README.md)
   * [Dataloader](cache-dataloader/dataloader.md)
   * [Cache](cache-dataloader/cache.md)
-* gstore Methods
+* [gstore Methods](gstore-methods/README.md)
   * [save\(\)](gstore-methods/save.md)
 * [Typescript](typescript.md)
-* Appendix
+* [Appendix](appendix/README.md)
   * [Error Codes](appendix/error-codes.md)
   * [Credits](appendix/credits.md)
+

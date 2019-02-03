@@ -1,13 +1,12 @@
-#Queries
+# deleteAll\(\)
 
-If you need to delete all the entities of a Model, this shortcut query will do just that.
-It queries the entitites by batches of 500 (maximum set by the Datastore) and delete them then repeat the query.
+If you need to delete all the entities of a Model, this shortcut query will do just that. It queries the entitites by batches of 500 \(maximum set by the Datastore\) and delete them then repeat the query.
 
 Disclaimer: this shortcut query hasn't been tested on a very large set of entities so please report any issue you might find.
 
 This method accepts the following arguments:
 
-```js
+```javascript
 MyModel.deleteAll(
     /* {Array} -- optional. ex: ['ParentEntity', 1234 ] */
     <ancestors>,
@@ -18,10 +17,11 @@ MyModel.deleteAll(
 )
 ```
 
-**@Returns** -- an object with a **success ** and a **message** properties.
+**@Returns** -- an object with a **success**  and a **message** properties.
 
 Example:
-```js
+
+```javascript
 BlogPost.deleteAll().then((response) => {
     console.log(response.success);
 });
@@ -40,3 +40,4 @@ BlogPost.deleteAll(function(err, response){
     console.log(response.message);
 });
 ```
+

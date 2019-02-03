@@ -1,8 +1,8 @@
-# Schema methods
+# path\(\)
 
 Getter / Setter for schemas paths.
 
-```js
+```javascript
 const mySchema = new Schema({ username: {type: String });
 
 // Getter
@@ -17,3 +17,4 @@ const User = gstore.model('User');
 // add new path to the User Schema
 User.schema.path('age', { type: Number });
 ```
+

@@ -1,10 +1,10 @@
-# Schema
+# Additional properties settings
 
 ### optional
 
-By default if a value is not provided it will be set to null or to its _default _value \(if any\). If you don't want this behavior you can define it as _optional_ and if no value is passed, this property will not be saved in the Datastore.
+By default if a value is not provided it will be set to null or to its _default \_value \(if any\). If you don't want this behavior you can define it as \_optional_ and if no value is passed, this property will not be saved in the Datastore.
 
-```js
+```javascript
 const schema = new Schema({
     ...
     website: { optional: true }
@@ -13,14 +13,14 @@ const schema = new Schema({
 
 ### default
 
-Allows you to define a default value for a property.   
+Allows you to define a default value for a property.  
 You can either pass a **static** value or a **function** to be executed at runtime.
 
 In case you want to set the current time of the request to _date_ property you can use the `gstore.defaultValues.NOW` for default value \(instead of writing a function\).
 
-Also, if you have a _modifiedOn _property set in your schema, it will automatically be set to the **current time of the request** when the  entity is saved.
+Also, if you have a \_modifiedOn \_property set in your schema, it will automatically be set to the **current time of the request** when the entity is saved.
 
-```js
+```javascript
 const userSchema = new Schema({
     createdOn: { type: Date, default: gstore.defaultValues.NOW }, // will be set to the current time of the request
     modifiedOn: { type: Date }, // will automatically be updated to the current time on each "save|update"
@@ -30,9 +30,9 @@ const userSchema = new Schema({
 
 ### excludeFromIndexes
 
-By default all properties are **included** in the Datastore indexes. If you don't want some property to be indexed set its _excludeFromIndexes _setting to **true**.
+By default all properties are **included** in the Datastore indexes. If you don't want some property to be indexed set its \_excludeFromIndexes \_setting to **true**.
 
-```js
+```javascript
 const articleSchema = new Schema({
     author: { type: String },
     text: { type: String, excludeFromIndexes: true } // indexes size is limited, so very long text can't be indexed
@@ -41,7 +41,7 @@ const articleSchema = new Schema({
 
 For **embedded entities** you can pass one or more properties that you don't want to index by passing the property name or an Array of names.
 
-```js
+```javascript
 // In the example below, 'biography' is a property of the embedded entity 'author'
 // and 'text' & 'description' are properties of an implicit 'book' embedded entity in the array
 // Important: for embedded entities inside **Arrays** you have to specify the type to 'array' for the excludeFromIndexes to work.
@@ -66,7 +66,7 @@ This parameter can be overridden on a query basis by passing a _readAll_ option 
 
 If you want to protect certain properties to be written by a untrusted source, you can set their _write_ parameter to **false**. You can then call **sanitize\(\)** \(see Model section\) on a Model passing the user data and those properties will be removed from the data to be saved in the Datastore.
 
-```js
+```javascript
 // Schema:
 const blogPostSchema = new Schema({
     ...
@@ -91,7 +91,7 @@ function createBlogPost(req, res) {
 
 If you want to define a mandatory property, set its **required** parameter to true. If the value passed for property is **undefined**, **null** or an **empty string** it will not validate and will not be saved in the Datastore.
 
-```js
+```javascript
 // Schema:
 const userSchema = new Schema({
     name: { type: String }
@@ -110,7 +110,7 @@ user.save()
 
 ## Complete parameters example
 
-```js
+```javascript
 var entitySchema = new Schema({
     name:  {type: String},
     lastname:  {excludeFromIndexes: true},
@@ -121,6 +121,4 @@ var entitySchema = new Schema({
     ...
 });
 ```
-
-
 

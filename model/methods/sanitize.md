@@ -1,11 +1,11 @@
-# Model Methods
+# sanitize\(\)
 
-This methods will clean and do basic formatting of an entity data. You should always execute it on data coming from an untrusted source.  MyModel.sanitize() will:
+This methods will clean and do basic formatting of an entity data. You should always execute it on data coming from an untrusted source. MyModel.sanitize\(\) will:
 
-- **remove properties** that are marked as **not writable** in schemas
-- convert 'null' (string) values to **null**
+* **remove properties** that are marked as **not writable** in schemas
+* convert 'null' \(string\) values to **null**
 
-```js
+```javascript
 // user.model.js
 
 const userSchema = new Schema({
@@ -20,10 +20,9 @@ const schema = new Schema({
 }, { joi: true });
 
 module.exports = gstore.model('User', userSchema);
-
 ```
 
-```js
+```javascript
 // user.controller.js
 const User = require('./user.model');
 
@@ -46,5 +45,5 @@ console.log(data);
     name: null,
 }
 */
-
 ```
+

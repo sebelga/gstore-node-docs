@@ -1,15 +1,15 @@
-# Middleware \(hooks\)
+# Pre hooks
 
-### Pre hooks
+## Pre hooks
 
-Add methods to execute before "save", "delete", "findOne" or your customMethod. The middleware that you declare receives the original argument\(s\) passed to the method. You can modify them in your **resolve** passing an object with an **\_\_override** property containing the new parameter\(s\) for the target method \(be careful though... with great power comes great responsibility!\).  See example below.  
+Add methods to execute before "save", "delete", "findOne" or your customMethod. The middleware that you declare receives the original argument\(s\) passed to the method. You can modify them in your **resolve** passing an object with an **\_\_override** property containing the new parameter\(s\) for the target method \(be careful though... with great power comes great responsibility!\). See example below.  
 If you **reject** the Promise in a "pre" middleware, the target function is not executed.
 
-#### Example
+### Example
 
 Hook to hash a user's password before saving it into the Datastore.
 
-```js
+```javascript
 const gstore = require('gstore-node')();
 const bscrypt = require('bcrypt-nodejs');
 
@@ -74,7 +74,7 @@ user.save()
 **Note**  
 The pre\('delete'\) hook has its scope set on the entity to be deleted. **Except** when an _Array_ of ids to delete is passed.
 
-```js
+```javascript
 blogSchema.pre('delete', function() {
     console.log(this.entityKey); // the datastore entity key to be deleted
 
@@ -108,7 +108,7 @@ BlogPost.delete(1234).then(() => {...});
 
 You can also pass an **Array** of middlewares to execute
 
-```js
+```javascript
 function middleware1() {
     // Return a Promise
     return Promise.resolve();
@@ -121,11 +121,11 @@ function middleware2() {
 userSchema.pre('save', [middleware1, middleware2]);
 ```
 
-### Dataloader instance
+## Dataloader instance
 
 In case you provided a Dataloader instance to a Model.update\(\) call, it will be added to the entity being saved. This means that it is accessible from inside your "pre" save hooks.
 
-```js
+```javascript
 function myPreSaveMiddleware() {
     // fetch the BlogPost author detail with the "entity.model()" method
     return this.model('User')
@@ -136,11 +136,11 @@ function myPreSaveMiddleware() {
 }
 ```
 
-### Override parameters
+## Override parameters
 
 In the rare cases \(maybe during a migration of data\) where you'd need to override the parameters in a "pre" hook, you can resolve your middleware with an object containing an `__override`property.
 
-```js
+```javascript
 const userSchema = new gstore.Schema({
     user: { type: 'string' },
     email: { type: 'string', validate: 'isEmail' },
@@ -163,6 +163,4 @@ userSchema.pre('findOne', (...args) => {
 // the Query will occur on the Ancestor ['Dad', 'Targaryen'];
 User.findOne({ email: 'john@snow.com' }).then((user) => { ... })
 ```
-
-
 

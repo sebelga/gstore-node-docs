@@ -1,9 +1,9 @@
-# Entity
+# Creation
 
 Each entity is an instance of a Model and represents an entity stored in the Datastore of a certain _Kind_.  
 To create an entity you call the Model constructor
 
-```js
+```javascript
 new Model(
     /* {object} -- The entity data to be saved */
     <data>,
@@ -22,13 +22,13 @@ example:
 const blogPost = new BlogPost({title: 'title of the post', author: 'John Snow' });
 ```
 
-### id
-**(optional)**
+## id
 
-By default, if you don't pass an id when you create an instance, the entity id will be auto-generated. If you want to manually give the entity an id, pass it as a second parameter during the instantiation. 
+**\(optional\)**
 
-```js
+By default, if you don't pass an id when you create an instance, the entity id will be auto-generated. If you want to manually give the entity an id, pass it as a second parameter during the instantiation.
 
+```javascript
 // String id
 const blogPost = new BlogPost(data, 'stringId');
 
@@ -36,23 +36,22 @@ const blogPost = new BlogPost(data, 'stringId');
 const blogPost = new BlogPost(data, 1234);
 ```
 
+If the ID integer is **outside the bounds of a JavaScript Number object**, you have to create an **Int** calling the int\(\) method from @google-cloud/datastore
 
-If the ID integer is **outside the bounds of a JavaScript Number object**, you have to create an **Int** calling the int() method from @google-cloud/datastore
+Reminder: _gstore.ds_ is an alias to the google-cloud **datastore** instance.
 
-Reminder: _gstore.ds_ is an alias to the google-cloud **datastore **instance.
-
-```js
-
+```javascript
 // long Key ID 
 const blogPost = new BlogPost(data, gstore.ds.int('100000000000001234'));
 ```
 
-### ancestors
-**(optional)**
+## ancestors
+
+**\(optional\)**
 
 You can define the ancestors of the entity.
 
-```js
+```javascript
 // Auto generated id with an ancestor
 const blogPost = new BlogPost(data, null, ['Parent', 'keyname']);
 
@@ -60,12 +59,14 @@ const blogPost = new BlogPost(data, null, ['Parent', 'keyname']);
 const blogPost = new BlogPost(data, 1234, ['Parent', 'keyname']);
 ```
 
-### namespace
-**(optional)**
+## namespace
 
-By default entities keys are generated with the default namespace (defined when setting up the '@google-cloud/datastore'). You can create models instances on another namespace by passing it as a third parameter.
+**\(optional\)**
 
-```js
+By default entities keys are generated with the default namespace \(defined when setting up the '@google-cloud/datastore'\). You can create models instances on another namespace by passing it as a third parameter.
+
+```javascript
 // Creates an entity with auto-generated id on the namespace "dev-com.my-domain"
 const blogPost = new BlogPost(data, null, null, 'dev.com.my-domain');
 ```
+

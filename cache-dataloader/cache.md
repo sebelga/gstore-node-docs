@@ -2,11 +2,11 @@
 
 ![](https://github.com/sebelga/nsql-cache/raw/master/logo/logo.gif)
 
-gstore-node integrates the **[nsql-cache](https://github.com/sebelga/gstore-cache)** manager. This means that the cache management \(add, remove, invalidate) is done for you. Just initialize gstore-node with the cache turned on and call it a day.
+gstore-node integrates the [**nsql-cache**](https://github.com/sebelga/gstore-cache) manager. This means that the cache management \(add, remove, invalidate\) is done for you. Just initialize gstore-node with the cache turned on and call it a day.
 
 nsql-cache uses underneath the powerful [node-cache-manager](https://github.com/BryanDonovan/node-cache-manager). This means that you can have multiple cache stores with different TTL settings in each one. It also means that you get a [LRU memory cache](https://www.npmjs.com/package/lru-cache) instance out of the box that will give a boost to your application right away.
 
-**Important:** Since v2.7.0 of node-cache-manager it is possible to set/get and delete multiple keys at once from the cache stores. Although this feature is available in the manager, you still need to provide a store that _supports_ it. At the time of this writing, only the _memory_ store and the [node-cache-manager-redis-store](https://github.com/dabroek/node-cache-manager-redis-store) support it. If you provide [another store engine](https://github.com/BryanDonovan/node-cache-manager#store-engines) that does not support _mget_ or _mset_ you will still be able to use the cache but you won't be able to fetch **multiple** keys (batch) from the Datastore and cache them.
+**Important:** Since v2.7.0 of node-cache-manager it is possible to set/get and delete multiple keys at once from the cache stores. Although this feature is available in the manager, you still need to provide a store that _supports_ it. At the time of this writing, only the _memory_ store and the [node-cache-manager-redis-store](https://github.com/dabroek/node-cache-manager-redis-store) support it. If you provide [another store engine](https://github.com/BryanDonovan/node-cache-manager#store-engines) that does not support _mget_ or _mset_ you will still be able to use the cache but you won't be able to fetch **multiple** keys \(batch\) from the Datastore and cache them.
 
 ## Activate the cache
 
@@ -14,7 +14,7 @@ You activate the cache by passing a configuration object during the gstore initi
 
 #### Default configuration
 
-```js
+```javascript
 // server.js (Application Bootstrap)
 const GstoreNode = require('gstore-node');
 
@@ -28,12 +28,11 @@ const gstore = GstoreNode({
         config: { ... }
     },
 });
-
 ```
 
 This is the default configuration from nsql-cache.
 
-```js
+```javascript
 // ------------------------------
 // Default cache stores
 // ------------------------------
@@ -77,14 +76,13 @@ const defaultConfig = {
 };
 ```
 
-Refer to the [nsql-cache](https://github.com/sebelga/nsql-cache#api) for  a detailed explanation of the configuration properties.
-
+Refer to the [nsql-cache](https://github.com/sebelga/nsql-cache#api) for a detailed explanation of the configuration properties.
 
 #### Multi stores example
 
 To change the configuration you only need to provide what needs to be overriden.
 
-```js
+```javascript
 ...
 const redisStore = require('cache-manager-redis-store');
 
@@ -116,7 +114,7 @@ const gstore = require('gstore-node')({
         stores: cacheStores,
         config: cacheConfig
     }
-}); 
+});
 ```
 
 ## Access the cache instance
@@ -124,20 +122,20 @@ const gstore = require('gstore-node')({
 You can access at any time the underlying gstore-cache **instance** and call its API. If you need to cache custom data \(other the than _keys_ or _queries_ managed by gstore-node\), just call the set/mset/get/mset/del methods directly on the cache instance.  
 For more information on the API refer to the [nsql-cache documentation](https://github.com/sebelga/nsql-cache#api).
 
-```js
-// Anywhere in your Appication
+```javascript
+// Anywhere in your Application
 const gstore = require('gstore-node')();
 
 const { cache } = gstore;
 
-// You can then call any method from gstore-cache
+// You can then call any method from nsql-cache
 cache.get('somekey').then(...);
 cache.set('someKey', { name: 'john' }).then(...);
 ```
 
 ## Advanced Cache for Queries
 
-nsql-cache has an advanced cache for queries **when you provide a **_**Redis**_** store** \(either as single store or in a multi-store\). nsql-cache detects the _Kind_ of the entities on which the query is run to not only cache the _response_ of the Query but also keep a _reference_ to the Query in a Redis **_Set_**. It creates one Set by _Entity Kind_.
+nsql-cache has an advanced cache for queries **when you provide a** _**Redis**_ **store** \(either as single store or in a multi-store\). nsql-cache detects the _Kind_ of the entities on which the query is run to not only cache the _response_ of the Query but also keep a _reference_ to the Query in a Redis _**Set**_. It creates one Set by _Entity Kind_.
 
 This means that you can have an infinite TTL \(0\) for the queries on the Redis store. Each time an entity is added/updated/deleted gstore-node will automatically remove all the queries references from the Entity Kind Set and invalidate the cache of those queries.
 
@@ -157,7 +155,7 @@ In case you have a complex aggregation of data that comes from multiple queries,
 
 Let see it with an example:
 
-```js
+```javascript
 const gstore = require('gstore-node')();
 const { cache } = gstore;
 
@@ -213,7 +211,7 @@ It cannot do it for you though when you are updating entities inside a transacti
 
 Let see it with an example.
 
-```js
+```javascript
 const gstore = require('gstore-node')();
 const transaction = gstore.transaction();
 
@@ -249,6 +247,4 @@ transaction.run()
 
     })
 ```
-
-
 

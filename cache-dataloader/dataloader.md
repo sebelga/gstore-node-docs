@@ -6,7 +6,7 @@ It combines all individuals loads within a single frame of execution \(a single 
 
 Although Dataloader has a memoization cache for all loads which occur in a single request, it is not meant to be used as a cache layer. As it excplicitly says, Dataloader "is a data loading mechanism, and its cache only serves the purpose of not repeatedly loading the same data in the context of a single request to your Application".
 
-### How it works
+## How it works
 
 First make sure that you have dataloader installed.
 
@@ -14,14 +14,14 @@ First make sure that you have dataloader installed.
 npm install --save dataloader
 ```
 
-#### gstore.createDataLoader\(\)
+### gstore.createDataLoader\(\)
 
 createDataLoader\(\) is a **helper** to create a Dataloader instance with a batch function that works with the Google Datastore.  
 You will need to create a new Dataloader instance **for each request**, and pass it to gstore methods as an option property.
 
 Let's see it with some examples.
 
-```js
+```javascript
 // user.routes.js
 
 const gstore = require('gstore-node');
@@ -38,7 +38,7 @@ const getUser = (req, res) => {
 
 If you only had this piece of code then the Dataloader would not be of much help. Let's see with a more complex example
 
-```js
+```javascript
 // images.js
 
 const Image = require('./image.model');
@@ -91,11 +91,11 @@ module.exports = { getUser };
  };
 ```
 
-#### Dataloader memoization cache
+### Dataloader memoization cache
 
 To understand memoization, let's see it with another example.
 
-```js
+```javascript
 const Post = require('./posts.model');
 
 // dataloader is passed from the request to our getPost() method
@@ -128,6 +128,4 @@ const updateUser = (id, data, dataloader) => {
     return User.update(id, data, null, null, null, { dataloader })
 };
 ```
-
-
 

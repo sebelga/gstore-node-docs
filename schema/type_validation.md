@@ -1,4 +1,4 @@
-# Schema
+# Type validation
 
 You can define a type for a schema property passing a "type" parameter to it.
 
@@ -20,7 +20,7 @@ Valid types are
 
 So back to our previous example of a User Model, we would probably have something like this.
 
-```js
+```javascript
 const userSchema = new Schema({
     name: { type: String },
     lastname: { type: String },
@@ -33,14 +33,12 @@ const userSchema = new Schema({
 });
 ```
 
-Note: you are not forced to set a type, if you don't define one, then **any **type is valid.
+Note: you are not forced to set a type, if you don't define one, then **any** type is valid.
 
-```js
+```javascript
 const userSchema = new Schema({
     name: {}, // any type
     email: { type: String }
 });
 ```
-
-
 
