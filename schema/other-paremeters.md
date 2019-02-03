@@ -76,12 +76,6 @@ ArticleModel.list()
     })
 ```
 
-For **embedded entities** you can pass one or more properties that you don't want to index by passing the property name or an Array of names.
-
-```javascript
-
-```
-
 ### read
 
 If you don't want certain properties to show up in the response data of queries or when calling entity.plain\(\) \(see Entity section\), set this parameter to **false**. This is useful when you have entity properties only useful to your business logic and that you don't want to exposed publicly.
