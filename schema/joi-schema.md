@@ -50,7 +50,7 @@ const schema = new Schema({
 
 ## Advanced
 
-If you need even more control over the schema validation you can define an _**extra**_ ****setting for joi. This will be applied on the complete Joi Schema object type.
+If you need even more control over the schema validation you can define an _**extra**_ _\*\*_setting for joi. This will be applied on the complete Joi Schema object type.
 
 ```javascript
 const schema = new Schema({
