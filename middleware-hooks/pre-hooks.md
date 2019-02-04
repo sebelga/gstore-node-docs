@@ -10,8 +10,10 @@ If you **reject** the Promise in a "pre" middleware, the target function is not 
 Hook to hash a user's password before saving it into the Datastore.
 
 ```javascript
-const gstore = require('gstore-node')();
+const { instances } = require('gstore-node');
 const bscrypt = require('bcrypt-nodejs');
+
+const gstore = instances.get('default');
 
 const userSchema = new gstore.Schema({
     user: { type: String },

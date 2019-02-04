@@ -73,7 +73,9 @@ BlogPost.update(123, blogPostData, function onBlogPostUpdate(err, entity) {
 The dataloader instance will be added to the entity instance being saved. This means that it is available in your "pre" save middlewares \(attached on the "this" scope \(`const dataloader = this.dataloader;`\)\)
 
 ```javascript
-const gstore = require('gstore-node')();
+const { instances } = require('gstore-node');
+
+const gstore = instances.get('default');
 
 // Important! This should be done on **each** request (read the Dataloader documentation)
 const dataloader = gstore.createDataLoader();

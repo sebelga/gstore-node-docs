@@ -89,7 +89,9 @@ transaction.run().then(() => {
 &gt; **ttl** Overrides the global keys TTL of the cache. If you have multiple cache stores, you can pass an _Object_ with a different value for each store. See in the example below.
 
 ```javascript
-const gstore = require('gstore-node')();
+const { instances } = require('gstore-node');
+
+const gstore = instances.get('default');
 
 // Important! This should be done on **each** request (read the Dataloader documentation)
 const dataloader = gstore.createDataLoader();

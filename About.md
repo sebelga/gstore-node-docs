@@ -17,6 +17,7 @@
 * **Joi** type and validation \([documentation](https://www.npmjs.com/package/joi)\)
 * [**cache**](cache-dataloader/cache.md) layer to speed up entities fetching
 * [**Typescript**](typescript.md) support
+* [**populate()**](populate.md) support to fetch reference entities and do cross Entity Type "joins" when querying one or multiple entities
 
 ### Repository
 
@@ -25,4 +26,3 @@
 ### Support
 
 [https://github.com/sebelga/gstore-node/issues](https://github.com/sebelga/gstore-node/issues)
-

@@ -27,9 +27,10 @@ schema.post('save', function postSave(){
 
 // user.controller.js
 
-const gstore = require('gstore-node')();
-
+const { instances } = require('gstore-node');
 const User = require('./user.model');
+
+const gstore = instances.get('default');
 const user = new User({ name: 'John', email: 'john@snow.com' });
 
 user.save().then((entity) => {

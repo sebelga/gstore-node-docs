@@ -8,11 +8,7 @@ Although Dataloader has a memoization cache for all loads which occur in a singl
 
 ## How it works
 
-First make sure that you have dataloader installed.
-
-```bash
-npm install --save dataloader
-```
+On each request of your application you create a new instance of Dataloader. Gstore provides a method for that `createDataLoader()`
 
 ### gstore.createDataLoader\(\)
 
@@ -24,9 +20,10 @@ Let's see it with some examples.
 ```javascript
 // user.routes.js
 
-const gstore = require('gstore-node');
+const { Gstore } = require('gstore-node');
 const User = require('../users/users.model');
 
+const gstore = new Gstore();
 const { createDataLoader } = gstore;
 
 const getUser = (req, res) => {
@@ -66,11 +63,13 @@ module.exports = { getUser };
  * The above 2 files don't know about each other (and should not).
  * In our book route handler we need to fetch the book and then its author + cover image
  */
- const gstore = require('gstore-node')();
+ const { instances } = require('gstore-node');
 
  const images = require('../images/images');
  const users = require('../images/images');
  const Book = require('./book.model');
+
+ const gstore = instances.get('default');
 
  const getBook = (req, res) => {
      const dataloader = gstore.createDataLoader();

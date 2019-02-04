@@ -31,7 +31,9 @@ Example:
 
 ```javascript
 // blog-post.model.js
-const gstore = require('gstore-node')();
+const { instances } = require('gstore-node');
+
+const gstore = intances.get('default');
 
 const blogPostSchema = new gstore.Schema({
   title: { type: String },
