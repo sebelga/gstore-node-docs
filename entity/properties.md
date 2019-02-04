@@ -13,9 +13,7 @@ This means there are two ways you can access the data of an Entity: via entity.e
 For example:
 
 ```javascript
-const { instances } = require('gstore-node');
-
-const gstore = intances.get('default');
+const gstore = require('gstore-node')();
 
 const blogPostSchema = new gstore.Schema({
     title: { type:'string' },

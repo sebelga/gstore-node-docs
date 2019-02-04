@@ -9,9 +9,7 @@ It is also on schemas that you can add **pre** and **post** middlewares for diff
 Let's define a simple "User" Model schema.
 
 ```javascript
-const { instances } = require('gstore-node');
-
-const gstore = instances.get('default'); // This implies that you have set an instance earlier
+const gstore = require('gstore-node')();
 const Schema = gstore.Schema;
 
 const userSchema = new Schema({

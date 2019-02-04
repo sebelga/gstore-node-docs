@@ -5,21 +5,31 @@
 In order to get a gstore instance, import the module and then call it and provide an optional configuration object. The gstore instances are cached so you can do this in multiple places of your application, **the same instance will always be returned**.
 
 ```javascript
-const { Gstore } = require('gstore-node');
-const gstore = new Gstore(/*optional*/<config>);
+const GstoreNode = require('gstore-node');
+const gstore = GstoreNode(/*optional*/<config>);
 ```
 
 ## Configuration
 
 Optionally you can provide a configuration object when creating the instance with the following properties:
 
-### cache
+### namespace \(string\)
 
-Refer to [the cache documentation](../cache-dataloader/cache.md) for a detail explanation of the cache configuration.
+String \(`default: "gstore-node"`\)
+
+This allows you to create multiple instances of gstore. The following example will create 2 instances of gstore that can connect to 2 different Datastore client instances \(see below\).
 
 ```javascript
-const { Gstore } = require('gstore-node');
-const gstore = new Gstore({ cache: true });
+const GstoreNode = require('gstore-node');
+const gstoreDefaultInstance = GstoreNode();
+const gstoreInstance1 = GstoreNode({ namespace: 'instance-1' });
+const gstoreInstance2 = GstoreNode({ namespace: 'instance-2' });
+
+// anywhere in your application...
+
+const gstoreDefaultInstance = require('gstore-node')(); // Get the default instance
+// or
+const gstoreInstance1 = require('gstore-node')({ namespace: 'instance-1' }); // Get other instance
 ```
 
 ### errorOnEntityNotFound
@@ -28,81 +38,36 @@ Boolean \(`default: true`\)
 
 By default if you fetch an entity by Key and the entity is not found in the Datastore, gstore will throw an "_ERR\_ENTITY\_NOT\_FOUND_" error. If you prefer to have `null` returned when an entity is not found, set `errorOnEntityNotFound` to `false`.
 
-```javascript
-const { Gstore } = require('gstore-node');
-const gstore = new Gstore({ errorOnEntityNotFound: false });
+```text
+const GstoreNode = require('gstore-node');
+const gstore = GstoreNode({ errorOnEntityNotFound: false });
 ```
+
+### cache
+
+Refer to [the cache documentation](../cache-dataloader/cache.md) for a detail explanation of the cache configuration.
 
 ## Connect to the Google Cloud Node library
 
 For all the information on how to configure the Goolge Datastore client, [read the docs here](https://cloud.google.com/nodejs/docs/reference/datastore/2.0.x/Datastore).
 
 ```javascript
-const { Datastore } = require('@google-cloud/datastore');
-const { Gstore } = require('gstore-node');
-
-const gstore = new Gstore();
-const datastore = new Datastore();
+const datastore = require('@google-cloud/datastore')();
+const GstoreNode = require('gstore-node');
+const gstore = GstoreNode();
 
 gstore.connect(datastore);
+
+// Create another gstore instance and connect it to another Datastore instance (with a different namespace)
+const namespace = 'another-namespace';
+const datastore2 = require('@google-cloud/datastore')({ namespace });
+const gstore2 = GstoreNode({ namespace });
 ```
 
 ## Aliases
 
-After connecting gstore to the datastore, the gstore instance has **2 aliases** set up
+After connecting gstore to the datastore, gstore has **2 aliases** set up
 
 * `gstore.ds` The underlying @google/datastore instance. This allows you to access **the full API** of the Datastore client whenever needed.
 * `gstore.transaction`. Alias of the same google-cloud/datastore method
-
-## Instances
-
-Each time you call `const gstore = new Gstore()` you create a **new** instance. This means that you are responsible to cache that instance to be able to retrieve it in different places of your application. One way to do that is to initialize gstore in a separate file and require the instance from there.
-
-```javascript
-// db.js
-const { Gstore } = require('gstore-node');
-const gstore = new Gstore();
-
-module.exports = { gstore };
-```
-
-```javascript
-// You can then access the same instance anywhere in your application with
-const { gstore } = require('./db');
-```
-
-Another way is to use gstore `instances` to **save** and **retrieve** gstore instances.
-
-```javascript
-// server.js
-const { Gstore, instances } = require('gstore-node');
-const { Datastore } = require('@google-cloud/datastore');
-
-const gstore1 = new Gstore();
-const gstore2 = new Gstore({ cache: true }); // instance with cache turned "on"
-const gstore3 = new Gstore(); // instance that we will connect to a different Datastore "namespace"
-
-const datastore1 = new Datastore({ namespace: 'dev' });
-const datastore2 = new Datastore({ namespace: 'staging' });
-
-gstore1.connect(datastore1);
-gstore2.connect(datastore1);
-gstore3.connect(datastore2); // different namespace
-
-// Give a unique ID to each instance
-instances.set('default', gstore1);
-instances.set('cache-on', gstore2);
-instances.set('staging', gstore3);
-
-...
-
-// Anywhere in your application...
-const { instances } = require('gstore-node');
-
-const gstoreDefaultInstance = instances.get('default');
-// or
-const gstoreWithCache = instances.get('cache-on');
-// or
-const gstoreStaging = instances.get('staging');
-```
 

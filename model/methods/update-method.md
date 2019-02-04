@@ -47,8 +47,8 @@ BlogPost.update(123, data, ['Grandpa', 123, 'Dad', 123], 'dev.namespace.com')
 
 // from inside a Transaction
 const transaction = gstore.transaction();
-transaction.run().then(async () => {
-    await BlogPost.update(123, data, null, null, transaction);
+transaction.run().then(() => {
+    BlogPost.update(123, data, null, null, transaction);
 
     transaction.commit().then(() => { ... });
 });
@@ -73,9 +73,7 @@ BlogPost.update(123, blogPostData, function onBlogPostUpdate(err, entity) {
 The dataloader instance will be added to the entity instance being saved. This means that it is available in your "pre" save middlewares \(attached on the "this" scope \(`const dataloader = this.dataloader;`\)\)
 
 ```javascript
-const { instances } = require('gstore-node');
-
-const gstore = instances.get('default');
+const gstore = require('gstore-node')();
 
 // Important! This should be done on **each** request (read the Dataloader documentation)
 const dataloader = gstore.createDataLoader();

@@ -8,9 +8,7 @@ As you can see, the name of the model will be the entity kind in the Datastore.
 Example:
 
 ```javascript
-const { instances } = require('gstore-node');
-
-const gstore = instances.get('default');
+const gstore = require('gstore-node')();
 const Schema = gstore.Schema;
 
 const userSchema = new Schema({

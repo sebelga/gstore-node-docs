@@ -48,7 +48,7 @@ BlogPost.get(1234, function onEntity(err, entity) {
 });
 ```
 
-The resulting entity has a **plain\(\)** method that returns an object with the entity **data** + its **id**. See [the doc here](../../entity/methods/plain.md).
+The resulting entity has a **plain\(\)** method that returns an object with the entity **data**  + its **id**. See [the doc here](../../entity/methods/plain.md).
 
 ```javascript
 BlogPost.get(123).then(entity) {
@@ -89,9 +89,7 @@ transaction.run().then(() => {
 &gt; **ttl** Overrides the global keys TTL of the cache. If you have multiple cache stores, you can pass an _Object_ with a different value for each store. See in the example below.
 
 ```javascript
-const { instances } = require('gstore-node');
-
-const gstore = instances.get('default');
+const gstore = require('gstore-node')();
 
 // Important! This should be done on **each** request (read the Dataloader documentation)
 const dataloader = gstore.createDataLoader();

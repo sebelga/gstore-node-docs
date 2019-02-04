@@ -16,13 +16,13 @@ You activate the cache by passing a configuration object during the gstore initi
 
 ```javascript
 // server.js (Application Bootstrap)
-const { Gstore } = require('gstore-node');
+const GstoreNode = require('gstore-node');
 
 // Default cache configuration
-const gstore = new Gstore({ cache: true }); 
+const gstore = GstoreNode({ cache: true }); 
 
 // Or by passing cache store(s) and configuration
-const gstore = new Gstore({
+const gstore = GstoreNode({
     cache: {
         stores: [ ... ],
         config: { ... }
@@ -109,14 +109,12 @@ const cacheConfig = {
     }
 };
 
-const gstore = new Gstore({
+const gstore = require('gstore-node')({
     cache: {
         stores: cacheStores,
         config: cacheConfig
     }
 });
-
-instances.set('default', gstore);
 ```
 
 ## Access the cache instance
@@ -126,9 +124,8 @@ For more information on the API refer to the [nsql-cache documentation](https://
 
 ```javascript
 // Anywhere in your Application
-const { instances } = require('gstore-node');
+const gstore = require('gstore-node')();
 
-const gstore = instances.get('default');
 const { cache } = gstore;
 
 // You can then call any method from nsql-cache
@@ -159,9 +156,7 @@ In case you have a complex aggregation of data that comes from multiple queries,
 Let see it with an example:
 
 ```javascript
-const { instances } = require('gstore-node');
-
-const gstore = instances.get('default');
+const gstore = require('gstore-node')();
 const { cache } = gstore;
 
 const Posts = require('./posts.model');
@@ -217,9 +212,7 @@ It cannot do it for you though when you are updating entities inside a transacti
 Let see it with an example.
 
 ```javascript
-const { instances } = require('gstore-node');
-
-const gstore = instances.get('default');
+const gstore = require('gstore-node')();
 const transaction = gstore.transaction();
 
 const User = require('./user.model');

@@ -54,7 +54,7 @@ const mySchema = new Schema({
 
 ### excludeFromRead
 
-For **embedded entities** you can provide an array of properties that you don't want to be returned in the queries result or when calling `entity.plain()`
+For **embedded entities** you can provide an array of properties that you don't want to be returned in the queries result or when calling `entity.plain()` 
 
 ```javascript
 const articleSchema = new Schema({
