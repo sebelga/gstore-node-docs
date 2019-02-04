@@ -56,7 +56,7 @@ After connecting gstore to the datastore, the gstore instance has **2 aliases** 
 
 ## Instances
 
-Each time you call `const gstore = new Gstore()` you create a **new** instance. This means that you are responsible to cache that instance to be able to retrieve it in different places of your application.  One way to do that is to initialize gstore in a separate file and require the instance from there.
+Each time you call `const gstore = new Gstore()` you create a **new** instance. This means that you are responsible to cache that instance to be able to retrieve it in different places of your application. One way to do that is to initialize gstore in a separate file and require the instance from there.
 
 ```javascript
 // db.js
@@ -74,7 +74,6 @@ const { gstore } = require('./db');
 Another way is to use gstore `instances` to **save** and **retrieve** gstore instances.
 
 ```javascript
-
 // server.js
 const { Gstore, instances } = require('gstore-node');
 const { Datastore } = require('@google-cloud/datastore');
@@ -106,3 +105,4 @@ const gstoreWithCache = instances.get('cache-on');
 // or
 const gstoreStaging = instances.get('staging');
 ```
+

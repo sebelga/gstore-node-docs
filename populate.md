@@ -30,10 +30,9 @@ const Post = gstore.model('Post', postSchema);
 
 ## Save the entities with references
 
-Let's then save some entities, providing the entity _Key_ as reference. 
+Let's then save some entities, providing the entity _Key_ as reference.
 
 ```javascript
-
 const blog = new Blog({ title: 'This is the title of the blog' });
 await blog.save();
 
@@ -47,7 +46,7 @@ const post = new Post({ title: 'Title of the post', author: user.entityKey });
 await post.save();
 ```
 
-## Populate on Model.get()
+## Populate on Model.get\(\)
 
 ### Populate 1 reference
 
@@ -112,7 +111,7 @@ console.log(post);
 // }
 ```
 
-### Chain populate() calls
+### Chain populate\(\) calls
 
 We can chain `populate()` calls to fetch multiple references
 
@@ -224,12 +223,11 @@ console.log(posts);
 //]
 ```
 
-
 ### Specify the properties to return
 
-`populate()` accepts a second argument to specify **one or multiple properties** to be returned from the reference entity.  
+`populate()` accepts a second argument to specify **one or multiple properties** to be returned from the reference entity.
 
-**Important:** You can't provide specific properties if you have passed an **_array_** of references as first argument.
+**Important:** You can't provide specific properties if you have passed an _**array**_ of references as first argument.
 
 ```javascript
 const post = await Post.get(123).populate('user', 'email');
@@ -252,13 +250,12 @@ const post = await Post.get(123).populate(['user', 'blog'], 'email'); // This is
 
 ## Populate on queries
 
-The real power of `populate()` comes **with queries** as it allows you to very easily join entities data, similar to a "Left Join" in SQL.  gstore uses [Dataloader](./cache-dataloader/dataloader.md) to fetch all the entities by keys in one call. Using Dataloader means that if multiple entities returned by the query have references pointing to **the same entity Key**, only 1 Key will be sent to `Datastore.get()` and fetched from the Datastore. It also means that the entities fetched are memoized and returned from cache if the reference Key is the same at different "depth" of the tree traversal.  
+The real power of `populate()` comes **with queries** as it allows you to very easily join entities data, similar to a "Left Join" in SQL. gstore uses [Dataloader](cache-dataloader/dataloader.md) to fetch all the entities by keys in one call. Using Dataloader means that if multiple entities returned by the query have references pointing to **the same entity Key**, only 1 Key will be sent to `Datastore.get()` and fetched from the Datastore. It also means that the entities fetched are memoized and returned from cache if the reference Key is the same at different "depth" of the tree traversal.  
 This not only means faster retrieval time but only some nice savings on your Datastore billing at the end of the month!
 
 Let's look at some examples.
 
 ```javascript
-
 /**
  * Let's assume that we have 3 Models with the following Schemas
  * 
@@ -320,13 +317,13 @@ Book.list()
     });
 ```
 
-For the 2 "books" + its "collection" + the "author" of the books and the collections, **only 3 keys** where fetched from the Datastore: `['User', 1], ['User', 2], ['Collection', 1]`.  
+For the 2 "books" + its "collection" + the "author" of the books and the collections, **only 3 keys** where fetched from the Datastore: `['User', 1], ['User', 2], ['Collection', 1]`.
 
-Of course, if you have [activated the cache](./cache-dataloader/cache.md) with a Redis store, it would be `0` keys fetched the second time that this query is executed, until a "User", "Post" or "Collection" is added/updated or removed.
+Of course, if you have [activated the cache](cache-dataloader/cache.md) with a Redis store, it would be `0` keys fetched the second time that this query is executed, until a "User", "Post" or "Collection" is added/updated or removed.
 
-**Important:** The maxium Keys allowed for a Lookup operation is **1,000**. With `populate()`, this corresponds to the maximum number of _distinct_ entity references at **one** "depth" of the entity data tree. Thanks to the Dataloader and cache, this limit should be hard to reach in most use cases. ([View the Datastore limitations](https://cloud.google.com/datastore/docs/concepts/limits))
+**Important:** The maxium Keys allowed for a Lookup operation is **1,000**. With `populate()`, this corresponds to the maximum number of _distinct_ entity references at **one** "depth" of the entity data tree. Thanks to the Dataloader and cache, this limit should be hard to reach in most use cases. \([View the Datastore limitations](https://cloud.google.com/datastore/docs/concepts/limits)\)
 
-### Model.list(), .findAround(), .findOne(), .query()
+### Model.list\(\), .findAround\(\), .findOne\(\), .query\(\)
 
 All the different gstore queries support the `populate()` chaining calls with the same arguments that we have seen in previous examples.
 
@@ -348,7 +345,7 @@ const users = await User.findAround('createdAt', new Date('2019-01-01'), { after
 
 ## Populate on an Entity instance
 
-Finally, _Entity_ instances have also a `populate()` method that you can call to quickly fetch all the entity references. Like any other populate() that we have seen above, it takes 2 arguments: the "_references_" to fetch and the "_properties_" to return from each entity reference.
+Finally, _Entity_ instances have also a `populate()` method that you can call to quickly fetch all the entity references. Like any other populate\(\) that we have seen above, it takes 2 arguments: the "_references_" to fetch and the "_properties_" to return from each entity reference.
 
 ```javascript
 const post = new Post({ title: 'Some title', author: SomeAuthorKey });
@@ -356,3 +353,4 @@ await post.populate('author');
 
 // post.author has now been replaced by the content of the entity at "SomeAuthorKey"
 ```
+

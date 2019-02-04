@@ -48,7 +48,7 @@ BlogPost.get(1234, function onEntity(err, entity) {
 });
 ```
 
-The resulting entity has a **plain\(\)** method that returns an object with the entity **data**  + its **id**. See [the doc here](../../entity/methods/plain.md).
+The resulting entity has a **plain\(\)** method that returns an object with the entity **data** + its **id**. See [the doc here](../../entity/methods/plain.md).
 
 ```javascript
 BlogPost.get(123).then(entity) {

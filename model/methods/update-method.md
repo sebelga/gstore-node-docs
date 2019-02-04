@@ -47,8 +47,8 @@ BlogPost.update(123, data, ['Grandpa', 123, 'Dad', 123], 'dev.namespace.com')
 
 // from inside a Transaction
 const transaction = gstore.transaction();
-transaction.run().then(() => {
-    BlogPost.update(123, data, null, null, transaction);
+transaction.run().then(async () => {
+    await BlogPost.update(123, data, null, null, transaction);
 
     transaction.commit().then(() => { ... });
 });
