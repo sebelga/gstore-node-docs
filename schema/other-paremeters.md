@@ -132,6 +132,32 @@ user.save()
     });
 ```
 
+### ref
+
+If you have specified a Schema.Types.Key as a type, you can optionally provide the Entity _Type_ that you want the Key to be of. If you don't specify a ref, any valid Datastore Key is allowed.
+
+```text
+const userSchema = new Schema({
+    name: { type: String }
+    address: { type: Schema.Types.Key,  ref: 'Address' } // Must point to an Address entity Kind
+});
+
+// Could be used like this
+
+const User = require('./user.model');
+const Address = require('./address.model');
+
+const user = new User({ name: 'John', address: Adress.key(123) });
+
+// Or first by saving a new address an then create a User with its Key
+
+const address = new Addresss({ country: 'Belgium' });
+const { entityKey } = await address.save();
+const user = new User({ name: 'John', address: entityKey });
+await user.save();
+...
+```
+
 ## Complete parameters example
 
 ```javascript
