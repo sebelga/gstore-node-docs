@@ -11,9 +11,7 @@ gstore.save(
     /* {Transaction} -- optional. The transaction currently in progress */
     <transaction>,
     /* {object} -- optional. An optional object of options */
-    <options>,
-    /* {function} -- optional. The callback, if not passed a Promise is returned */
-    <callback>
+    <options>
 )
 ```
 
@@ -43,15 +41,7 @@ query.run({ format: "ENTITY" })
          // and then save them by calling:
          gstore.save(entities).then(() => {
              ...
-         });
-
-         // ... or with a callback
-         gstore.save(entities, (err) => {
-             if (err) { ... // deal with err) }
-
-             ...
-         });
-
+         })
     });
 
 /*

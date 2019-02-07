@@ -15,9 +15,7 @@ MyModel.findOne(
     /* {string} -- optional. A specific namespace */
     <namespace>,
     /* {object}. -- optional. Options for the query */
-    <options>,
-    /* {function} -- optional. The callback, if not passed a Promise is returned */
-    <callback>
+    <options>
 )
 ```
 
@@ -52,16 +50,6 @@ User.findOne({ email: 'john@snow.com' }, null, null, { ttl: { memory: -1, redis:
     .then((entity) => {
         console.log(entity.plain()); // entityData + id
         console.log(entity.firstname)); // 'John'
-});
-
-// with a callback
-User.findOne({ email: 'john@snow.com' }, function onEntity(err, entity) {
-    if (err) {
-        ... // deal with error
-    }
-
-    console.log(entity.plain());
-    console.log(entity.get('name'));
 });
 ```
 

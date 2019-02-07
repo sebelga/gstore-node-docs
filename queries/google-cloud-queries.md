@@ -78,16 +78,6 @@ query.run().then((response) => {
     const nextPageCursor = response.nextPageCursor; // not present if no more results
 });
 
-// or with a callback
-query.run(function(err, response) {
-    if (err) {
-        // deal with err
-    }
-
-    const entities = response.entities;
-    const nextPageCursor = response.nextPageCursor;
-});
-
 // You can then use the "nextPageCursor" when calling the same query and pass it as start value
 const query = User.query()
                   .filter('name', '=', 'John')

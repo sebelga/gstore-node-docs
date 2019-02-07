@@ -14,9 +14,7 @@ MyModel.get(
     /* {Transaction} -- optional. The transaction currently in progress */
     <transaction>,
     /* {object} -- optional. Additional config */
-    <options>,
-    /* {function} -- optional. The callback, if not passed a Promise is returned */
-    <callback>
+    <options>
 )
 ```
 
@@ -40,12 +38,6 @@ BlogPost.get([1,2,3]).then((entities) => {
 // Passing an ancestor path with a Kind and a name
 const ancestors = ['Parent', 'parentName'];
 BlogPost.get('stringId', ancestors).then((entity) => { ... });
-
-// ... with a callback
-BlogPost.get(1234, function onEntity(err, entity) {
-    if (err) { // deal with err }
-    console.log('Blogpost title:', entity.title);
-});
 ```
 
 The resulting entity has a **plain\(\)** method that returns an object with the entity **data** + its **id**. See [the doc here](../../entity/methods/plain.md).

@@ -18,9 +18,7 @@ MyModel.update(
     /* {Transaction} -- optional. The transaction currently in progress */
     <transaction>,
     /* {object} -- optional. Additional config */
-    <options>,
-    /* {function} -- optional. The callback, if not passed a Promise is returned */
-    <callback>
+    <options>
 )
 ```
 
@@ -51,14 +49,6 @@ transaction.run().then(async () => {
     await BlogPost.update(123, data, null, null, transaction);
 
     transaction.commit().then(() => { ... });
-});
-
-// with a callback
-BlogPost.update(123, blogPostData, function onBlogPostUpdate(err, entity) {
-    if (err) {
-        // deal with err
-    }
-    console.log(entity.plain());
 });
 ```
 
