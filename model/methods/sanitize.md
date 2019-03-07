@@ -4,6 +4,7 @@ This methods will clean and do basic formatting of an entity data. You should al
 
 * **remove properties** that are marked as **not writable** in schemas
 * convert 'null' \(string\) values to **null**
+* convert entity **refs** that have been populated back to their Datastore Key
 
 ```javascript
 // user.model.js
