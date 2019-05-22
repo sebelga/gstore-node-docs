@@ -25,6 +25,7 @@ The options argument accepts the following properties:
 
 * **cache** \(default: the "global" cache configuration\) "true" = read from the cache and prime the cache with the query response.
 * **ttl** \(default: the global `cache.ttl.queries` value\) Custom TTL value for the cache. For multi-store it can be an _Object_ of TTL values.
+* **readAll** \(default: false\). Return all the properties, even the ones marked as `read: false` on the Schema.
 
 Example:
 
@@ -37,8 +38,8 @@ User.findOne({ email: 'john@snow.com' })
         console.log(entity.firstname)); // 'John'
 });
 
-// Disable cache
-User.findOne({ email: 'john@snow.com' }, null, null, { cache: false })
+// Disable cache and read all properties
+User.findOne({ email: 'john@snow.com' }, null, null, { cache: false, readAll: true })
     .then((entity) => {
         console.log(entity.plain()); // entityData + id
         console.log(entity.firstname)); // 'John'
