@@ -19,7 +19,7 @@ const query = MyModel.query(
 
 ## Chain query operators
 
-Refer to [@google-cloud/datastore](https://cloud.google.com/nodejs/docs/reference/datastore/2.0.x/Query) for the list of operators available.
+Refer to [@google-cloud/datastore](https://googleapis.dev/nodejs/datastore/latest/Query.html) for the list of methods and operators available.
 
 ```javascript
 query.filter(...).order(...).groupBy(...).start(...);

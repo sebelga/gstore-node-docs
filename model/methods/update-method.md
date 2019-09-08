@@ -1,7 +1,9 @@
 # UPDATE
 
-This method allows you to update an entity in the Datastore.  
-It will first fetch the entity, then update its data with the new ones and finally save the data back to the Datastore
+This method allows you to **partially** update \(providing a few properties\) or completely **replace** an entity in the Datastore.  
+It will first fetch the entity, then update its data with the new ones and finally save the data back to the Datastore. The whole operation occurs inside a [Datastore transaction](https://googleapis.dev/nodejs/datastore/latest/Transaction.html).  
+  
+**Note:** This method is different than using \`Entity.save\(null, { method: 'update' }\)\` \(which correspond to the [datastore update\(\) method](https://googleapis.dev/nodejs/datastore/latest/Datastore.html#update)\). 
 
 This method accepts the following arguments:
 
