@@ -82,7 +82,7 @@ module.exports = gstore.model('BlogPost', blogPostSchema);
 
 ## 2. Use anywhere
 
-`MyModel.list(options /*optional*/, callback /*optional*/)`
+`MyModel.list(options /*optional*/)`
 
 **@Returns**: the response is an object with 2 properties:
 

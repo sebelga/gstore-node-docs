@@ -16,9 +16,7 @@ MyModel.delete(
         {object|Array} -- optional. An entityKey. Can also be an *Array* of keys.
         If you already know the key (after a get() for ex.) you can pass it here.
     */
-    <key>,
-    /* {function} -- optional. The callback, if not passed a Promise is returned */
-    <callback>
+    <key>
 )
 ```
 
@@ -50,18 +48,8 @@ BlogPost.delete(123, ['Parent', 123], 'dev.namespace.com').then((response) => { 
 // passing an entity Key (can also be an *Array* of keys)
 BlogPost.delete(null, null, null, null, key).then((response) => { ... });
 
-// with a callback
-BlogPost.delete(123, function onBlogPostDelete(err, response) {
-    if (err) {
-        // deal with err
-    }
-
-    ...
-});
-
-
 // Transaction
-// -----------
+// ------------
 /* The same method can be executed inside a transaction
  * Important: if you have "pre" middelware defined on "delete" in your schema,
  * then you must first *resolve* the Promise before commiting the transaction

@@ -1,6 +1,6 @@
 # Installation
 
-## Add the npm package to your project
+## Add gstore-node to your project
 
 ```bash
  npm install gstore-node --save

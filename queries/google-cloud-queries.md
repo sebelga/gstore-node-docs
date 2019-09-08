@@ -19,7 +19,7 @@ const query = MyModel.query(
 
 ## Chain query operators
 
-Refer to [@google-cloud/datastore](https://cloud.google.com/nodejs/docs/reference/datastore/2.0.x/Query) for the list of operators available.
+Refer to [@google-cloud/datastore](https://googleapis.dev/nodejs/datastore/latest/Query.html) for the list of methods and operators available.
 
 ```javascript
 query.filter(...).order(...).groupBy(...).start(...);
@@ -76,16 +76,6 @@ const query = User.query()
 query.run().then((response) => {
     const entities = response.entities;
     const nextPageCursor = response.nextPageCursor; // not present if no more results
-});
-
-// or with a callback
-query.run(function(err, response) {
-    if (err) {
-        // deal with err
-    }
-
-    const entities = response.entities;
-    const nextPageCursor = response.nextPageCursor;
 });
 
 // You can then use the "nextPageCursor" when calling the same query and pass it as start value

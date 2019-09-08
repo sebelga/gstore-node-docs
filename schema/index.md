@@ -19,6 +19,7 @@ const userSchema = new Schema({
     lastname: {},
     password: {},
     email: {},
+    company: {},
     votes: {},
     dateOfBirth: {},
     createdOn: {},
