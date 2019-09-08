@@ -15,6 +15,7 @@ Valid types are
 * Buffer
 * Schema.Types.Double \(a float or a gcloud.datastore.double\)
 * Schema.Types.GeoPoint \(a gcloud.datastore.geoPoint\)
+* Schema.Types.Key \(an entity Key\)
 
 \(\*\) Valid datetime are javascript Date\(\) or a string with the following format: 'YYYY-MM-DD' \| 'YYYY-MM-DD 00:00:00' \| 'YYYY-MM-DD 00:00:00.000' \| 'YYYY-MM-DDT00:00:00'
 
@@ -26,6 +27,7 @@ const userSchema = new Schema({
     lastname: { type: String },
     password: { type: String },
     email: { type: String },
+    company: { type: Schema.Types.Key, ref: 'Company' },
     votes: { type: Number },
     dateOfBirth: { type: Date },
     createdOn: { type: Date },

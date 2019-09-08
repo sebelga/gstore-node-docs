@@ -11,9 +11,7 @@ MyModel.deleteAll(
     /* {Array} -- optional. ex: ['ParentEntity', 1234 ] */
     <ancestors>,
     /* {string} -- optional. A specific namespace */
-    <namespace>,
-    /* {function} -- optional. The callback, if not passed a Promise is returned */
-    <callback>
+    <namespace>
 )
 ```
 
@@ -32,12 +30,5 @@ BlogPost.deleteAll(['Grandpa', 1234, 'Dad', 'keyname'], 'com.dev.new-domain')
         .then((response) => {
             ...
         });
-
-// with a callback
-BlogPost.deleteAll(function(err, response){
-    if (err) {// deal with err}
-
-    console.log(response.message);
-});
 ```
 

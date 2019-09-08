@@ -1,10 +1,10 @@
 # Installation
 
-## Add the npm package to your project
+## Add gstore-node and google-cloud Datastore libs to your project
 
 ```bash
- npm install gstore-node --save
+ npm install gstore-node @google-cloud/datastore --save
  # or
- yarn add gstore-node
+ yarn add gstore-node @google-cloud/datastore
 ```
 

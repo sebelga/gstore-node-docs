@@ -8,9 +8,7 @@ entity.save(
     /* {Transaction} -- optional. Will execute the save operation inside this transaction */
     <transaction>,
     /* {object} -- optional. Additional config */
-    <options>,
-    /* {function} -- optional. The callback, if not passed a Promise is returned */
-    <callback>
+    <options>
 )
 ```
 
@@ -57,13 +55,6 @@ blogPostEntity.save().then((entity) => {
 // changing the save method
 var blogPostEntity = new BlogPost(data);
 blogPostEntity.save(null, { method: 'insert' }).then( ... );
-
-// with a callback
-blogPostEntity.save(function onBlogPostSave(err, entity) {
-    if (err) { // deal with err }
-
-    console.log(entity.entityKey.id); // auto-generated id
-});
 
 // from inside a transaction
 // Info: if you have middleware on "pre" see note below

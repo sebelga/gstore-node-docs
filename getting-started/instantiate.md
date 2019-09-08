@@ -2,7 +2,7 @@
 
 ## Instantiate
 
-In order to get a gstore instance, import the module and then call it and provide an optional configuration object. The gstore instances are cached so you can do this in multiple places of your application, **the same instance will always be returned**.
+In order to get a gstore instance, import the module and create a new instance with an _optional_ configuration object.
 
 ```javascript
 const { Gstore } = require('gstore-node');
@@ -33,9 +33,9 @@ const { Gstore } = require('gstore-node');
 const gstore = new Gstore({ errorOnEntityNotFound: false });
 ```
 
-## Connect to the Google Cloud Node library
+## Connect the Google Cloud Node library
 
-For all the information on how to configure the Goolge Datastore client, [read the docs here](https://cloud.google.com/nodejs/docs/reference/datastore/2.0.x/Datastore).
+For all the information on how to configure and instantiate the Datastore client, [read the docs here](https://cloud.google.com/nodejs/docs/reference/datastore/2.0.x/Datastore).
 
 ```javascript
 const { Datastore } = require('@google-cloud/datastore');
@@ -51,12 +51,12 @@ gstore.connect(datastore);
 
 After connecting gstore to the datastore, the gstore instance has **2 aliases** set up
 
-* `gstore.ds` The underlying @google/datastore instance. This allows you to access **the full API** of the Datastore client whenever needed.
-* `gstore.transaction`. Alias of the same google-cloud/datastore method
+* `gstore.ds` The underlying @google/datastore instance. This allows you to access **the complete API** of the Datastore client whenever needed.
+* `gstore.transaction`. Alias of the same google-cloud/datastore method.
 
 ## Instances
 
-Each time you call `const gstore = new Gstore()` you create a **new** instance. This means that you are responsible to cache that instance to be able to retrieve it in different places of your application. One way to do that is to initialize gstore in a separate file and require the instance from there.
+Each time you call `const gstore = new Gstore()` you create a **new** instance. This means that you are responsible to cache that instance to be able to retrieve it in different places of your application. One way to do that is to initialise gstore in a separate file and require the instance from there.
 
 ```javascript
 // db.js
@@ -96,7 +96,7 @@ instances.set('staging', gstore3);
 
 ...
 
-// Anywhere in your application...
+// You can access the gstore instances anywhere in your application
 const { instances } = require('gstore-node');
 
 const gstoreDefaultInstance = instances.get('default');
