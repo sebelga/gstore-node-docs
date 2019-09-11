@@ -30,7 +30,7 @@ const userSchema = new Schema({
 
 ### excludeFromIndexes
 
-By default all properties are **included** in the Datastore indexes. If you don't want some property to be indexed set its \_excludeFromIndexes \_setting to **true**.
+By default all properties are **included** in the Datastore indexes. If you don't want some property to be indexed set its `excludeFromIndexes` option to **true**.
 
 ```javascript
 const articleSchema = new Schema({
@@ -44,12 +44,42 @@ For **embedded entities** you can pass one or more properties that you don't wan
 ```javascript
 // In the example below, 'biography' is a property of the embedded entity 'author'
 // and 'text' & 'description' are properties of an implicit 'book' embedded entity in the array
-// Important: for embedded entities inside **Arrays** you have to specify the type to 'array' for the excludeFromIndexes to work.
+// Important: for embedded entities inside **Arrays** you have to specify the type to 'Array' for the excludeFromIndexes to work.
 
 const mySchema = new Schema({
     author: { type: Object, excludeFromIndexes: 'biography' },
+    publication: { type: Object, excludeFromIndexes: '*' }, // Wildcard for all object properties
+    other: { type: Object, excludeFromIndexes: 'childObject.*' }, // Wildcard on a "child" object
     listBooks: { type: Array, excludeFromIndexes: ['text', 'description'] },
+    anotherList: { type: Array, excludeFromIndexes: '*' },
 });
+
+// The above schema would allow to save the following data:
+
+const data = {
+  author: {
+    name: 'John',
+    biography: '<Some very long text (more than 1500 bytes)>'
+  },
+  publication: {
+    description: '<Some very long text'>,
+    history: '<Some very long text'>,
+  },
+  other: {
+    childObject: {
+      text: '<Some very long text>',
+      text2: '<Some very long text>',
+    }
+  },
+  listBooks: [{
+    text: '<Some very long text>',
+    description: '<Some very long text>',
+  }],
+  anotherList: [{
+    text: '<Some very long text>',
+    description: '<Some very long text>',
+  }],
+};
 ```
 
 ### excludeFromRead
