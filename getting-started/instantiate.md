@@ -35,7 +35,7 @@ const gstore = new Gstore({ errorOnEntityNotFound: false });
 
 ## Connect the Google Cloud Node library
 
-For all the information on how to configure and instantiate the Datastore client, [read the docs here](https://cloud.google.com/nodejs/docs/reference/datastore/2.0.x/Datastore).
+For all the information on how to configure and instantiate the Datastore client, [read the docs here](https://googleapis.dev/nodejs/datastore/latest/Datastore.html).
 
 ```javascript
 const { Datastore } = require('@google-cloud/datastore');
