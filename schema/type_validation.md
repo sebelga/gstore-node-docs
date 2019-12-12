@@ -7,17 +7,17 @@ You can define a type for a schema property passing a "type" parameter to it.
 Valid types are
 
 * String
-* Number \(an integer or a gcloud.datastore.int\)
+* Number \(an integer or a `gcloud.datastore.int()`\)
 * Array
 * Object
 * Boolean
 * Date\(\*\)
 * Buffer
-* Schema.Types.Double \(a float or a gcloud.datastore.double\)
-* Schema.Types.GeoPoint \(a gcloud.datastore.geoPoint\)
+* Schema.Types.Double \(a float or a `gcloud.datastore.double()`\)
+* Schema.Types.GeoPoint \(a `gcloud.datastore.geoPoint()`\)
 * Schema.Types.Key \(an entity Key\)
 
-\(\*\) Valid datetime are javascript Date\(\) or a string with the following format: 'YYYY-MM-DD' \| 'YYYY-MM-DD 00:00:00' \| 'YYYY-MM-DD 00:00:00.000' \| 'YYYY-MM-DDT00:00:00'
+\(\*\) Valid Date are javascript `Date`  instance \(calling`new Date()`\)  or any valid **string** date. If a string date is provided, it will automatically be parsed as Date object when saving the entity in the Datastore.
 
 So back to our previous example of a User Model, we would probably have something like this.
 
