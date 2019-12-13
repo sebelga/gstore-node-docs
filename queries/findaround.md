@@ -9,9 +9,7 @@ MyModel.findAround(
     /* {string} -- The property value */
     <value>,
     /* {object} -- { before|after: Number [, ... ] } */
-    <options>,
-    /* {function} -- optional. The callback, if not passed a Promise is returned */
-    <callback>
+    <options>
 )
 ```
 
@@ -29,11 +27,6 @@ BlogPost.findAround('publishedOn', '2016-03-01', { after: 20 })
 // Find 10 users with the lastname coming before 'Jagger'
 User.findAround('lastname', 'Jagger', { before: 10 })
     .then( ... );
-
-// with a callback
-BlogPost.findAround('publishedOn', '2016-03-01', {after:20}, function onEntities(err, entities){
-   ...
-});
 ```
 
 **Additional options**

@@ -1,22 +1,16 @@
 # GET
 
-Get one or multiple entities from the Datastore. Retrieving an entity **by key** is the fastest way to read from the Datastore.  
+Get one entity from the Datastore. Retrieving an entity **by key** is the fastest way to read from the Datastore.  
 This method accepts the following arguments:
 
 ```javascript
 MyModel.get(
-    /* {int|string|Array<int|string>}. -- id(s) to retrieve */
+    /*
+     {{string | { id: string|number } | { name: string } | { key: EntityKey }}}
+     */
     <id>,
-    /* {Array} -- optional. ex: ['ParentEntity', 1234 ] */
-    <ancestors>,
-    /* {string} -- optional. A specific namespace */
-    <namespace>,
-    /* {Transaction} -- optional. The transaction currently in progress */
-    <transaction>,
-    /* {object} -- optional. Additional config */
-    <options>,
-    /* {function} -- optional. The callback, if not passed a Promise is returned */
-    <callback>
+    /* {object} -- optional. Additional configuration */
+    <options>
 )
 ```
 
@@ -28,30 +22,20 @@ Example:
 const BlogPost = require('./blog-post.model');
 
 // id can be an integer or a string
-BlogPost.get(123).then((entity) => {
+BlogPost.get({ id: 123 }).then((entity) => {
     console.log(entity.plain());
-});
-
-// Array of ids
-BlogPost.get([1,2,3]).then((entities) => {
-    entities = entities.map(entity => entity.plain());
 });
 
 // Passing an ancestor path with a Kind and a name
 const ancestors = ['Parent', 'parentName'];
-BlogPost.get('stringId', ancestors).then((entity) => { ... });
-
-// ... with a callback
-BlogPost.get(1234, function onEntity(err, entity) {
-    if (err) { // deal with err }
-    console.log('Blogpost title:', entity.title);
-});
+BlogPost.get('myEntityId', { ancestors }).then((entity) => { ... });
 ```
 
-The resulting entity has a **plain\(\)** method that returns an object with the entity **data** + its **id**. See [the doc here](../../entity/methods/plain.md).
+The resulting entity has a **plain\(\)** method that returns an object with the entity **data** + its **id**.  
+See [the documentation of plain\(\) here](../../entity/methods/plain.md).
 
 ```javascript
-BlogPost.get(123).then(entity) {
+BlogPost.get({ id: 123 }).then(entity) {
     console.log(entity.plain());
 });
 ```
@@ -62,29 +46,34 @@ If you need to retrieve an entity **from inside a transaction**, you can pass th
 const transaction = gstore.transaction();
 
 transaction.run().then(() => {
-    BlogPost.get(123, null, null, transaction)
-            .then((entity) => {
-                // Reminder: entity is an instance of the BlogPost model with all its properties & methods
-
-                transaction.commit().then(() => { ... });
-            });
+  BlogPost.get({ id: 123 }, { transaction })
+    .then((blogPost) => {
+      // blogPost is an instance of the BlogPost model
+      // with all its properties & methods
+      transaction.commit().then(() => { ... });
+  });
 });
 ```
 
-**options** properties
+### **options** properties
 
-* _preserveOrder_ \(default: false\)
-* _dataloader_: a [Dataloader](https://github.com/facebook/dataloader) instance
-* _cache_ \(default: true\)
-* _ttl_ \(default: the global cache `ttl.keys` configuration\)
+* `ancestors` 
+* `transaction` 
+* `namespace`
+* `preserveOrder` \(default: `false`\)
+* `dataloader`: a [Dataloader](https://github.com/facebook/dataloader) instance
+* `cache` \(default: `true`\)
+* `ttl` \(default: the global cache `ttl.keys` configuration\)
 
-&gt; **preserveOrder**: This option is useful when you pass an array of IDs to retrieve and you want to preserve the order of those ids in the response.
+&gt; **ancestors**: Ancestors path for the entity \(eg: `['ParentEntity', 'parentName' ]`\)
 
-**Note**: setting this property to _true_ does add some processing, especially for large sets. Only use it if you absolutely need to maintain the original order passed.
+&gt; **transaction**: Optional transaction to execute the get request.
 
-&gt; **dataloader** The Dataloader instance created for the request. [Read the documentation](../../cache-dataloader/dataloader.md) for more information on how to create the instance.
+&gt; **namespace**: Optional namespace for the entity.
 
-&gt; **cache** If you activated the cache on the gstore-node instance, you can override here the _**global**_ cache configuration. If the global has been set to _true_ \(default\) you can pass _false_ here to bypass the cache. And if the global cache has been set to false, then you can pass _true_ here to cache specific key\(s\).
+&gt; **dataloader** Optional Dataloader to use to fetch the entity. [Read the documentation](../../cache-dataloader/dataloader.md) for more information on how to create a `dataloader` the instance.
+
+&gt; **cache** If you activated the cache on the gstore-node instance, you can override here the **global** cache configuration. If the cache **for keys fetching** has been activated \(default: `true`\), you can pass `false` here to bypass the cache. If the cache for keys fetching has been disabled, then you can pass `true` here to cache specific key\(s\).
 
 &gt; **ttl** Overrides the global keys TTL of the cache. If you have multiple cache stores, you can pass an _Object_ with a different value for each store. See in the example below.
 

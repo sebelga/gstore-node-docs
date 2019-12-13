@@ -84,16 +84,13 @@ Custom TTL value for the cache. For multi-store it can be an Object of TTL value
 
 Specify either "strong" or "eventual". If not specified, default values are chosen by Datastore for the operation. Learn more about strong and eventual consistency [here](https://cloud.google.com/datastore/docs/articles/balancing-strong-and-eventual-consistency-with-google-cloud-datastore).
 
-## keyType
+## excludeLargeProperties
 
-**default: 'auto'**
+**default: `false`**
 
-Defines the Key type \(id or name\) for the entities. By default gstore will convert '123' IDs to 123 \(int\). If you don't want this parsing to occur you can set the keyType to "name".  
-Valid values are:
+This will automatically exclude large properties from indexing. It help in storing large values that are not declared on the schema.
 
-* "id" \(integer IDs\). --&gt; Will force to convert string to datastore.int\(\)
-* "name" \(string IDs\)
-* "auto". --&gt; If a string is passed and it is a number, it will be converted. Otherwise the id will be left "as is".
+**Note:** This feature requires the `@google-cloud/datastore` **version 4.3.0 or superior.**
 
 ## Complete example:
 
@@ -104,7 +101,7 @@ const userSchema = new Schema({
 }, {
     validateBeforeSave: false,
     explicitOnly: false,
-    keyType: 'name',
+    excludeLargeProperties: true,
     queries: {
         readAll: true,
         format: 'ENTITY',
